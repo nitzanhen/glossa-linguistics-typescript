@@ -1,4 +1,5 @@
 import Tense from './Tense';
+import IllegalEnumValueError from '../../error/IllegalEnumValueError';
 
 /**
  * @todo doc
@@ -39,7 +40,7 @@ class Mood {
         return [Mood.INDICATIVE, Mood.OPTATIVE];
     }
 
-    throw new Error(
+    throw new IllegalEnumValueError(
       'Impossible code reached; Tenses exhausted but no Tense matched.'
     );
   }

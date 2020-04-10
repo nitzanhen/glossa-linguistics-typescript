@@ -1,3 +1,5 @@
+import IllegalEnumValueError from '../../error/IllegalEnumValueError';
+
 /**
  * @todo doc
  *
@@ -20,7 +22,7 @@ class Tense {
       this.AORIST,
       this.PERFECT,
       this.PLUPERFECT,
-      this.FUTURE_PERFECT
+      this.FUTURE_PERFECT,
     ];
   }
 
@@ -45,7 +47,7 @@ class Tense {
         return false;
     }
 
-    throw new Error(
+    throw new IllegalEnumValueError(
       'Impossible code reached; Tenses exhausted but no Tense matched.'
     );
   }
@@ -70,7 +72,7 @@ class Tense {
       case Tense.FUTURE:
         return false;
     }
-    throw new Error(
+    throw new IllegalEnumValueError(
       'Impossible code reached; Tenses exhausted but no Tense matched.'
     );
   }

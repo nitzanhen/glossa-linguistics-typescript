@@ -1,4 +1,5 @@
 import Tense from './Tense';
+import IllegalEnumValueError from '../../error/IllegalEnumValueError';
 
 /**
  * @todo doc
@@ -37,7 +38,7 @@ class Voice {
         return [Voice.ACTIVE, Voice.MIDDLE, Voice.PASSIVE];
     }
 
-    throw new Error(
+    throw new IllegalEnumValueError(
       'Impossible code reached; Tenses exhausted but no Tense matched.'
     );
   }
