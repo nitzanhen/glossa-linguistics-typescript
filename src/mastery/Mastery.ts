@@ -18,9 +18,13 @@ class Mastery {
   }
   public set score(value: number) {
     if (value > this.maxScore) {
-      this._score = this.maxScore;
+      throw new RangeError(
+        `Attempted to set invalid value ${value} to mastery with max score ${this.maxScore}; Score cannot be greater than the max score.`
+      );
     } else if (value < 0) {
-      this._score = 0;
+      throw new RangeError(
+        `Attempted to set invalid value ${value} to mastery; Score cannot be less than 0.`
+      );
     } else {
       this._score = value;
     }
@@ -36,7 +40,7 @@ class Mastery {
       throw new RangeError('score cannot be negative. Received: ' + score);
     if (score > maxScore)
       throw new RangeError(
-        `Score cannotr be greater than maxScore. Received ${score} for score and ${maxScore} for maxScore.`
+        `Score cannot be greater than maxScore. Received ${score} for score and ${maxScore} for maxScore.`
       );
 
     this._score = score;
@@ -77,7 +81,7 @@ class Mastery {
   public toJSON() {
     return {
       _score: this.score,
-      maxScore: this.maxScore
+      maxScore: this.maxScore,
     };
   }
 }

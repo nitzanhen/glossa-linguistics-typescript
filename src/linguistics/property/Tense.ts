@@ -1,4 +1,6 @@
 import IllegalEnumValueError from '../../error/IllegalEnumValueError';
+import Time from './Time';
+import Aspect from './Aspect';
 
 /**
  * @todo doc
@@ -6,13 +8,33 @@ import IllegalEnumValueError from '../../error/IllegalEnumValueError';
  * @since 14/3/20
  */
 class Tense {
-  static readonly PRESENT = new Tense('present');
-  static readonly IMPERFECT = new Tense('imperfect');
-  static readonly FUTURE = new Tense('future');
-  static readonly AORIST = new Tense('aorist');
-  static readonly PERFECT = new Tense('perfect');
-  static readonly PLUPERFECT = new Tense('pluperfect');
-  static readonly FUTURE_PERFECT = new Tense('future_perfect');
+  static readonly PRESENT = new Tense(
+    'present',
+    Time.PRESENT,
+    Aspect.IMPERFECTIVE
+  );
+  static readonly IMPERFECT = new Tense(
+    'imperfect',
+    Time.PAST,
+    Aspect.IMPERFECTIVE
+  );
+  static readonly FUTURE = new Tense('future', Time.FUTURE, Aspect.FUTURE);
+  static readonly AORIST = new Tense('aorist', Time.PAST, Aspect.AORIST);
+  static readonly PERFECT = new Tense(
+    'perfect',
+    Time.PRESENT,
+    Aspect.PERFECTIVE
+  );
+  static readonly PLUPERFECT = new Tense(
+    'pluperfect',
+    Time.PAST,
+    Aspect.PERFECTIVE
+  );
+  static readonly FUTURE_PERFECT = new Tense(
+    'future_perfect',
+    Time.FUTURE,
+    Aspect.PERFECTIVE
+  );
 
   static get values() {
     return [
@@ -26,7 +48,11 @@ class Tense {
     ];
   }
 
-  private constructor(public readonly name: string) {}
+  private constructor(
+    public readonly name: string,
+    public readonly time: Time,
+    public readonly aspect: Aspect
+  ) {}
 
   /**
    * Checks if this tense has infinitives (morphologically).

@@ -10,7 +10,7 @@ class Voice {
   static readonly ACTIVE = new Voice('active');
   static readonly MIDDLE = new Voice('middle');
   static readonly PASSIVE = new Voice('passive');
-  static readonly MEDIOPASSIVE = new Voice('mediopassive'); //???
+  static readonly MEDIOPASSIVE = new Voice('mediopassive');
 
   static get values(): Voice[] {
     return [this.ACTIVE, this.MIDDLE, this.PASSIVE, this.MEDIOPASSIVE];
