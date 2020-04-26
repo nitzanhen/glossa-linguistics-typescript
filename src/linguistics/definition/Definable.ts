@@ -7,8 +7,8 @@ import Definitions from './Definitions';
  *
  * @since 12/04/20
  */
-interface Definable {
-  definitions: Definitions;
+interface Definable<K> {
+  definitions: Definitions<K>;
 }
 
 export default Definable;

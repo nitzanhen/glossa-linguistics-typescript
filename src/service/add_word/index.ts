@@ -5,9 +5,9 @@ import AddNounService from './pos/AddNounService';
  *
  * @since 21/4/20
  */
-const addWordServices = {
+const AddWordServices = {
   GreekNoun: AddNounService,
   //...
 };
 
-export default addWordServices;
+export default Object.freeze(AddWordServices);
