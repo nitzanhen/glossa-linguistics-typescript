@@ -5,9 +5,9 @@ import Canister from './Canister';
  *
  * @since 14/3/20
  */
-interface Candidate {
+interface PrincipalPart {
   canister: Canister;
   baseInflection: string;
 }
 
-export default Candidate;
+export default PrincipalPart;
