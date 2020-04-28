@@ -3,38 +3,44 @@ import Time from './Time';
 import Aspect from './Aspect';
 
 /**
- * @todo doc
+ * @todo documentation
  *
- * @since 14/3/20
+ * @since 28/04/2020
  */
 class Tense {
+  //------ Instances ------//
+
   static readonly PRESENT = new Tense(
-    'present',
+    'present', 0,
     Time.PRESENT,
     Aspect.IMPERFECTIVE
   );
   static readonly IMPERFECT = new Tense(
-    'imperfect',
+    'imperfect', 1,
     Time.PAST,
     Aspect.IMPERFECTIVE
   );
-  static readonly FUTURE = new Tense('future', Time.FUTURE, Aspect.FUTURE);
-  static readonly AORIST = new Tense('aorist', Time.PAST, Aspect.AORIST);
+  static readonly FUTURE = new Tense('future', 2, Time.FUTURE, Aspect.FUTURE);
+  static readonly AORIST = new Tense('aorist', 3, Time.PAST, Aspect.AORIST);
   static readonly PERFECT = new Tense(
-    'perfect',
+    'perfect', 4,
     Time.PRESENT,
     Aspect.PERFECTIVE
   );
   static readonly PLUPERFECT = new Tense(
-    'pluperfect',
+    'pluperfect', 5,
     Time.PAST,
     Aspect.PERFECTIVE
   );
   static readonly FUTURE_PERFECT = new Tense(
-    'future_perfect',
+    'future_perfect', 6,
     Time.FUTURE,
     Aspect.PERFECTIVE
   );
+
+
+
+  //------ Static Methods ------//
 
   static get values() {
     return [
@@ -48,11 +54,49 @@ class Tense {
     ];
   }
 
+  /**
+   * Converts a string to its corresponding Tense instance.
+   *
+   * @param string the string to convert to Tense
+   * @throws RangeError, if a string that has no corressonding Tense value was passed.
+   * @returns the matching Tense
+   */
+  static fromString(string: string): Tense {
+    // Works assuming the name property of the enum is identical to the variable's name (case insensitive).
+    const value = (this as any)[string.toUpperCase()];
+    if (value) {
+      return value;
+    }
+
+    throw new RangeError(
+      `Illegal argument passed to fromString(): ${string} does not correspond to any instance of the enum ${
+      (this as any).prototype.constructor.name
+      }`
+    );
+  }
+
+  //------ Constructor------//
+
   private constructor(
+    /** name of the instance */
     public readonly name: string,
+
+    /** index of the instance */
+    public readonly index: number,
+
     public readonly time: Time,
     public readonly aspect: Aspect
-  ) {}
+  ) { }
+
+  //------ Methods ------//
+
+  /**
+   * Called when converting the Tense value to a string using JSON.Stringify.
+   * Compare to the fromString() method, which deserializes the object.
+   */
+  public toJSON() {
+    return this.name;
+  }
 
   /**
    * Checks if this tense has infinitives (morphologically).

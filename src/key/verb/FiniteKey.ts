@@ -1,5 +1,5 @@
 import VerbKey from './VerbKey';
-import { Tense, Voice, Person, Number, PrincipalPart } from '../../linguistics/property';
+import { Tense, Voice, Person, Number, PrincipalPart, Mood } from '../../linguistics/property';
 
 /**
  * Key for Greek finite forms of verbs
@@ -13,6 +13,7 @@ class FiniteKey extends VerbKey {
         principalPart: PrincipalPart,
         tense: Tense,
         voice: Voice,
+        public mood: Mood,
         public person: Person,
         public number: Number
     ) {

@@ -2,29 +2,52 @@ import Tense from './Tense';
 import IllegalEnumValueError from '../../error/IllegalEnumValueError';
 
 /**
- * @todo doc
+ * @todo documentation
  *
- * @since 14/3/20
+ * @since 28/04/2020
  */
 class Mood {
-  static readonly INDICATIVE = new Mood('indicative');
-  static readonly SUBJUNCTIVE = new Mood('subjunctive');
-  static readonly OPTATIVE = new Mood('optative');
-  static readonly IMPERATIVE = new Mood('imperative');
+  //------ Instances ------//
 
-  static get values() {
+  static readonly INDICATIVE = new Mood('indicative', 0);
+  static readonly SUBJUNCTIVE = new Mood('subjunctive', 1);
+  static readonly OPTATIVE = new Mood('optative', 2);
+  static readonly IMPERATIVE = new Mood('imperative', 3);
+
+  //------ Static Methods ------//
+
+  static get values(): Mood[] {
     return [this.INDICATIVE, this.SUBJUNCTIVE, this.OPTATIVE, this.IMPERATIVE];
   }
 
-  private constructor(public readonly name: string) {}
+  /**
+   * Converts a string to its corresponding Mood instance.
+   *
+   * @param string the string to convert to Mood
+   * @throws RangeError, if a string that has no corressonding Mood value was passed.
+   * @returns the matching Mood
+   */
+  static fromString(string: string): Mood {
+    // Works assuming the name property of the enum is identical to the variable's name (case insensitive).
+    const value = (this as any)[string.toUpperCase()];
+    if (value) {
+      return value;
+    }
+
+    throw new RangeError(
+      `Illegal argument passed to fromString(): ${string} does not correspond to any instance of the enum ${
+      (this as any).prototype.constructor.name
+      }`
+    );
+  }
 
   /**
-   * Returns the morphologically-sound moods of a tense.
-   *
-   * @param tense the tense whose moods are wanted.
-   * @returns the morphologically possible moods of the given tense.
-   */
-  public moodsOf(tense: Tense): Mood[] {
+  * Returns the morphologically-sound moods of a tense.
+  *
+  * @param tense the tense whose moods are wanted.
+  * @returns the morphologically possible moods of the given tense.
+  */
+  public static moodsOf(tense: Tense): Mood[] {
     switch (tense) {
       case Tense.PRESENT:
       case Tense.AORIST:
@@ -43,6 +66,26 @@ class Mood {
     throw new IllegalEnumValueError(
       'Impossible code reached; Tenses exhausted but no Tense matched.'
     );
+  }
+
+  //------ Constructor------//
+
+  private constructor(
+    /** name of the instance */
+    public readonly name: string,
+
+    /** index of the instance */
+    public readonly index: number
+  ) { }
+
+
+
+  /**
+   * Called when converting the Mood value to a string using JSON.Stringify.
+   * Compare to the fromString() method, which deserializes the object.
+   */
+  public toJSON() {
+    return this.name;
   }
 }
 

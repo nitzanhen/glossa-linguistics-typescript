@@ -5,9 +5,15 @@ import Canister from './Canister';
  *
  * @since 14/3/20
  */
-interface PrincipalPart {
-  canister: Canister;
-  baseInflection: string;
+class PrincipalPart {
+
+  //------ Constructor ------//
+
+  public constructor(
+    public canister: Canister,
+    public baseInflection: string
+  ) { }
+
 }
 
 export default PrincipalPart;
