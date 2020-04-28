@@ -10,4 +10,4 @@ const HashServices: Record<string, Hasher<any>> = {
 
 };
 
-export default HashServices;
+export default Object.freeze(HashServices);

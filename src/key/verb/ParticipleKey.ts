@@ -1,9 +1,6 @@
 import VerbKey from './VerbKey';
-import PrincipalPart from '../../linguistics/property/PrincipalPart';
-import Tense from '../../linguistics/property/Tense';
-import Voice from '../../linguistics/property/Voice';
-import Case from '../../linguistics/property/Case';
-import Number from '../../linguistics/property/Number';
+import { Tense, Voice, Case, Number, PrincipalPart } from '../../linguistics/property';
+
 
 /**
  * Key implementation for Greek participles

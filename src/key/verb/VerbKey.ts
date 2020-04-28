@@ -1,7 +1,5 @@
 import Key from '../Key';
-import PrincipalPart from '../../linguistics/property/PrincipalPart';
-import Tense from '../../linguistics/property/Tense';
-import Voice from '../../linguistics/property/Voice';
+import { PrincipalPart, Tense, Voice } from '../../linguistics/property';
 
 /**
  * Base implementation of a filter key, for Greek verbs.

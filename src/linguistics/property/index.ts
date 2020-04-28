@@ -1,0 +1,12 @@
+export { default as Aspect } from './Aspect';
+export { default as Canister } from './Canister';
+export { default as Case } from './Case';
+export { default as Declension } from './Declension';
+export { default as Gender } from './Gender';
+export { default as Mood } from './Mood';
+export { default as Number } from './Number';
+export { default as Person } from './Person';
+export { default as PrincipalPart } from './PrincipalPart';
+export { default as Tense } from './Tense';
+export { default as Time } from './Time';
+export { default as Voice } from './Voice';

@@ -1,6 +1,5 @@
 import Key from '../Key';
-import Case from '../../linguistics/property/Case';
-import Number from '../../linguistics/property/Number';
+import { Case, Number } from '../../linguistics/property';
 
 /**
  * @since 27/04/20
