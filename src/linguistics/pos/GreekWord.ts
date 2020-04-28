@@ -12,13 +12,13 @@ import Key from '../../key/Key';
  * @since 21/04/20
  */
 abstract class GreekWord<K extends Key>
-  implements Definable<K>, Inflectable<K>, Masterable {
+  implements Definable<K>, Inflectable, Masterable {
 
 
   //------ Fields ------//
 
   public definitions: Definitions<K>;
-  abstract inflections: Inflections<K>;
+  abstract inflections: Inflections;
   abstract mastery: Mastery;
 
   public mnemonic: string;

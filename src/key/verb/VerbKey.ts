@@ -1,5 +1,4 @@
 import Key from '../Key';
-import GreekVerb from '../../linguistics/pos/GreekVerb';
 import PrincipalPart from '../../linguistics/property/PrincipalPart';
 import Tense from '../../linguistics/property/Tense';
 import Voice from '../../linguistics/property/Voice';
