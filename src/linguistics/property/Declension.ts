@@ -6,14 +6,14 @@
 class Declension {
     //------ Instances ------//
 
-    static readonly FIRST = new Declension('first', 0);
-    static readonly SECOND = new Declension('second', 1);
-    static readonly THIRD = new Declension('third', 2);
+    static readonly FIRST_DECLENSION = new Declension('first_declension', 0);
+    static readonly SECOND_DECLENSION = new Declension('second_declension', 1);
+    static readonly THIRD_DECLENSION = new Declension('third_declension', 2);
 
     //------ Static Methods ------//
 
     static get values(): Declension[] {
-        return [this.FIRST, this.SECOND, this.THIRD];
+        return [this.FIRST_DECLENSION, this.SECOND_DECLENSION, this.THIRD_DECLENSION];
     }
 
     /**
