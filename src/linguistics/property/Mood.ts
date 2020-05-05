@@ -1,5 +1,5 @@
 import Tense from './Tense';
-import IllegalEnumValueError from '../../error/IllegalEnumValueError';
+import { IllegalEnumValueError } from '../../error';
 
 /**
  * @todo documentation
@@ -24,7 +24,7 @@ class Mood {
    * Converts a string to its corresponding Mood instance.
    *
    * @param string the string to convert to Mood
-   * @throws RangeError, if a string that has no corressonding Mood value was passed.
+   * @throws IllegalEnumValueError, if a string that has no corressonding Mood value was passed.
    * @returns the matching Mood
    */
   static fromString(string: string): Mood {
@@ -34,7 +34,7 @@ class Mood {
       return value;
     }
 
-    throw new RangeError(
+    throw new IllegalEnumValueError(
       `Illegal argument passed to fromString(): ${string} does not correspond to any instance of the enum ${
       (this as any).prototype.constructor.name
       }`

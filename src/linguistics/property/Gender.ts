@@ -1,3 +1,5 @@
+import { IllegalEnumValueError } from '../../error';
+
 /**
  * @todo documentation
  *
@@ -20,7 +22,7 @@ class Gender {
      * Converts a string to its corresponding Gender instance.
      *
      * @param string the string to convert to Gender
-     * @throws RangeError, if a string that has no corressonding Gender value was passed.
+     * @throws IllegalEnumValueError, if a string that has no corressonding Gender value was passed.
      * @returns the matching Gender
      */
     static fromString(string: string): Gender {
@@ -30,7 +32,7 @@ class Gender {
             return value;
         }
 
-        throw new RangeError(
+        throw new IllegalEnumValueError(
             `Illegal argument passed to fromString(): ${string} does not correspond to any instance of the enum ${
             (this as any).prototype.constructor.name
             }`

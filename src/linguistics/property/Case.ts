@@ -1,3 +1,5 @@
+import { IllegalEnumValueError } from '../../error';
+
 /**
  * @todo documentation
  *
@@ -22,7 +24,7 @@ class Case {
      * Converts a string to its corresponding Case instance.
      *
      * @param string the string to convert to Case
-     * @throws RangeError, if a string that has no corressonding Case value was passed.
+     * @throws IllegalEnumValueError, if a string that has no corressonding Case value was passed.
      * @returns the matching Case
      */
     static fromString(string: string): Case {
@@ -32,7 +34,7 @@ class Case {
             return value;
         }
 
-        throw new RangeError(
+        throw new IllegalEnumValueError(
             `Illegal argument passed to fromString(): ${string} does not correspond to any instance of the enum ${
             (this as any).prototype.constructor.name
             }`

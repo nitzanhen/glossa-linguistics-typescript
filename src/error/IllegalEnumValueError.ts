@@ -4,10 +4,6 @@
  *
  * @since 10/4/20
  */
-class IllegalEnumValueError extends RangeError {
-  constructor(message: string) {
-    super(message);
-  }
-}
+class IllegalEnumValueError extends RangeError { }
 
 export default IllegalEnumValueError;

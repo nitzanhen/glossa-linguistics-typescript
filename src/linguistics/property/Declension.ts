@@ -1,3 +1,5 @@
+import { IllegalEnumValueError } from '../../error';
+
 /**
  * @todo documentation
  *
@@ -20,7 +22,7 @@ class Declension {
      * Converts a string to its corresponding Declension instance.
      *
      * @param string the string to convert to Declension
-     * @throws RangeError, if a string that has no corressonding Declension value was passed.
+     * @throws IllegalEnumValueError, if a string that has no corressonding Declension value was passed.
      * @returns the matching Declension
      */
     static fromString(string: string): Declension {
@@ -30,7 +32,7 @@ class Declension {
             return value;
         }
 
-        throw new RangeError(
+        throw new IllegalEnumValueError(
             `Illegal argument passed to fromString(): ${string} does not correspond to any instance of the enum ${
             (this as any).prototype.constructor.name
             }`

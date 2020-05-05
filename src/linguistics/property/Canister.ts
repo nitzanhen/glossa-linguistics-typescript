@@ -1,3 +1,5 @@
+import { IllegalEnumValueError } from '../../error';
+
 /**
  * @todo documentation
  *
@@ -23,7 +25,7 @@ class Canister {
    * Converts a string to its corresponding Canister instance.
    *
    * @param string the string to convert to Canister
-   * @throws RangeError, if a string that has no corressonding Canister value was passed.
+   * @throws IllegalEnumValueError, if a string that has no corressonding Canister value was passed.
    * @returns the matching Canister
    */
   static fromString(string: string): Canister {
@@ -33,7 +35,7 @@ class Canister {
       return value;
     }
 
-    throw new RangeError(
+    throw new IllegalEnumValueError(
       `Illegal argument passed to fromString(): ${string} does not correspond to any instance of the enum ${
       (this as any).prototype.constructor.name
       }`

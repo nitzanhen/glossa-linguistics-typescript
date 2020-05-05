@@ -46,10 +46,18 @@ export const inflection_suffixes = {
         },
         masculine: {
             alpha: {
-
+                nominative: { singular: "ᾱς", plural: "αι" },
+                genitive: { singular: "ου", plural: "ων" },
+                dative: { singular: "ᾳ", plural: "αις" },
+                accusative: { singular: "ᾱν", plural: "ᾱς" },
+                vocative: { singular: "ᾱ", plural: "αι" }
             },
             eta: {
-
+                nominative: { singular: "ης", plural: "αι" },
+                genitive: { singular: "ου", plural: "ων" },
+                dative: { singular: "ῃ", plural: "αις" },
+                accusative: { singular: "ην", plural: "ᾱς" },
+                vocative: { singular: "α", plural: "αι" }
             }
         }
     },
@@ -69,17 +77,7 @@ export const inflection_suffixes = {
             vocative: { singular: "ον", plural: "α" }
         }
     },
-    third_declension: {
-        masculine: {
-
-        },
-        feminine: {
-
-        },
-        neuter: {
-
-        }
-    }
+    third_declension: null /** @todo */
 };
 
 /**

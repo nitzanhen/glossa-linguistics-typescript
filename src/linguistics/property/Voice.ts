@@ -1,5 +1,5 @@
 import Tense from './Tense';
-import IllegalEnumValueError from '../../error/IllegalEnumValueError';
+import { IllegalEnumValueError } from '../../error';
 
 /**
  * @todo documentation
@@ -24,7 +24,7 @@ class Voice {
    * Converts a string to its corresponding Voice instance.
    *
    * @param string the string to convert to Voice
-   * @throws RangeError, if a string that has no corressonding Voice value was passed.
+   * @throws IllegalEnumValueError, if a string that has no corressonding Voice value was passed.
    * @returns the matching Voice
    */
   static fromString(string: string): Voice {
@@ -34,7 +34,7 @@ class Voice {
       return value;
     }
 
-    throw new RangeError(
+    throw new IllegalEnumValueError(
       `Illegal argument passed to fromString(): ${string} does not correspond to any instance of the enum ${
       (this as any).prototype.constructor.name
       }`

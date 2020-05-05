@@ -1,3 +1,5 @@
+import { IllegalEnumValueError } from '../../error';
+
 /**
  * @todo documentation
  *
@@ -19,7 +21,7 @@ class Number {
    * Converts a string to its corresponding Number instance.
    *
    * @param string the string to convert to Number
-   * @throws RangeError, if a string that has no corressonding Number value was passed.
+   * @throws IllegalEnumValueError, if a string that has no corressonding Number value was passed.
    * @returns the matching Number
    */
   static fromString(string: string): Number {
@@ -29,9 +31,9 @@ class Number {
       return value;
     }
 
-    throw new RangeError(
+    throw new IllegalEnumValueError(
       `Illegal argument passed to fromString(): ${string} does not correspond to any instance of the enum ${
-        (this as any).prototype.constructor.name
+      (this as any).prototype.constructor.name
       }`
     );
   }
@@ -44,7 +46,7 @@ class Number {
 
     /** Index of the instance */
     public readonly index: number
-  ) {}
+  ) { }
 
   //------ Methods ------//
 
