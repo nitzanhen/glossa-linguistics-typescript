@@ -1,6 +1,7 @@
 import { Number, Case, Declension, Gender } from '../../../linguistics/property';
 import InflectionServices from '../../inflection';
 import { NounKey } from '../../../key';
+import { capitalize } from '../../../util/stringUtils';
 
 const inflectionService = InflectionServices["GreekNoun"];
 
@@ -20,7 +21,7 @@ const AddNounService = {
     generateBlockOverview(root: string, declension: Declension, gender: Gender, number: Number): [string, string] {
         const key = new NounKey(root, Case.NOMINATIVE, number);
         const baseForm = inflectionService.suggestInflection(key, declension, gender);
-        return [baseForm, number.name];
+        return [baseForm, `(${capitalize(number.name)})`];
     },
 
     /**
@@ -30,7 +31,7 @@ const AddNounService = {
      * Should be passed the root of the noun and the noun's declension.
      * 
      * The returned tuples contain the exact params that should be passed to the generateBlockOverview()
-     * function to generate the overview text for the blocks.
+     * and generateInflectionBlock() functions to generate the overview text for the blocks.
      * 
      * @param root the noun's root.
      * @param declension the noun's declension.

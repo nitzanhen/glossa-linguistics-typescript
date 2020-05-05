@@ -13,13 +13,25 @@ abstract class Key {
 
     //------ Constructor ------//
 
-    constructor() { }
+    constructor() {
+    }
 
     //------ Getters ------//
 
     public get hash() {
         return HashServices[getClassName(this)].hash(this);
     }
+
+    //------ Abstract Methods ------//
+
+    /** 
+     * To be implemented by subclasses of Key. 
+     * Should validate that the parameters passed to the constructor are valid.
+     * if they are not, should throw an error.
+     * 
+     * @todo
+     */
+    //protected abstract validate(): void;
 
     //------ Methods ------//
 

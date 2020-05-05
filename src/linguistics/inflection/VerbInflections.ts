@@ -1,9 +1,8 @@
 import Inflections from './Inflections';
 import KeyMap from '../../structure/KeyMap';
-import FiniteKey from '../../key/verb/FiniteKey';
+import { FiniteKey, InfinitiveKey, ParticipleKey } from '../../key';
 import Inflection from './Inflection';
-import InfinitiveKey from '../../key/verb/InfinitiveKey';
-import ParticipleKey from '../../key/verb/ParticipleKey';
+
 
 /**
  * Collection of inflections for a Greek verb.
@@ -13,9 +12,9 @@ import ParticipleKey from '../../key/verb/ParticipleKey';
 class VerbInflections extends Inflections {
     //------ Fields ------//
 
-    private finiteInflections: KeyMap<FiniteKey, Inflection<FiniteKey>>;
-    private infinitives: KeyMap<InfinitiveKey, Inflection<InfinitiveKey>>;
-    private participles: KeyMap<ParticipleKey, Inflection<ParticipleKey>>;
+    private readonly finiteInflections: KeyMap<FiniteKey, Inflection<FiniteKey>>;
+    private readonly infinitives: KeyMap<InfinitiveKey, Inflection<InfinitiveKey>>;
+    private readonly participles: KeyMap<ParticipleKey, Inflection<ParticipleKey>>;
 
     //------ Constructor ------//
 

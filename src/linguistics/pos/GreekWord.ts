@@ -17,9 +17,9 @@ abstract class GreekWord<K extends Key>
 
   //------ Fields ------//
 
-  public definitions: Definitions<K>;
-  abstract inflections: Inflections;
-  abstract mastery: Mastery;
+  public readonly definitions: Definitions<K>;
+  abstract readonly inflections: Inflections;
+  abstract readonly mastery: Mastery;
 
   public mnemonic: string;
   public readonly creationDate: Date;
