@@ -1,11 +1,12 @@
 import { Case, Number, Declension, Gender } from '../../../linguistics/property';
+import { NotImplementedError } from '../../../error';
+import { NounKey } from '../../../key';
 
 /**
  * Collection of functions dealing with Greek noun inflections.
  * 
  * @since 04/05/20
  */
-
 /**
  * Retrieves the root of a Greek noun, for inflecting nouns.
  * Expects to receive the nominative singular form of the noun.
@@ -13,8 +14,8 @@ import { Case, Number, Declension, Gender } from '../../../linguistics/property'
  * @param nomSg the nominative singular form of the noun
  * @returns the root of the noun, as a string.
  */
-export function getRootOf(nomSg: string): string {
-    throw new Error('not implemented.');
+export function getRootOf(): string {
+    throw new NotImplementedError();
 }
 
 export const inflection_suffixes = {
@@ -80,17 +81,27 @@ export const inflection_suffixes = {
     third_declension: null /** @todo */
 };
 
-/**
- * Inflects the given root, according to the given parameters
- * 
- * @param root the root on top of which to inflect.
- * @param declension the noun's declension.
- * @param case_ the case by which to inflect.
- * @param number the number by which to inflect.
- * @returns the inflected form.
- * 
- * @todo support for contract verbs.
- */
-export function inflect(root: string, declension: Declension, gender: Gender, case_: Case, number: Number): string {
-    throw new Error('not implemented.');
-}
+const nounInflectionService = {
+    /**
+     * Inflects the given root, according to the given parameters.
+     * Note that the inflection is to be treated as a suggestion, and in reality
+     * many irregularities or minor rules may have the actual form different than the
+     * suggested inflection returned by this function.
+     * 
+     * @param key the key, I.E the collection of properties, to inflect by.
+     * @param declension the noun's declension.
+     * @returns the inflected form.
+     * 
+     * @todo support for third declension and contract verbs.
+     */
+    suggestInflection(key: NounKey, declension: Declension, gender: Gender): string {
+        if (declension === Declension.THIRD_DECLENSION) {
+            throw new NotImplementedError('Inflection suggestions for third-declension nouns are not yet supported');
+        }
+        throw new NotImplementedError();
+    }
+};
+
+export default Object.freeze(nounInflectionService);
+
+
