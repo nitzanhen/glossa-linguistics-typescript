@@ -7,7 +7,7 @@ import { NounKeyHasher, FiniteKeyHasher, InfinitiveKeyHasher, ParticipleKeyHashe
  * 
  * @since 26/04/20
  */
-const HashServices: Record<string, Hasher<any>> = {
+const HashServices: Record<string, Readonly<Hasher<any>>> = {
     NounKey: NounKeyHasher,
     FiniteKey: FiniteKeyHasher,
     InfinitiveKey: InfinitiveKeyHasher,

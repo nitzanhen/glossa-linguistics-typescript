@@ -58,4 +58,4 @@ const AddNounService = {
     }
 };
 
-export default AddNounService;
+export default Object.freeze(AddNounService);

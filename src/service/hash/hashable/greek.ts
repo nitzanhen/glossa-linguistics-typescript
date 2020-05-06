@@ -9,7 +9,7 @@ import { Case, Number, PrincipalPart, Tense, Voice, Mood, Person, Canister } fro
  */
 
 /** NounKey Hasher */
-export const NounKeyHasher: Hasher<NounKey> = {
+export const NounKeyHasher: Readonly<Hasher<NounKey>> = {
     hash(target: NounKey): string {
         return [target.baseInflection, target.case_.name, target.number.name].join(',');
     },
@@ -24,7 +24,7 @@ export const NounKeyHasher: Hasher<NounKey> = {
 };
 
 /** PrincipalPart hasher (private) */
-const principalPartHasher: Hasher<PrincipalPart> = {
+const principalPartHasher: Readonly<Hasher<PrincipalPart>> = {
     hash(target: PrincipalPart): string {
         return target.canister.name + ";" + target.baseInflection;
     },
@@ -35,7 +35,7 @@ const principalPartHasher: Hasher<PrincipalPart> = {
 };
 
 /** FiniteKey Hasher */
-export const FiniteKeyHasher: Hasher<FiniteKey> = {
+export const FiniteKeyHasher: Readonly<Hasher<FiniteKey>> = {
     hash(target: FiniteKey): string {
         const { principalPart, tense, voice, mood, person, number } = target;
         return [principalPartHasher.hash(principalPart), tense.name, voice.name, mood.name, person.name, number.name].join(',');
@@ -54,7 +54,7 @@ export const FiniteKeyHasher: Hasher<FiniteKey> = {
 };
 
 /** InfinitiveKey Hasher */
-export const InfinitiveKeyHasher: Hasher<InfinitiveKey> = {
+export const InfinitiveKeyHasher: Readonly<Hasher<InfinitiveKey>> = {
     hash(target: InfinitiveKey): string {
         const { principalPart, tense, voice } = target;
         return [principalPartHasher.hash(principalPart), tense.name, voice.name].join(',');
@@ -70,7 +70,7 @@ export const InfinitiveKeyHasher: Hasher<InfinitiveKey> = {
 };
 
 /** ParticipleKey Hasher */
-export const ParticipleKeyHasher: Hasher<ParticipleKey> = {
+export const ParticipleKeyHasher: Readonly<Hasher<ParticipleKey>> = {
     hash(target: ParticipleKey): string {
         const { principalPart, tense, voice, case_, number } = target;
         return [principalPartHasher.hash(principalPart), tense.name, voice.name, case_.name, number.name].join(',');

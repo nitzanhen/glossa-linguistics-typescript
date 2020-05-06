@@ -81,7 +81,7 @@ export const inflection_suffixes = {
     third_declension: null /** @todo */
 };
 
-const nounInflectionService = {
+const NounInflectionService = {
     /**
      * Inflects the given root, according to the given parameters.
      * Note that the inflection is to be treated as a suggestion, and in reality
@@ -92,16 +92,17 @@ const nounInflectionService = {
      * @param declension the noun's declension.
      * @returns the inflected form.
      * 
-     * @todo support for third declension and contract verbs.
+     * @todo support for third declension, contract verbs, accenting.
      */
     suggestInflection(key: NounKey, declension: Declension, gender: Gender): string {
         if (declension === Declension.THIRD_DECLENSION) {
             throw new NotImplementedError('Inflection suggestions for third-declension nouns are not yet supported');
         }
-        throw new NotImplementedError();
+        const { baseInflection: root, case_, number } = key;
+
     }
 };
 
-export default Object.freeze(nounInflectionService);
+export default Object.freeze(NounInflectionService);
 
 
