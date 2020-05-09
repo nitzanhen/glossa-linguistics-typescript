@@ -21,21 +21,19 @@ export function getRootOf(): string {
 export const inflection_suffixes = {
     first_declension: {
         feminine: {
-            alpha: {
-                long: {
-                    nominative: { singular: "ᾱ", plural: "αι" },
-                    genitive: { singular: "ᾱς", plural: "ων" },
-                    dative: { singular: "ᾳ", plural: "αις" },
-                    accusative: { singular: "ᾱν", plural: "ᾱς" },
-                    vocative: { singular: "ᾱ", plural: "αι" }
-                },
-                short: {
-                    nominative: { singular: "α", plural: "αι" },
-                    genitive: { singular: "ᾱς", plural: "ων" },
-                    dative: { singular: "ᾳ", plural: "αις" },
-                    accusative: { singular: "αν", plural: "ᾱς" },
-                    vocative: { singular: "α", plural: "αι" }
-                }
+            alpha_long: {
+                nominative: { singular: "ᾱ", plural: "αι" },
+                genitive: { singular: "ᾱς", plural: "ων" },
+                dative: { singular: "ᾳ", plural: "αις" },
+                accusative: { singular: "ᾱν", plural: "ᾱς" },
+                vocative: { singular: "ᾱ", plural: "αι" }
+            },
+            alpha_short: {
+                nominative: { singular: "α", plural: "αι" },
+                genitive: { singular: "ᾱς", plural: "ων" },
+                dative: { singular: "ᾳ", plural: "αις" },
+                accusative: { singular: "αν", plural: "ᾱς" },
+                vocative: { singular: "α", plural: "αι" }
             },
             eta: {
                 nominative: { singular: "η", plural: "αι" },
@@ -81,6 +79,7 @@ export const inflection_suffixes = {
     third_declension: null /** @todo */
 };
 
+export type FirstDeclensionVariant = "alpha" | "alpha_long" | "alpha_short" | "eta";
 const NounInflectionService = {
     /**
      * Inflects the given root, according to the given parameters.
@@ -92,14 +91,42 @@ const NounInflectionService = {
      * @param declension the noun's declension.
      * @returns the inflected form.
      * 
+     * @throws RangeError if the variant does not match the other arguments.
+     * @throws NotImplementedError if an attempt to form a third-declension nouun is made.
+     * 
      * @todo support for third declension, contract verbs, accenting.
      */
-    suggestInflection(key: NounKey, declension: Declension, gender: Gender): string {
-        if (declension === Declension.THIRD_DECLENSION) {
+    suggestInflection(key: NounKey, declension: Declension, gender: Gender, variant?: FirstDeclensionVariant): string {
+        //Ensuring variant is a safe argument 
+        if (declension === Declension.FIRST_DECLENSION) {
+            if (!variant) {
+                throw new RangeError("For first-declension nouns, the inflection variant is required.");
+            }
+            else if (gender === Gender.MASCULINE && !["alpha", "eta"].includes(variant)) {
+                throw new RangeError("First-declension masculine nouns must be of either the alpha or eta variant.");
+            }
+            else if (gender === Gender.FEMININE && variant === "alpha") {
+                throw new RangeError("First-declension feminine nouns must be one of the alpha-long, alpha-short, or eta variants.");
+            }
+        }
+        //Third declension is currently not supported
+        else if (declension === Declension.THIRD_DECLENSION) {
             throw new NotImplementedError('Inflection suggestions for third-declension nouns are not yet supported');
         }
+        //We're good to go.
+        const suffixes = inflection_suffixes as any;
         const { baseInflection: root, case_, number } = key;
+        const suffix = declension === Declension.FIRST_DECLENSION
+            ? suffixes[declension.name][gender.name]?.[variant!!][case_.name][number.name]
+            : suffixes[declension.name][gender.name]?.[case_.name][number.name];
 
+        if (!suffix) {
+            throw new RangeError("No such suffix; invalid set of arguments passed: "
+                + `${declension},${gender},${case_},${number},variant: ${variant}`);
+        }
+        else {
+            return root + suffix;
+        }
     }
 };
 
