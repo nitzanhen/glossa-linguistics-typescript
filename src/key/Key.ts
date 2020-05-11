@@ -1,5 +1,5 @@
 import HashServices from '../service/hash';
-import { getClassName } from '../util/classUtils';
+import { getClassName } from '../util/typeUtils';
 
 /**
  * Common ancestor to all Key instances.
@@ -16,24 +16,13 @@ abstract class Key {
     constructor() {
     }
 
-    //------ Getters ------//
+    //------ Methods ------//
 
-    public get hash() {
+
+
+    public hash(): string {
         return HashServices[getClassName(this)].hash(this);
     }
-
-    //------ Abstract Methods ------//
-
-    /** 
-     * To be implemented by subclasses of Key. 
-     * Should validate that the parameters passed to the constructor are valid.
-     * if they are not, should throw an error.
-     * 
-     * @todo
-     */
-    //protected abstract validate(): void;
-
-    //------ Methods ------//
 
     /**
      * Checks whether two keys are equal.
@@ -43,9 +32,9 @@ abstract class Key {
      * @param other the key to test equality against.
      * @returns true if the keys are equal, and false otherwise. 
      */
-    public equals(other: Key) {
+    public equals(other: Key): boolean {
         return getClassName(this) === getClassName(other)
-            && this.hash === other.hash;
+            && this.hash() === other.hash();
     }
 }
 

@@ -1,5 +1,5 @@
 import Key from '../key/Key';
-import { Nullable } from '../util/typeUtil';
+import { Nullable } from '../util/typeUtils';
 
 /**
  * Imeplementation of a Map data structure that supports basic hashing - converting Key
@@ -39,7 +39,7 @@ class KeyMap<K extends Key, V> {
      * @returns true if the map has the key, and false otherwise. 
      */
     public has(key: K): boolean {
-        return this.store.has(key.hash);
+        return this.store.has(key.hash());
     }
 
     /**
@@ -51,7 +51,7 @@ class KeyMap<K extends Key, V> {
      * @param value the value to associate with the key.
      */
     public set(key: K, value: V): void {
-        this.store.set(key.hash, value);
+        this.store.set(key.hash(), value);
     }
 
     /**
@@ -65,7 +65,7 @@ class KeyMap<K extends Key, V> {
      */
     public getStrict(key: K): V {
         if (this.has(key)) {
-            return this.store.get(key.hash)!!;
+            return this.store.get(key.hash())!!;
         }
         else {
             throw RangeError(`Invalid key - passed non-existing key to getStrict(): ${key}`);
@@ -88,7 +88,7 @@ class KeyMap<K extends Key, V> {
         }
 
         if (this.has(key)) {
-            return this.store.get(key.hash);
+            return this.store.get(key.hash());
         }
         else if (isVCallback(otherwise)) {
             return otherwise();

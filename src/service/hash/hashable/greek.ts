@@ -11,10 +11,10 @@ import { Case, Number, PrincipalPart, Tense, Voice, Mood, Person, Canister } fro
 /** NounKey Hasher */
 export const NounKeyHasher: Readonly<Hasher<NounKey>> = {
     hash(target: NounKey): string {
-        return [target.baseInflection, target.case_.name, target.number.name].join(',');
+        return JSON.stringify([target.baseInflection, target.case_.name, target.number.name]);
     },
     unhash(hash: string): NounKey {
-        const [baseInflection, case_, number] = hash.split(',');
+        const [baseInflection, case_, number] = JSON.parse(hash);
         return new NounKey(
             baseInflection,
             Case.fromString(case_),
@@ -26,10 +26,10 @@ export const NounKeyHasher: Readonly<Hasher<NounKey>> = {
 /** PrincipalPart hasher (private) */
 const principalPartHasher: Readonly<Hasher<PrincipalPart>> = {
     hash(target: PrincipalPart): string {
-        return target.canister.name + ";" + target.baseInflection;
+        return JSON.stringify([target.canister.name, target.baseInflection]);
     },
     unhash(hash: string): PrincipalPart {
-        const [canister, baseInflection] = hash.split(';');
+        const [canister, baseInflection] = JSON.parse(hash);
         return new PrincipalPart(Canister.fromString(canister), baseInflection);
     }
 };
@@ -38,10 +38,10 @@ const principalPartHasher: Readonly<Hasher<PrincipalPart>> = {
 export const FiniteKeyHasher: Readonly<Hasher<FiniteKey>> = {
     hash(target: FiniteKey): string {
         const { principalPart, tense, voice, mood, person, number } = target;
-        return [principalPartHasher.hash(principalPart), tense.name, voice.name, mood.name, person.name, number.name].join(',');
+        return JSON.stringify([principalPartHasher.hash(principalPart), tense.name, voice.name, mood.name, person.name, number.name]);
     },
     unhash(hash: string): FiniteKey {
-        const [principalPartHash, tense, voice, mood, person, number] = hash.split(',');
+        const [principalPartHash, tense, voice, mood, person, number] = JSON.parse(hash);
         return new FiniteKey(
             principalPartHasher.unhash(principalPartHash),
             Tense.fromString(tense),
@@ -57,10 +57,10 @@ export const FiniteKeyHasher: Readonly<Hasher<FiniteKey>> = {
 export const InfinitiveKeyHasher: Readonly<Hasher<InfinitiveKey>> = {
     hash(target: InfinitiveKey): string {
         const { principalPart, tense, voice } = target;
-        return [principalPartHasher.hash(principalPart), tense.name, voice.name].join(',');
+        return JSON.stringify([principalPartHasher.hash(principalPart), tense.name, voice.name]);
     },
     unhash(hash: string): InfinitiveKey {
-        const [principalPartHash, tense, voice] = hash.split(',');
+        const [principalPartHash, tense, voice] = JSON.parse(hash);
         return new InfinitiveKey(
             principalPartHasher.unhash(principalPartHash),
             Tense.fromString(tense),
@@ -73,10 +73,10 @@ export const InfinitiveKeyHasher: Readonly<Hasher<InfinitiveKey>> = {
 export const ParticipleKeyHasher: Readonly<Hasher<ParticipleKey>> = {
     hash(target: ParticipleKey): string {
         const { principalPart, tense, voice, case_, number } = target;
-        return [principalPartHasher.hash(principalPart), tense.name, voice.name, case_.name, number.name].join(',');
+        return JSON.stringify([principalPartHasher.hash(principalPart), tense.name, voice.name, case_.name, number.name]);
     },
     unhash(hash: string): ParticipleKey {
-        const [principalPartHash, tense, voice, case_, number] = hash.split(',');
+        const [principalPartHash, tense, voice, case_, number] = JSON.parse(hash);
         return new ParticipleKey(
             principalPartHasher.unhash(principalPartHash),
             Tense.fromString(tense),

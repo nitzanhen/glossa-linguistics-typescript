@@ -7,4 +7,4 @@ export { default as FiniteKey } from './verb/FiniteKey';
 export { default as InfinitiveKey } from './verb/InfinitiveKey';
 export { default as ParticipleKey } from './verb/ParticipleKey';
 
-export { default as PartialKey } from './PartialKey';
+export { default as FilterKey } from './FilterKey';
