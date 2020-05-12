@@ -1,4 +1,4 @@
-import Key from '../Key';
+import Key from '../../key2/Key';
 import { PrincipalPart, Tense, Voice } from '../../linguistics/property';
 
 /**

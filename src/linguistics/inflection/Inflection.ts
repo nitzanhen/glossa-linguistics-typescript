@@ -1,4 +1,4 @@
-import Key from '../../key/Key';
+import Key from '../../key2/Key';
 import Masterable from '../../mastery/Masterable';
 
 /**

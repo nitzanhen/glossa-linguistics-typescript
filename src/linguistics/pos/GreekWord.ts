@@ -4,7 +4,7 @@ import Inflectable from '../inflection/Inflectable';
 import Inflections from '../inflection/Inflections';
 import Masterable from '../../mastery/Masterable';
 import Mastery from '../../mastery/Mastery';
-import Key from '../../key/Key';
+import Key from '../../key2/Key';
 
 /**
  * Base class for Greek words.

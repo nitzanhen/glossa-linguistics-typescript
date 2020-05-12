@@ -4,9 +4,10 @@ import { getClassName } from '../util/typeUtils';
 /**
  * Common ancestor to all Key instances.
  * Keys as a concept bear a close relation to Hash and Hashing, and generally should be implemented
- * such that two Key instances of the same class are equal iff their hash values are strictly equal.
+ * such that two Key instances of the same class are equal if and only if their hash values are strictly equal (I.E as an homomorphism).
  * For an implementation of key equality as a relation, see the equals() method.
  *
+ * See the readme file in this directory for more information.
  * @since 12/04/20
  */
 abstract class Key {
@@ -25,9 +26,7 @@ abstract class Key {
     }
 
     /**
-     * Checks whether two keys are equal.
-     * In practice, checks whether they're instances of the same class, and their hash
-     * values match.
+     * Checks whether two keys are equal, using the hash relation. 
      * 
      * @param other the key to test equality against.
      * @returns true if the keys are equal, and false otherwise. 

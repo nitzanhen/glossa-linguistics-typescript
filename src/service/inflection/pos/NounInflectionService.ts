@@ -92,7 +92,7 @@ const NounInflectionService = {
      * @returns the inflected form.
      * 
      * @throws RangeError if the variant does not match the other arguments.
-     * @throws NotImplementedError if an attempt to form a third-declension nouun is made.
+     * @throws NotImplementedError if an attempt to form a third-declension noun is made.
      * 
      * @todo support for third declension, contract verbs, accenting.
      */
