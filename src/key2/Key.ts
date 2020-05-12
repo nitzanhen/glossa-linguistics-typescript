@@ -7,6 +7,9 @@ import { getClassName } from '../util/typeUtils';
  * such that two Key instances of the same class are equal if and only if their hash values are strictly equal (I.E as an homomorphism).
  * For an implementation of key equality as a relation, see the equals() method.
  *
+ * Every subclass of the Key class should also implement from another interface, either a KeyProperties-extending property interface, or a FilterKey type
+ * of such an interface.
+ * 
  * See the readme file in this directory for more information.
  * @since 12/04/20
  */
@@ -18,8 +21,6 @@ abstract class Key {
     }
 
     //------ Methods ------//
-
-
 
     public hash(): string {
         return HashServices[getClassName(this)].hash(this);
