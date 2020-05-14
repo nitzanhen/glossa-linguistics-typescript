@@ -7,8 +7,9 @@ The Key contract is comprised of three different pieces:
 
 - A "normal key" (or "complete" key) class. This extends the abstract Key class (or one of its subclasses), and provides extra functionality and typing over the properties interface. This class follows the convention of "XXXKey" (for example, InfinitiveKey).
 
-- A "filter key" (or "partial" key) class. This too extends the Key class, and additionally implements the generic `FilterKey<P>`, where P is the properties interface, and is named conforming to "XXXFilterKey".
-  For example, `class InfinitiveFilterKey extends Key implements FilterKey<InfinitiveProperties>`.
+- A "filter key" (or "partial" key) class. This too extends the Key class, and additionally implements the generic `FilterKey<P>`, where P is the properties interface, and is named conforming to "XXXFilterKey". The filter key class is actually composed
+of two separate declarations, one for extending Key and the other for implementing FilterKey, for example, 
+`class InfinitiveFilterKey extends Key implements FilterKey<InfinitiveProperties>`.
 
 Keys as a concept bear a close relation to Hash and Hashing, and generally should be implemented
 such that two Key instances of the same class are equal if and only if their hash values are strictly equal (I.E as an homomorphism).

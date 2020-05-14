@@ -7,7 +7,7 @@ import Definitions from './Definitions';
  *
  * @since 12/04/20
  */
-interface Definable<K> {
+interface Definable<K extends Key> {
   definitions: Definitions<K>;
 }
 
