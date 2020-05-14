@@ -17,7 +17,22 @@ abstract class Key {
 
     //------ Constructor ------//
 
-    constructor() {
+    /**
+     * Constructor for the Key class. Can accept any object as argument,
+     * however should generally be passed nothing. Filter Key subclasses should pass their own
+     * fields in the object, enforced by the local constructor to only contain the props contained in the corresponding
+     * property interface wrapped by the FilterKey type. 
+     * 
+     * For example, InfinitiveKey's constructor should pass nothing to this method, but InfinitiveFilterKey's method
+     * should pass in properties of the FilterKey<InfinitiveProperties> type.
+     * 
+     * @param args: the object of arguments to pass into the constructor. In practice, assigns all properties of the args object
+     * to this.
+     */
+    constructor(args?: object) {
+        if (args) {
+            Object.assign(this, args);
+        }
     }
 
     //------ Methods ------//

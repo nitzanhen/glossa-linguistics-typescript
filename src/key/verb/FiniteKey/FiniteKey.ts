@@ -1,12 +1,13 @@
-import VerbKey from './VerbKey';
-import { Tense, Voice, Person, Number, PrincipalPart, Mood } from '../../linguistics/property';
+import VerbKey from '../VerbKey';
+import { Tense, Voice, Person, Number, PrincipalPart, Mood } from '../../../linguistics/property';
+import FiniteProperties from './FiniteProperties';
 
 /**
  * Key for Greek finite forms of verbs
  * 
  * @since 27/04/20
  */
-class FiniteKey extends VerbKey {
+class FiniteKey extends VerbKey implements FiniteProperties {
     //------ Constructor ------//
 
     public constructor(

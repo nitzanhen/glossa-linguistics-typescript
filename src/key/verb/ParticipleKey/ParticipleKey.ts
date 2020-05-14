@@ -1,5 +1,6 @@
-import VerbKey from './VerbKey';
-import { Tense, Voice, Case, Number, PrincipalPart } from '../../linguistics/property';
+import VerbKey from '../VerbKey';
+import { Tense, Voice, Case, Number, PrincipalPart } from '../../../linguistics/property';
+import ParticipleProperties from './ParticipleProperties';
 
 
 /**
@@ -7,7 +8,7 @@ import { Tense, Voice, Case, Number, PrincipalPart } from '../../linguistics/pro
  * 
  * @since 27/04/20
  */
-class ParticipleKey extends VerbKey {
+class ParticipleKey extends VerbKey implements ParticipleProperties {
     //------ Constructor ------//
 
     public constructor(

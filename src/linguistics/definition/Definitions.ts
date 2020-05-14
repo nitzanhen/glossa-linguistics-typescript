@@ -1,5 +1,5 @@
 import Definition from './Definition';
-import Key from '../../key2/Key';
+import Key from '../../key/Key';
 import KeyMap from '../../structure/KeyMap';
 
 /**

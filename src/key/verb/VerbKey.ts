@@ -1,5 +1,6 @@
-import Key from '../../key2/Key';
+import Key from '../Key';
 import { PrincipalPart, Tense, Voice } from '../../linguistics/property';
+import VerbProperties from './VerbProperties';
 
 /**
  * Base implementation of a filter key, for Greek verbs.
@@ -9,7 +10,7 @@ import { PrincipalPart, Tense, Voice } from '../../linguistics/property';
  * @see Key
  * @since 12/04/20
  */
-abstract class VerbKey extends Key {
+abstract class VerbKey extends Key implements VerbProperties {
     //------ Constructor ------//
 
     public constructor(

@@ -1,17 +1,11 @@
-import { Key } from '../key';
+import Key from './Key';
 import { NonFunctionProperties } from '../util/typeUtils';
 import { permutationsOf } from '../util/collectionUtils';
 
-/**
- * bb
- */
 type FilterKey<K extends Key> = {
     [P in keyof NonFunctionProperties<K>]?: Array<K[P]>
 };
 
-/**
- * As a namespace, FilterKey contains additional functionality regare
- */
 namespace FilterKey {
     /**
      * 
