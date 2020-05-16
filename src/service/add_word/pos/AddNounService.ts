@@ -2,6 +2,7 @@ import { Number, Case, Declension, Gender } from '../../../linguistics/property'
 import InflectionServices from '../../inflection';
 import { NounKey } from '../../../key';
 import { capitalize } from '../../../util/stringUtils';
+import ExtendedNounProperties, { DeclensionVariant } from '../../../key/NounKey/ExtendedNounProperties';
 
 const inflectionService = InflectionServices["GreekNoun"];
 
@@ -18,9 +19,15 @@ const AddNounService = {
      * @param number the number of the suggested block.
      * @returns a string,string tuple containing the base form, inflected by the given number, and the number's name.
      */
-    generateBlockOverview(root: string, declension: Declension, gender: Gender, number: Number): [string, string] {
-        const key = new NounKey(root, Case.NOMINATIVE, number);
-        const baseForm = inflectionService.suggestInflection(key, declension, gender);
+    generateBlockOverview(root: string, declension: Declension, gender: Gender, number: Number, variant?: DeclensionVariant): [string, string] {
+        const baseForm = inflectionService.suggestInflection({
+            baseInflection: root,
+            declension,
+            gender,
+            case_: Case.NOMINATIVE,
+            number,
+            variant
+        });
         return [baseForm, `(${capitalize(number.name)})`];
     },
 
@@ -36,25 +43,32 @@ const AddNounService = {
      * @param root the noun's root.
      * @param declension the noun's declension.
      */
-    generateDefaultBlockSuggestions(root: string, declension: Declension, gender: Gender): [string, Declension, Gender, Number][] {
+    generateDefaultBlockSuggestions(root: string, declension: Declension, gender: Gender, variant?: DeclensionVariant):
+        [string, Declension, Gender, Number, DeclensionVariant | undefined][] {
         return [
-            [root, declension, gender, Number.SINGULAR],
-            [root, declension, gender, Number.PLURAL]
+            [root, declension, gender, Number.SINGULAR, variant],
+            [root, declension, gender, Number.PLURAL, variant]
         ];
     },
 
     /**
      * Generates inflections for all five cases of the noun with the given declension and gender, 
-     * in the given number. Returns the inflections as a five-tuple.
+     * in the given number. Returns the inflections as an array.
      * 
      * @param root the root of the noun to inflect upon.
      * @param declension the declension of the noun.
      * @param gender the gender of the noun.
      */
-    generateInflectionBlock(root: string, declension: Declension, gender: Gender, number: Number) {
+    generateInflectionBlock(root: string, declension: Declension, gender: Gender, number: Number, variant?: DeclensionVariant) {
         return Case.values
-            .map(case_ => new NounKey(root, case_, number)) //Cases to NounKeys
-            .map(key => inflectionService.suggestInflection(key, declension, gender)); //Keys to inflections
+            .map(case_ => inflectionService.suggestInflection({
+                baseInflection: root,
+                declension,
+                gender,
+                case_,
+                number,
+                variant
+            }));
     }
 };
 
