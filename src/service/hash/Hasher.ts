@@ -11,7 +11,9 @@
  * 
  * @since 26/04/20
  */
-export interface Hasher<T> {
+interface Hasher<T> {
     hash(target: T): string;
     unhash(hash: string): T;
 }
+
+export default Hasher;
