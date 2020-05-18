@@ -1,6 +1,5 @@
 import { Case, Number, Declension, Gender } from '../../../linguistics/property';
 import { NotImplementedError } from '../../../error';
-import { NounKey } from '../../../key';
 import ExtendedNounProperties from '../../../key/NounKey/ExtendedNounProperties';
 
 /**
@@ -8,16 +7,6 @@ import ExtendedNounProperties from '../../../key/NounKey/ExtendedNounProperties'
  * 
  * @since 04/05/20
  */
-/**
- * Retrieves the root of a Greek noun, for inflecting nouns.
- * Expects to receive the nominative singular form of the noun.
- * 
- * @param nomSg the nominative singular form of the noun
- * @returns the root of the noun, as a string.
- */
-export function getRootOf(): string {
-    throw new NotImplementedError();
-}
 
 export const inflection_suffixes = {
     first_declension: {
