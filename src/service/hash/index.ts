@@ -1,4 +1,3 @@
-import Hasher from './Hasher';
 import NounKeyHasher from './hashers/standard/NounKeyHasher';
 import FiniteKeyHasher from './hashers/standard/FiniteKeyHasher';
 import InfinitiveKeyHasher from './hashers/standard/InfinitiveKeyHasher';
@@ -15,7 +14,7 @@ import ParticipleFilterKeyHasher from './hashers/filter/ParticipleFilterKeyHashe
  * 
  * @since 26/04/20
  */
-const HashServices: Record<string, Readonly<Hasher<any>>> = {
+const HashServices = {
     NounKey: NounKeyHasher,
     NounFilterKey: NounFilterKeyHasher,
     FiniteKey: FiniteKeyHasher,

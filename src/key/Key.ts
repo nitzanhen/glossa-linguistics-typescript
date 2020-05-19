@@ -38,7 +38,7 @@ abstract class Key {
     //------ Methods ------//
 
     public hash(): string {
-        return HashServices[getClassName(this)].hash(this);
+        return (<any>HashServices)[getClassName(this)].hash(this);
     }
 
     /**
