@@ -11,8 +11,8 @@ class Voice {
 
   static readonly ACTIVE = new Voice('active', 0);
   static readonly MIDDLE = new Voice('middle', 1);
-  static readonly PASSIVE = new Voice('passive', 1);
-  static readonly MEDIOPASSIVE = new Voice('mediopassive', 1);
+  static readonly PASSIVE = new Voice('passive', 2);
+  static readonly MEDIOPASSIVE = new Voice('mediopassive', 3);
 
   //------ Static Methods ------//
 
