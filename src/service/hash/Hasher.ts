@@ -1,5 +1,6 @@
 /**
- * Generic hasher interface mapping between strings and a generic type T (to be hashed).
+ * Generic hasher interface mapping between a hash of type H (typically a string)
+ * and a generic type T (to be hashed).
  * 
  * If the hasher uses string-casted numbers, the numbers should typically be integers.
  * Otherwise, the strings this hashers maps into should typically be indicative of the properties
@@ -11,9 +12,9 @@
  * 
  * @since 26/04/20
  */
-interface Hasher<T> {
-    hash(target: T): string;
-    unhash(hash: string): T;
+interface Hasher<T, H = string> {
+    hash(target: T): H;
+    unhash(hash: H): T;
 }
 
 export default Hasher;

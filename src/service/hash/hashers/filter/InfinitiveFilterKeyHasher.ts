@@ -21,7 +21,7 @@ const InfinitiveFilterKeyHasher: Readonly<Hasher<InfinitiveFilterKey>> = {
         let [principalPart, tense, voice] = JSON.parse(hash);
         principalPart = principalPart
             //Map to Principal Parts
-            ? principalPart.map((pPart: string) => principalPartHasher.unhash(pPart))
+            ? principalPart.map((pPart: [string, string]) => principalPartHasher.unhash(pPart))
             //principalPartHash is null. Convert to undefined
             : undefined;
 

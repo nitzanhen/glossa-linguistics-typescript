@@ -8,14 +8,14 @@ import { IllegalEnumValueError } from '../../error';
 class Person {
   //------ Instances ------//
 
-  static readonly FIRST = new Person('first', 0);
-  static readonly SECOND = new Person('second', 1);
-  static readonly THIRD = new Person('third', 2);
+  static readonly FIRST_PERSON = new Person('first_person', 0);
+  static readonly SECOND_PERSON = new Person('second_person', 1);
+  static readonly THIRD_PERSON = new Person('third_person', 2);
 
   //------ Static Methods ------//
 
   static get values(): Person[] {
-    return [this.FIRST, this.SECOND, this.THIRD];
+    return [this.FIRST_PERSON, this.SECOND_PERSON, this.THIRD_PERSON];
   }
 
   /**

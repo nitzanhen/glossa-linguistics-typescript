@@ -15,6 +15,10 @@ const NounFilterKeyHasher: Readonly<Hasher<NounFilterKey>> = {
     unhash(hash: string): NounFilterKey {
         let [baseInflection, case_, number] = JSON.parse(hash);
 
+        if(baseInflection === null) {
+            baseInflection = undefined;
+        }
+
         case_ = Boolean(case_)
             //Map to Case instances    
             ? case_.map((c: string) => Case.fromString(c))

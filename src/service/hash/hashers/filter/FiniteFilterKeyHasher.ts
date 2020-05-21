@@ -22,7 +22,7 @@ const FiniteFilterKeyHasher: Readonly<Hasher<FiniteFilterKey>> = {
 
         const principalPart = principalPartHash
             //Map to Principal Parts
-            ? principalPartHash.map((pPartHash: string) => principalPartHasher.unhash(pPartHash))
+            ? principalPartHash.map((pPartHash: [string, string]) => principalPartHasher.unhash(pPartHash))
             //principalPartHash is null. Convert to undefined
             : undefined;
 
