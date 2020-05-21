@@ -175,10 +175,45 @@ const VerbInflectionSuffixes = {
        }
     },
     aorist: {
-
+        active: {
+            singular: {
+                first: 'α',
+                second: 'ας',
+                third: 'ε'
+            },
+            plural: {
+                first: 'αμεν',
+                second: 'ατε',
+                third: 'αν'
+            }
+        },
+        middle: {
+            singular: {
+                first: 'αμην',
+                second: 'ω',
+                third: 'ατο'
+            },
+            plural: {
+                first: 'αμεθα',
+                second: 'ασθε',
+                third: 'αντο'
+            }
+        },
+        passive: {
+            singular: {
+                first: 'ην',
+                second: 'ης',
+                third: 'η'
+            },
+            plural: {
+                first: 'ημεν',
+                second: 'ητε',
+                third: 'ησαν'
+            }
+        }
     },
     perfect: {
-
+        
     },
     pluperfect: {
 
