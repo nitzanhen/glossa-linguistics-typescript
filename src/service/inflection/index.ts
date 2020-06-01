@@ -1,4 +1,4 @@
-import NounInflectionService from './pos/NounInflectionService';
+import NounInflectionService from './pos/noun/NounInflectionService';
 
 /**
  * A collection of services that provides inflection functionality for different parts of speech.
