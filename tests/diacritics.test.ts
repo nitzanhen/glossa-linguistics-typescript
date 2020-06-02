@@ -1,4 +1,4 @@
-import { strip, Diacritic } from '../src/alphabet/diacritics';
+import { Diacritic, stripDiacritics } from '../src/alphabet/diacritics';
 
 describe("diacritics.ts", () => {
     test("Stripping diacritics", () => {
@@ -27,6 +27,6 @@ describe("diacritics.ts", () => {
         ];
 
         testData.forEach(({ input, output, blacklist }) =>
-            expect(strip(input, blacklist)).toMatch(output));
+            expect(stripDiacritics(input, blacklist)).toMatch(output));
     });
 });

@@ -1,3 +1,4 @@
+import { stripDiacritics } from './diacritics';
 
 /**
  * List of Greek letters. 
@@ -42,6 +43,7 @@ export function isGreekLetter(letter: string): boolean {
     return letters.hasOwnProperty(letter);
 }
 
+
 /**
  * @returns true if the string is a sequence of letters of the Greek alphabet, 
  * and false otherwise. Note that spaces and puncuation marks are not letters.
@@ -51,11 +53,13 @@ export function isGreekString(string: string): boolean {
     return Array.from(string).every(isGreekLetter);
 }
 
+//------ Vowels ------//
+
 /**
- * Readonly collection of the vowels of the Greek alphabet,
+ * Readonly collection of the monophthongs (single vowels) of the Greek alphabet,
  * sorted by alphabet order.
  */
-export const vowels = Object.freeze(
+export const monophtongs = Object.freeze(
     Object.entries(letters)
         .filter(([_, props]) => props.type === 'vowel')
         .map(([letter, _]) => letter)
@@ -63,12 +67,32 @@ export const vowels = Object.freeze(
 );
 
 /**
- * @returns true if the passed letter param is in the vowels array, and false otherwise.
- * @todo should the letter be normalized (stipped of accents)? should separate methods exist
- * for testing normalized equality and strict equality?
- * @param letter the strring to be tested. 
+ * Readonly collection of the diphthongs ("double vowels") of the Greek alphabet.
+ * 
+ * Note the difference between "αι" and "ᾳ"; the former is the proper diphthong, while the
+ * latter is the improper diphthong (ᾱι, in iota adscript). 
  */
-export function isVowel(letter: string): boolean {
+export const diphthongs = Object.freeze(
+    ["αι", "αυ", "ει", "ευ", "ηυ", "οι", "ου", "υι", "ᾳ", "ῃ", "ῳ"]
+)
+
+export const vowels = Object.freeze(monophtongs.concat(diphthongs))
+
+
+
+/**
+ * @returns true if the passed letter param is in the vowels array, and false otherwise.
+ * Can optionally test "strictly", meaning an accented vowel (i.e. a vowel with any diacritic symbol)
+ * will not count as a vowel.
+ * 
+ * @param letter the string to be tested. 
+ * @param strict whether to test strictly or not, default to false.
+ */
+export function isVowel(letter: string, strict: boolean = false): boolean {
+    if(!strict) {
+        //If we're not testing strictly, remove all diacritics.
+        letter = stripDiacritics(letter);
+    }
     return vowels.includes(letter);
 }
 

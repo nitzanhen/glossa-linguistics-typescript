@@ -26,7 +26,7 @@ export type Diacritic = keyof typeof diacritics;
  * @param blacklist the diacritics to strip. By default, removes all diacritics.
  * @returns the cleaned text
  */
-export function strip(text: string, blacklist: Diacritic[] = Object.keys(diacritics) as Diacritic[]): string {
+export function stripDiacritics(text: string, blacklist: Diacritic[] = Object.keys(diacritics) as Diacritic[]): string {
     //Map blacklist keys to symbols, then concatanate for regex
     const concattedDiacritics = blacklist
         .map(key => diacritics[key])
