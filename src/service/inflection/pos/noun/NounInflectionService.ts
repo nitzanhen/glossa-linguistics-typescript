@@ -1,7 +1,8 @@
-import { Case, Number, Declension, Gender } from '../../../../linguistics/property';
+import { Declension } from '../../../../linguistics/property';
 import { NotImplementedError } from '../../../../error';
 import ExtendedNounProperties from '../../../../key/NounKey/ExtendedNounProperties';
-import nounInflectionSuffixes from './NounInflectionSuffixes';
+import NounInflectionFunctions from './NounInflectionFunctions';
+import nounInflectionFunctions from './NounInflectionFunctions';
 
 /**
  * Collection of functions dealing with Greek noun inflections.
@@ -37,18 +38,18 @@ const NounInflectionService = {
         }
 
         //We're good to go.
-        const suffixes = nounInflectionSuffixes as any;
+        const inflectionFunctions = nounInflectionFunctions as any;
 
-        const suffix = declension === Declension.FIRST_DECLENSION
-            ? suffixes[declension.name][gender.name]?.[variant!!][case_.name][number.name]
-            : suffixes[declension.name][gender.name]?.[case_.name][number.name];
+        const inflect = declension === Declension.FIRST_DECLENSION
+            ? inflectionFunctions[declension.name][gender.name]?.[variant!!][case_.name][number.name]
+            : inflectionFunctions[declension.name][gender.name]?.[case_.name][number.name];
 
-        if (!suffix) {
-            throw new RangeError("No such suffix; invalid set of arguments passed: "
+        if (!inflect) {
+            throw new RangeError("No such inflection function; invalid set of arguments passed: "
                 + `${declension},${gender},${case_},${number},variant: ${variant}`);
         }
         else {
-            return root + suffix;
+            return inflect(root);
         }
     }
 };
