@@ -8,10 +8,10 @@
     "start": "tsc && node ./build/index.js",
     "dev": "ts-node-dev --respawn --transpileOnly --no-notify ./src/index.ts",
     "test": "jest",
-    "link-alias": "link-module-alias"
+    "link-alias": "link-module-alias clean && link-module-alias"
   },
   "_moduleAliases": {
-    "glossa-core": "src"
+    "#": "src"
   },
   "author": "",
   "license": "ISC",
