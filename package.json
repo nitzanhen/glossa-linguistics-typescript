@@ -7,7 +7,11 @@
     "tsc": "tsc",
     "start": "tsc && node ./build/index.js",
     "dev": "ts-node-dev --respawn --transpileOnly --no-notify ./src/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "link-alias": "link-module-alias"
+  },
+  "_moduleAliases": {
+    "glossa-core": "src"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +25,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "eslint": "^6.8.0"
+    "eslint": "^6.8.0",
+    "link-module-alias": "^1.2.0"
   }
 }
