@@ -1,4 +1,5 @@
-import { IllegalEnumValueError } from '../../error';
+import { IllegalEnumValueError } from '#/error';
+
 import Time from './Time';
 import Aspect from './Aspect';
 

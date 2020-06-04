@@ -1,15 +1,10 @@
+import { Gender, Declension } from '#/linguistics/property';
+import { DeclensionVariant } from '#/linguistics/variant';
+
 import NounProperties from './NounProperties';
 import ExtendedKeyProperties from '../ExtendedKeyProperties';
-import { Gender, Declension } from '../../linguistics/property';
 
-export type FirstDeclensionVariant = "alpha" | "alpha_long" | "alpha_short" | "eta";
 
-/**
- * Todo
- */
-export type ThirdDeclensionVariant = never;
-
-export type DeclensionVariant = FirstDeclensionVariant | ThirdDeclensionVariant;
 
 /**
  * @since 16/05/20

@@ -1,5 +1,6 @@
+import { Case, Number } from '#/linguistics/property';
+
 import KeyProperties from '../KeyProperties';
-import { Case, Number } from '../../linguistics/property';
 
 /**
  * @since 14/05/20

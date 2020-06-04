@@ -1,6 +1,7 @@
+import { NonFunctionProperties } from '#/util/typeUtils';
+import { permutationsOf } from '#/util/collectionUtils';
+
 import Key from './Key';
-import { NonFunctionProperties } from '../util/typeUtils';
-import { permutationsOf } from '../util/collectionUtils';
 
 type FilterKey<K extends Key> = {
     [P in keyof NonFunctionProperties<K>]?: Array<K[P]>

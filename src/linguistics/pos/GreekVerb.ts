@@ -1,8 +1,9 @@
-import GreekWord from './GreekWord';
+import { Mastery } from '#/mastery';
+import { VerbKey } from '#/key';
 
-import VerbInflections from '../inflection/VerbInflections';
-import Mastery from '../../mastery/Mastery';
-import { VerbKey } from '../../key';
+import { VerbInflections } from '../inflection';
+
+import GreekWord from './GreekWord';
 
 class GreekVerb extends GreekWord<VerbKey> {
     //------ Fields ------//

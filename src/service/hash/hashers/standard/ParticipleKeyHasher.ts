@@ -1,7 +1,9 @@
+import { ParticipleKey } from '#/key';
+import { Tense, Voice, Case, Number } from '#/linguistics/property';
+
 import Hasher from '../../Hasher';
-import { ParticipleKey } from '../../../../key';
+
 import principalPartHasher from '../PrincipalPartHasher';
-import { Tense, Voice, Case, Number } from '../../../../linguistics/property';
 
 /** 
  * ParticipleKey Hasher 

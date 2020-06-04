@@ -1,7 +1,9 @@
+import { FiniteFilterKey } from '#/key';
+import { Tense, Mood, Voice, Person, Number } from '#/linguistics/property';
+
 import Hasher from '../../Hasher';
-import { FiniteFilterKey } from '../../../../key';
+
 import principalPartHasher from '../PrincipalPartHasher';
-import { Tense, Mood, Voice, Person, Number } from '../../../../linguistics/property';
 
 /** 
  * FiniteFilterKey hasher 

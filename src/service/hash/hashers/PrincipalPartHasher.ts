@@ -1,5 +1,5 @@
 import Hasher from '../Hasher';
-import { PrincipalPart, Canister } from '../../../linguistics/property';
+import { PrincipalPart, Canister } from '#/linguistics/property';
 
 /** 
  * PrincipalPart pseudo-hasher (private). 

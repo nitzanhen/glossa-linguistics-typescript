@@ -1,5 +1,6 @@
+import { PrincipalPart, Tense, Voice } from '#/linguistics/property';
+
 import KeyProperties from '../KeyProperties';
-import { PrincipalPart, Tense, Voice } from '../../linguistics/property';
 
 interface VerbProperties extends KeyProperties {
     principalPart: PrincipalPart;

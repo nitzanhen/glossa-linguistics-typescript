@@ -1,8 +1,7 @@
+import { Key, FilterKey } from '#/key';
+import { KeyMap, Tree } from '#/structure';
+
 import Definition from './Definition';
-import Key from '../../key/Key';
-import KeyMap from '../../structure/KeyMap';
-import { FilterKey } from '../../key';
-import Tree from '../../structure/Tree';
 
 /**
  * A mapping between FilterKey classes (inheriting from both Key and Filter Key, see the readme.md file at /key),

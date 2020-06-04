@@ -1,6 +1,7 @@
+import { KeyMap } from '#/structure';
+import { NounKey } from '#/key';
+
 import Inflections from './Inflections';
-import KeyMap from '../../structure/KeyMap';
-import NounKey from '../../key/noun/NounKey';
 import Inflection from './Inflection';
 
 /**

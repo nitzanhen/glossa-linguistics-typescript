@@ -1,8 +1,8 @@
-import { Number, Case, Declension, Gender } from '../../../linguistics/property';
+import { Number, Case, Declension, Gender } from '#/linguistics/property';
+import { capitalize } from '#/util/stringUtils';
+import { DeclensionVariant } from '#/key/NounKey/ExtendedNounProperties';
+
 import InflectionServices from '../../inflection';
-import { NounKey } from '../../../key';
-import { capitalize } from '../../../util/stringUtils';
-import ExtendedNounProperties, { DeclensionVariant } from '../../../key/NounKey/ExtendedNounProperties';
 
 const inflectionService = InflectionServices["GreekNoun"];
 

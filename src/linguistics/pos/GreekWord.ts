@@ -1,10 +1,8 @@
-import Definitions from '../definition/Definitions';
-import Definable from '../definition/Definable';
-import Inflectable from '../inflection/Inflectable';
-import Inflections from '../inflection/Inflections';
-import Masterable from '../../mastery/Masterable';
-import Mastery from '../../mastery/Mastery';
-import { Key } from '../../key';
+import { Key } from '#/key';
+import { Mastery, Masterable } from '#/mastery';
+
+import { Definitions, Definable } from '../definition';
+import { Inflections, Inflectable } from '../inflection';
 
 /**
  * Base class for Greek words.

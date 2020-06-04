@@ -1,4 +1,4 @@
-import { IllegalEnumValueError } from '../../error';
+import { IllegalEnumValueError } from '#/error';
 
 /**
  * @todo documentation

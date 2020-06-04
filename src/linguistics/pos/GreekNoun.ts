@@ -1,7 +1,9 @@
+import { NounKey } from '#/key';
+import { Mastery } from '#/mastery';
+
+import { NounInflections } from '../inflection/';
+
 import GreekWord from './GreekWord';
-import { NounKey } from '../../key';
-import Mastery from '../../mastery/Mastery';
-import NounInflections from '../inflection/NounInflections';
 
 class GreekNoun extends GreekWord<NounKey> {
     //------ Fields ------//

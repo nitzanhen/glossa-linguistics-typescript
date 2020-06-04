@@ -1,5 +1,5 @@
-import Key from '../../key/Key';
-import Masterable from '../../mastery/Masterable';
+import { Key } from '#/key';
+import { Masterable } from '#/mastery';
 
 /**
  * Base inflection class.

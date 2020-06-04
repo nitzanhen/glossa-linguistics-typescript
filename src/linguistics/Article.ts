@@ -1,6 +1,4 @@
-import Number from './property/Number'
-import Case from './property/Case';
-import Gender from './property/Gender';
+import { Gender, Case, Number } from './property';
 
 namespace Article {
 

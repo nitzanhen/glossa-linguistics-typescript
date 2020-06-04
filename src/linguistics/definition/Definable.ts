@@ -1,5 +1,6 @@
+import { Key } from '#/key';
+
 import Definitions from './Definitions';
-import { Key } from '../../key';
 
 /**
  * Denotes that an entity is definable - it can be defined.

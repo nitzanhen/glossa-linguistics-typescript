@@ -1,5 +1,6 @@
+import { Mood, Person, Number } from '#/linguistics/property';
+
 import VerbProperties from '../VerbProperties';
-import { Mood, Person, Number } from '../../../linguistics/property';
 
 interface FiniteProperties extends VerbProperties {
     mood: Mood;

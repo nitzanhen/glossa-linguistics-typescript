@@ -1,6 +1,7 @@
+import { KeyMap } from '#/structure';
+import { FiniteKey, InfinitiveKey, ParticipleKey } from '#/key';
+
 import Inflections from './Inflections';
-import KeyMap from '../../structure/KeyMap';
-import { FiniteKey, InfinitiveKey, ParticipleKey } from '../../key';
 import Inflection from './Inflection';
 
 

@@ -1,5 +1,6 @@
+import { Case, Number } from '#/linguistics/property';
+
 import VerbProperties from '../VerbProperties';
-import { Case, Number } from '../../../linguistics/property';
 
 interface ParticipleProperties extends VerbProperties {
     case_: Case;

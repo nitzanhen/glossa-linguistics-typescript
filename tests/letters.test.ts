@@ -1,5 +1,5 @@
-import letters, { vowels, consonants, monophtongs, diphthongs, isMonophthong, isDiphthong, isVowel, isGreekLetter } from '../src/alphabet/letters';
-import diacritics from '../src/alphabet/diacritics';
+import letters, { vowels, consonants, monophtongs, diphthongs, isMonophthong, isDiphthong, isVowel, isGreekLetter } from '#/linguistics/alphabet/letters';
+import diacritics from '#/linguistics/alphabet/diacritics';
 
 describe("lettes.ts", () => {
     test("All letter groups have the correct number of elements", () => {

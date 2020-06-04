@@ -1,7 +1,9 @@
+import { InfinitiveFilterKey } from '#/key';
+import { Tense, Voice } from '#/linguistics/property';
+
 import Hasher from '../../Hasher';
-import { InfinitiveFilterKey } from '../../../../key';
+
 import principalPartHasher from '../PrincipalPartHasher';
-import { Tense, Voice } from '../../../../linguistics/property';
 
 /**
  * Hasher for InfinitiveFilterKeys

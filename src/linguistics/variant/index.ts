@@ -1,0 +1,1 @@
+export { FirstDeclensionVariant, ThirdDeclensionVariant, DeclensionVariant } from './DeclensionVariant';

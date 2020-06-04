@@ -1,4 +1,4 @@
-import { suffixer } from '../../../../util/stringUtils';
+import { suffixer } from '#/util/stringUtils';
 
 const nounInflectionFunctions = {
   first_declension: {

@@ -1,6 +1,5 @@
-import Masterable from '../../mastery/Masterable';
-import Mastery from '../../mastery/Mastery';
-import { capitalize } from '../../util/stringUtils';
+import { Mastery, Masterable } from '#/mastery';
+import { capitalize } from '#/util/stringUtils';
 
 /**
  * A definition for a word.

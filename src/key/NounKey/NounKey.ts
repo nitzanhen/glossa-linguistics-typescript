@@ -1,5 +1,6 @@
+import { Case, Number } from '#/linguistics/property';
+
 import Key from '../Key';
-import { Case, Number } from '../../linguistics/property';
 import NounProperties from './NounProperties';
 
 /**

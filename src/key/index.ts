@@ -3,6 +3,7 @@ export { default as Key } from './Key';
 export { default as FilterKey } from './FilterKey';
 
 export { default as NounProperties } from './NounKey/NounProperties';
+export { default as ExtendedNounProperties } from './NounKey/ExtendedNounProperties';
 export { default as NounKey } from './NounKey/NounKey';
 export { default as NounFilterKey } from './NounKey/NounFilterKey';
 

@@ -1,4 +1,4 @@
-import { Diacritic, stripDiacritics } from '../src/alphabet/diacritics';
+import { Diacritic, stripDiacritics } from '#/linguistics/alphabet/diacritics';
 
 describe("diacritics.ts", () => {
     test("Stripping diacritics", () => {

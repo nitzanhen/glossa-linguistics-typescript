@@ -1,5 +1,6 @@
+import { IllegalEnumValueError } from '#/error';
+
 import Tense from './Tense';
-import { IllegalEnumValueError } from '../../error';
 
 /**
  * @todo documentation
