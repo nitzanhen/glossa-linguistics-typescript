@@ -4,8 +4,6 @@ import { DeclensionVariant } from '#/linguistics/variant';
 import NounProperties from './NounProperties';
 import ExtendedKeyProperties from '../ExtendedKeyProperties';
 
-
-
 /**
  * @since 16/05/20
  */
