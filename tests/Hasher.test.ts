@@ -1,8 +1,7 @@
-import HasherService from '../src/service/hash';
-import Hasher from '../src/service/hash/Hasher';
-import { Key, NounKey, NounFilterKey, FiniteKey, FiniteFilterKey, InfinitiveKey, InfinitiveFilterKey, ParticipleKey, ParticipleFilterKey, FilterKey } from '../src/key';
-import { Case, Number, PrincipalPart, Canister, Tense, Voice, Mood, Person } from '../src/linguistics/property';
-import hash from '../src/service/hash';
+import HasherService from '#/service/hash';
+import Hasher from '#/service/hash/Hasher';
+import { Key, NounKey, NounFilterKey, FiniteKey, FiniteFilterKey, InfinitiveKey, InfinitiveFilterKey, ParticipleKey, ParticipleFilterKey, FilterKey } from '#/key';
+import { Case, Number, PrincipalPart, Canister, Tense, Voice, Mood, Person } from '#/linguistics/property';
 
 describe("hashers", () => {
     test("HasherService contains only hashers", () => {

@@ -1,9 +1,9 @@
-import { capitalize } from '../src/util/stringUtils';
-import { getClassName } from '../src/util/typeUtils';
-import Tree from '../src/structure/Tree';
-import { Declension, Gender, Number } from '../src/linguistics/property';
-import Mastery from '../src/mastery/Mastery';
-import { permutationsOf } from '../src/util/collectionUtils';
+import { capitalize } from '#/util/stringUtils';
+import { getClassName } from '#/util/typeUtils';
+import { permutationsOf } from '#/util/collectionUtils';
+import Tree from '#/structure/Tree';
+import { Declension, Gender, Number } from '#/linguistics/property';
+import { Mastery } from '#/mastery';
 
 describe("Utils", () => {
     test("typeUtils", () => {
