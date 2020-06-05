@@ -1,4 +1,4 @@
-****# Glossa Core #
+# Glossa Core #
 
 Core logic for the Glossa app. Written in Typescript.
 
