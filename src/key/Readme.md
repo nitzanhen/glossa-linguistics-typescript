@@ -10,19 +10,19 @@ The Key contract is comprised of four different pieces:
 - A "filter key" (or "partial" key) class. This too extends the Key class, and additionally implements the generic `FilterKey<P>`, where P is the properties interface, and is named conforming to "XXXFilterKey". The filter key class is actually composed
   of two separate declarations, one for extending Key and the other for implementing FilterKey, for example:
 
-```typescript
-interface InfinitiveFilterKey extends FilterKey<InfinitiveKey> { ... };
-class InfinitiveFilterKey extends Key { ... }
-```
+  ```typescript
+  interface InfinitiveFilterKey extends FilterKey<InfinitiveKey> { ... };
+  class InfinitiveFilterKey extends Key { ... }
+  ```
 
 - An "extended" properties interface. This bears no relation to the different Key classes, and is used for functions dealing with grammar logic. It extends
-  the Property interface of the corresponding class, as well as the empty ExtendedKeyProperties interface, for grouping the different extended interfaces.
-  These interfaces adhere to the "ExtendedXXXProperties" naming pattern.
-  For example:
+the Property interface of the corresponding class, as well as the empty ExtendedKeyProperties interface, for grouping the different extended interfaces.
+These interfaces adhere to the "ExtendedXXXProperties" naming pattern.
+For example:
 
-```typescript
-interface ExtendedInfinitiveProperties extends ExtendedKeyProperties, InfinitiveProperties { ... };
-```
+  ```typescript
+  interface ExtendedInfinitiveProperties extends ExtendedKeyProperties, InfinitiveProperties { ... };
+  ```
 
 Keys as a concept bear a close relation to Hash and Hashing, and generally should be implemented
 such that two Key instances of the same class are equal if and only if their hash values are strictly equal (I.E as an homomorphism).
