@@ -43,7 +43,6 @@ describe("lettes.ts", () => {
         });
 
         diphthongTests.forEach(diph => {
-            console.log(diph, isGreekLetter(diph))
             expect(isMonophthong(diph)).toBe(false);
             expect(isDiphthong(diph)).toBe(true);
             expect(isVowel(diph)).toBe(true);

@@ -1,5 +1,7 @@
 import diacritics, { stripDiacritics, Diacritic } from './diacritics';
 
+
+
 /**
  * List of Greek letters. 
  * Each letter is kept here in its lower-case form; to obtain the upper-case form,
@@ -34,6 +36,25 @@ const letters = {
     'ψ': { type: 'consonant', class: 'double' },
     'ω': { type: 'vowel', class: 'long' },
 };
+
+/**
+ * Utility method for extracting of a group of letters from the letters object below 
+ * (by a given property value). In essence, filters only the letters 
+ * with the given type or class name.
+ * 
+ * @param property the property to extract by.
+ * @param value the value of the property argument to filter by.
+ * @returns The letters with the passed type argument, sorted by alphabet order, as a readonly array.
+ */
+export function extractLetters(property: 'type' | 'class', value: string): readonly string[] {
+    return Object.freeze(
+        Object.entries(letters)
+            .filter(([_, props]) => (props as any)[property] === value)
+            .map(([letter, _]) => letter)
+            .sort()
+    );
+}
+
 
 /**
  * @returns true if the string is a letter of the Greek alphabet, and false otherwise.
@@ -87,12 +108,7 @@ const safeDiacritics = (() => {
  * Readonly collection of the monophthongs (single vowels) of the Greek alphabet,
  * sorted by alphabet order.
  */
-export const monophtongs = Object.freeze(
-    Object.entries(letters)
-        .filter(([_, props]) => props.type === 'vowel')
-        .map(([letter, _]) => letter)
-        .sort()
-);
+export const monophtongs = extractLetters('type', 'vowel');
 
 /**
  * Monophthong type; should match the possible values of the monophthongs array.
@@ -111,8 +127,6 @@ export type Monophthong = 'α' | 'ε' | 'η' | 'ι' | 'ο' | 'υ' | 'ω';
  * @param strict whether to test strictly or not, defaults to false.
  */
 export function isMonophthong(letter: string, strict: boolean = false): letter is Monophthong {
-    const { iota_subscript, ...otherDiacritics } = diacritics;
-
     if (!strict) {
         //DON'T remove iota subscript; all vowels with iota subscript are diphthongs
         letter = stripDiacritics(letter, safeDiacritics);
@@ -189,12 +203,7 @@ export function isVowel(letter: string, strict: boolean = false): letter is Vowe
  * Readonly collection of the consonants of the Greek alphabet,
  * sorted by alphabet order.
  */
-export const consonants = Object.freeze(
-    Object.entries(letters)
-        .filter(([_, props]) => props.type === 'consonant')
-        .map(([letter, _]) => letter)
-        .sort()
-);
+export const consonants = extractLetters('type', 'consonant');
 
 /**
  * Consonant type; should match the possible values of the consonants array.
@@ -216,6 +225,116 @@ export function isConsonant(letter: string): letter is Consonant {
     letter = stripDiacritics(letter, ["rough_breathing"]);
 
     return consonants.includes(letter);
+}
+
+//Consonant types
+
+//Liquids
+
+/**
+ * Readonly collection of the liquid consonants of the Greek alphabet,
+ * sorted by alphabet order.
+ */
+export const liquids = extractLetters("class", "liquid");
+
+/**
+ * @returns true if the passed letter param is in the liquids array, and false otherwise.
+ * A rho with rough breathing counts as a consonants, and passing it to this method returns true.
+ * 
+ * @param letter the string to be tested. 
+ */
+export function isLiquid(letter: string): boolean {
+    //Remove rough breathing mark in case the letter is rho
+    letter = stripDiacritics(letter, ["rough_breathing"]);
+
+    return liquids.includes(letter);
+}
+
+//Nasals
+
+/**
+ * Readonly collection of the nasal consonants of the Greek alphabet,
+ * sorted by alphabet order.
+ */
+export const nasals = extractLetters("class", "nasal");
+
+/**
+ * @returns true if the passed letter param is in the nasals array, and false otherwise.
+ * 
+ * @param letter the string to be tested. 
+ */
+export function isNasal(letter: string): boolean {
+    return nasals.includes(letter);
+}
+
+
+//Labials
+
+/**
+ * Readonly collection of the labial consonant of the Greek alphabet,
+ * sorted by alphabet order.
+ */
+export const labials = extractLetters("class", "labial");
+
+/**
+ * @returns true if the passed letter param is in the labials array, and false otherwise.
+ * 
+ * @param letter the string to be tested. 
+ */
+export function isLabial(letter: string): boolean {
+    return labials.includes(letter);
+}
+
+//Dentals
+
+/**
+ * Readonly collection of the dental consonants of the Greek alphabet,
+ * sorted by alphabet order.
+ */
+export const dentals = extractLetters("class", "dental");
+
+/**
+ * @returns true if the passed letter param is in the dentals array, and false otherwise.
+ * 
+ * @param letter the string to be tested. 
+ */
+export function isDental(letter: string): boolean {
+    return dentals.includes(letter);
+}
+
+
+//Palatals
+
+/**
+ * Readonly collection of the palatal consonants of the Greek alphabet,
+ * sorted by alphabet order.
+ */
+export const palatals = extractLetters("class", "palatal");
+
+/**
+ * @returns true if the passed letter param is in the palatals array, and false otherwise.
+ * 
+ * @param letter the string to be tested. 
+ */
+export function isPalatal(letter: string): boolean {
+    return palatals.includes(letter);
+}
+
+//Stops
+
+/**
+ * Readonly collection of the stops (also called mutes) 
+ * of the Greek alphabet, sorted by alphabet order.
+ */
+export const stops = labials.concat(dentals, palatals);
+
+/**
+ * @returns true if the passed letter param is in the stops array, and false otherwise.
+ * 
+ * @param letter the string to be tested. 
+ */
+export function isStop(letter: string): boolean {
+    return isLabial(letter) || isDental(letter) || isPalatal(letter);
 }
 
 export default Object.freeze(letters);
