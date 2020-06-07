@@ -42,4 +42,17 @@ export function stripDiacritics(text: string, blacklist: Diacritic[] = Object.ke
     return stripped.normalize("NFC");
 }
 
+/**
+ * @returns true if and only if char has the diacritic argument (that is, when decomposing char,
+ * the received string contains the diacritic). This function technically works for strings spanning
+ * more than a single letter - in which case it checks whether the diacritic exists somewhere in the string -
+ * but would typically be used to check a single character.
+ * 
+ * @param char the character (or string) to test for the diacritic.
+ * @param diacritic the diacritic to test for.
+ */
+export function containsDiacritic(char: string, diacritic: Diacritic): boolean {
+    return char.normalize("NFD").includes(diacritic);
+}
+
 export default Object.freeze(diacritics);

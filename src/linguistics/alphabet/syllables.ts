@@ -1,5 +1,6 @@
 import { InvalidLanguageError } from '#/error';
 import { isConsonant, isVowel, Consonant, isStop, isLiquid, isNasal, isGreekString } from './letters';
+import { containsDiacritic } from './diacritics';
 
 /**
  * Contains useful functions for working with and categorizing syllables.
@@ -55,8 +56,13 @@ export function splitIntoSyllables(word: string): string[] {
             i++;
             if (i > maxCharIndex)
                 break;
-            else
+            else {
                 char = characters[i];
+                //A vowel with a diaresis following a vowel begins a new syllable
+                if (containsDiacritic(char, "diaresis")) {
+                    break;
+                }
+            }
         }
 
         currentSyllable += vowelGroup;
@@ -91,6 +97,7 @@ export function splitIntoSyllables(word: string): string[] {
         currentSyllable = '';
 
         if (i >= maxCharIndex) {
+            //We're past the last letter, exit the loop.
             break;
         }
     }
