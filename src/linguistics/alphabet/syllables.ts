@@ -32,7 +32,6 @@ export function splitIntoSyllables(word: string): string[] {
     let i = 0;
     while (i < characters.length) {
         let char = characters[i];
-        console.log(char)
 
         //Add the starting consonant group to the syllable
         while (isConsonant(char)) {
@@ -61,11 +60,11 @@ export function splitIntoSyllables(word: string): string[] {
         }
 
         currentSyllable += vowelGroup;
-
+        vowelGroup = '';
 
         //The Vowel group has ended. char can now
         //be either a consonant or a vowel
-        if (isConsonant(char)) {
+        if (i <= maxCharIndex && isConsonant(char)) {
             //char is a consonant. We need to check what comes after it.
             if (i === maxCharIndex) {
                 //Char is the last letter in the word, and no word comes after it.
@@ -91,7 +90,7 @@ export function splitIntoSyllables(word: string): string[] {
         syllables.push(currentSyllable);
         currentSyllable = '';
 
-        if(i >= maxCharIndex) {
+        if (i >= maxCharIndex) {
             break;
         }
     }
@@ -129,16 +128,4 @@ function arePronouncedTogether(firstConsonant: Consonant, secondConsonant: Conso
         //firstConsonant is a double consonant
         return false;
     }
-
 }
-
-const testData = {
-    'φῦλα': ['φῦ', 'λα'],
-    'φύλλα': ['φύλ', 'λα'],
-    'ἅκρον': ['ἅ', 'κρον'],
-    'ἄρχων': ['ἄρ', 'χων'],
-    'οἶστρος': ['οἶ', 'στρος'],
-    'ἄνθραξ': ['ἄν', 'θραξ'],
-    'τάξις': ['τά', 'ξις'],
-};
-console.log(splitIntoSyllables('φῦλα'))

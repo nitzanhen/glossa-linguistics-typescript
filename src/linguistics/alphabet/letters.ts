@@ -197,7 +197,7 @@ export type Vowel = Monophthong | Diphthong;
  * @param letter the string to be tested. 
  * @param strict whether to test strictly or not, defaults to false.
  */
-export function isVowel(letter: string, strict: boolean = false): letter is Vowel {    
+export function isVowel(letter: string, strict: boolean = false): letter is Vowel {
     return isMonophthong(letter, strict) || isDiphthong(letter, strict);
 }
 
@@ -213,7 +213,7 @@ export const consonants = extractLetters('type', 'consonant');
  * Consonant type; should match the possible values of the consonants array.
  * Technically, a rho with rhough breathing also counts as a consonant (when testing
  * with isConsonant(), the strict parameter being passed false), even though
- * it's not present here.
+ * it's not present here. The same goes for the form of sigma at the end of the word - ς.
  */
 export type Consonant = 'β' | 'γ' | 'δ' | 'ζ' | 'θ' | 'κ' | 'λ' | 'μ' | 'ν' |
     'ξ' | 'π' | 'ρ' | 'σ' | 'τ' | 'φ' | 'χ' | 'ψ';
@@ -221,6 +221,7 @@ export type Consonant = 'β' | 'γ' | 'δ' | 'ζ' | 'θ' | 'κ' | 'λ' | 'μ' | 
 /**
  * @returns true if the passed letter param is in the consonants array, and false otherwise.
  * A rho with rough breathing counts as a consonants, and passing it to this method returns true.
+ * The same goes for the ending form of sigma - ς.
  * 
  * @param letter the string to be tested. 
  */
@@ -230,7 +231,7 @@ export function isConsonant(letter: string): letter is Consonant {
     //Remove rough breathing mark in case the letter is rho
     letter = stripDiacritics(letter, ["rough_breathing"]);
 
-    return consonants.includes(letter);
+    return consonants.includes(letter) || letter === 'ς';
 }
 
 //Consonant types
