@@ -1,3 +1,5 @@
+import '#/global/String';
+
 /**
  * Utility functions for strings
  *
@@ -15,8 +17,8 @@ export function capitalize(string: string): string {
   //When capitalizing, we want the iota to be lowercase, too;
   //Therefore, we store the uppercase string first, then slice it after 
   //the first character.
-  const upperCase = string[0].toUpperCase();
-  return upperCase.slice(1).toLowerCase();
+  const upperCase = string.toUpperCase();
+  return upperCase.charAt(0) + upperCase.slice(1).toLowerCase();
 }
 
 /**
