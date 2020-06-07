@@ -52,7 +52,8 @@ describe("Utils", () => {
         const examples: [string, string][] = [
             ["singular", "Singular"],
             ["aa_b", "Aa_b"],
-            ["GREEK", "Greek"]
+            ["GREEK", "Greek"],
+            ["ῳ", "Ωι"]
         ];
         examples.forEach(([string, capitalized]) =>
             expect(capitalize(string)).toBe(capitalized));

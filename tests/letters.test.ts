@@ -104,4 +104,17 @@ describe("lettes.ts", () => {
             expect(isGreekLetter(test, true)).toBe(false);
         });
     });
+
+    test("isGreekLetter(), isGreekString()", () => {
+        expect(isGreekLetter("α")).toBe(true);
+        expect(isGreekLetter("α", true)).toBe(true);
+        expect(isGreekLetter("Ξ")).toBe(true);
+        expect(isGreekLetter("Ξ", true)).toBe(true);
+        expect(isGreekLetter('ᾰ')).toBe(true);
+        expect(isGreekLetter('ᾰ', true)).toBe(false);
+        expect(isGreekLetter('ᾇ')).toBe(true);
+        expect(isGreekLetter('ᾰ', true)).toBe(false);
+        expect(isGreekLetter('ς')).toBe(true);
+        expect(isGreekLetter('ς', true)).toBe(true);
+    })
 });

@@ -65,10 +65,12 @@ export function extractLetters(property: 'type' | 'class', value: string): reado
  * @param strict whether to test strictly or not, defaults to false. 
  */
 export function isGreekLetter(letter: string, strict: boolean = false): boolean {
+    letter = letter.toLowerCase();
+
     if (!strict) {
         letter = stripDiacritics(letter);
     }
-    return letters.hasOwnProperty(letter);
+    return letters.hasOwnProperty(letter) || letter === 'ς';
 }
 
 
@@ -86,7 +88,6 @@ export function isGreekString(string: string, strict: boolean = false): boolean 
 }
 
 //------ Vowels ------//
-
 
 /**
  * Iota-subscript, unlike the other diacritics, makes a difference when it
@@ -127,8 +128,9 @@ export type Monophthong = 'α' | 'ε' | 'η' | 'ι' | 'ο' | 'υ' | 'ω';
  * @param strict whether to test strictly or not, defaults to false.
  */
 export function isMonophthong(letter: string, strict: boolean = false): letter is Monophthong {
+    letter = letter.toLowerCase();
+
     if (!strict) {
-        //DON'T remove iota subscript; all vowels with iota subscript are diphthongs
         letter = stripDiacritics(letter, safeDiacritics);
     }
     return monophtongs.includes(letter);
@@ -163,6 +165,8 @@ export type Diphthong = "αι" | "αυ" | "ει" | "ευ" | "ηυ" | "οι" | "�
  * @param strict whether to test strictly or not, defaults to false.
  */
 export function isDiphthong(letter: string, strict: boolean = false): letter is Diphthong {
+    letter = letter.toLowerCase();
+
     if (!strict) {
         letter = stripDiacritics(letter, safeDiacritics);
     }
@@ -193,7 +197,7 @@ export type Vowel = Monophthong | Diphthong;
  * @param letter the string to be tested. 
  * @param strict whether to test strictly or not, defaults to false.
  */
-export function isVowel(letter: string, strict: boolean = false): letter is Vowel {
+export function isVowel(letter: string, strict: boolean = false): letter is Vowel {    
     return isMonophthong(letter, strict) || isDiphthong(letter, strict);
 }
 
@@ -221,6 +225,8 @@ export type Consonant = 'β' | 'γ' | 'δ' | 'ζ' | 'θ' | 'κ' | 'λ' | 'μ' | 
  * @param letter the string to be tested. 
  */
 export function isConsonant(letter: string): letter is Consonant {
+    letter = letter.toLowerCase();
+
     //Remove rough breathing mark in case the letter is rho
     letter = stripDiacritics(letter, ["rough_breathing"]);
 
@@ -244,6 +250,8 @@ export const liquids = extractLetters("class", "liquid");
  * @param letter the string to be tested. 
  */
 export function isLiquid(letter: string): boolean {
+    letter = letter.toLowerCase();
+
     //Remove rough breathing mark in case the letter is rho
     letter = stripDiacritics(letter, ["rough_breathing"]);
 
@@ -264,6 +272,8 @@ export const nasals = extractLetters("class", "nasal");
  * @param letter the string to be tested. 
  */
 export function isNasal(letter: string): boolean {
+    letter = letter.toLowerCase();
+
     return nasals.includes(letter);
 }
 
@@ -282,6 +292,8 @@ export const labials = extractLetters("class", "labial");
  * @param letter the string to be tested. 
  */
 export function isLabial(letter: string): boolean {
+    letter = letter.toLowerCase();
+
     return labials.includes(letter);
 }
 
@@ -299,6 +311,8 @@ export const dentals = extractLetters("class", "dental");
  * @param letter the string to be tested. 
  */
 export function isDental(letter: string): boolean {
+    letter = letter.toLowerCase();
+
     return dentals.includes(letter);
 }
 
@@ -317,6 +331,8 @@ export const palatals = extractLetters("class", "palatal");
  * @param letter the string to be tested. 
  */
 export function isPalatal(letter: string): boolean {
+    letter = letter.toLowerCase();
+
     return palatals.includes(letter);
 }
 
@@ -335,6 +351,25 @@ export const stops = labials.concat(dentals, palatals);
  */
 export function isStop(letter: string): boolean {
     return isLabial(letter) || isDental(letter) || isPalatal(letter);
+}
+
+//Doubles
+
+/**
+ * Readonly collection of the double consonants
+ * of the Greek alphabet, sorted by alphabet order.
+ */
+export const doubles = extractLetters("class", "double");
+
+/**
+ * @returns true if the passed letter param is in the doubles array, and false otherwise.
+ * 
+ * @param letter the string to be tested. 
+ */
+export function isDouble(letter: string): boolean {
+    letter = letter.toLowerCase();
+
+    return doubles.includes(letter);
 }
 
 export default Object.freeze(letters);

@@ -5,11 +5,18 @@
  */
 
 /**
- * Capitalizes the given string.
+ * Capitalizes a given string.
+ * 
+ * @param string the string to be capitalized. 
  * @returns the capitalized string
  */
 export function capitalize(string: string): string {
-  return string[0].toUpperCase() + string.slice(1).toLowerCase();
+  //When string[0] is ῳ, calling toUpperCase() turns it to ΩΙ.
+  //When capitalizing, we want the iota to be lowercase, too;
+  //Therefore, we store the uppercase string first, then slice it after 
+  //the first character.
+  const upperCase = string[0].toUpperCase();
+  return upperCase.slice(1).toLowerCase();
 }
 
 /**
