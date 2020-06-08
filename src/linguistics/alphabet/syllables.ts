@@ -58,7 +58,7 @@ export function splitIntoSyllables(word: string): string[] {
                 break;
             else {
                 char = characters[i];
-                //A vowel with a diaresis following a vowel begins a new syllable
+                //A vowel with a diaresis following another vowel begins a new syllable
                 if (containsDiacritic(char, "diaresis")) {
                     break;
                 }
