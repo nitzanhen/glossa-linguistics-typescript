@@ -11,7 +11,7 @@ const diacritics = {
     smooth_breathing: '\u0313',
     rough_breathing: '\u0314', //Reversed Comma Above
     iota_subscript: '\u0345', //Ypogegrammeni
-    diaresis: '\u0308',
+    diaeresis: '\u0308',
 };
 
 /**
@@ -19,16 +19,26 @@ const diacritics = {
  */
 export type Diacritic = keyof typeof diacritics;
 
+type stripDiacriticsOptions = Partial<{
+    blacklist: Diacritic[],
+    retain: Diacritic[];
+}>;
 /**
  * Removes diacritics from the given text.
  * 
  * @param text the text to strip diacritics from
  * @param blacklist the diacritics to strip. By default, removes all diacritics.
+ * @param retain diacritics to retain. This overrides the blacklist param; a diacritic
+ * present in both will not be removed.
  * @returns the cleaned text
  */
-export function stripDiacritics(text: string, blacklist: Diacritic[] = Object.keys(diacritics) as Diacritic[]): string {
+export function stripDiacritics(text: string, {
+    blacklist = Object.keys(diacritics) as Diacritic[],
+    retain = []
+}: stripDiacriticsOptions = {}): string {
     //Map blacklist keys to symbols, then concatanate for regex
     const concattedDiacritics = blacklist
+        .filter(key => !retain.includes(key))
         .map(key => diacritics[key])
         .reduce((acc, value) => acc + value, '');
 
@@ -52,7 +62,7 @@ export function stripDiacritics(text: string, blacklist: Diacritic[] = Object.ke
  * @param diacritic the diacritic to test for.
  */
 export function containsDiacritic(char: string, diacritic: Diacritic): boolean {
-    return char.normalize("NFD").includes(diacritic);
+    return char.normalize("NFD").includes(diacritics[diacritic]);
 }
 
 export default Object.freeze(diacritics);

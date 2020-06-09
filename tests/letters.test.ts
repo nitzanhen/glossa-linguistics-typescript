@@ -1,4 +1,4 @@
-import letters, { vowels, consonants, monophtongs, diphthongs, isMonophthong, isDiphthong, isVowel, isGreekLetter } from '#/linguistics/alphabet/letters';
+import letters, { vowels, consonants, monophtongs, diphthongs, isMonophthong, isDiphthong, isVowel, isGreekLetter, isGreekString, nasals, isNasal, isConsonant, isLiquid, isLabial, isDental, isPalatal, isDouble } from '#/linguistics/alphabet/letters';
 import diacritics from '#/linguistics/alphabet/diacritics';
 
 describe("lettes.ts", () => {
@@ -116,5 +116,70 @@ describe("lettes.ts", () => {
         expect(isGreekLetter('ᾰ', true)).toBe(false);
         expect(isGreekLetter('ς')).toBe(true);
         expect(isGreekLetter('ς', true)).toBe(true);
-    })
+
+        const greekStrings = ['φῦλα', 'φύλλα', 'ἅκρον', 'ἄρχων', 'οἶστρος', 'ἄνθραξ', 'τάξις', 'ἀρχή', 'ἧττον',
+            'λείψω', 'φύλαξ', 'θεός', 'θύρᾱ', 'Ποσειδῶν',
+            //The acute here is on the iota, just not displayed well because of the macron
+            'Ἀφροδῑ́τη',
+            'Ἥφαιστος', 'Θουκῡδίδης', 'Ἀχιλλεύς', 'Τροίᾱ', 'Βαῦκις', 'Ξέρξης', 'Κύκλωψ', 'Ῥέᾱ',
+            'Δίρκη', 'Ὅμηρος', 'Σωκράτης', 'Μοῦσα', 'Ζεύς', 'Ἀγαμέμνων', 'Ὠκεανός', 'Φειδίᾱς', 'Λεύκιππος',
+            //Breathing and acute are on Alpha
+            'Ᾱ̔́ιδης',
+            'Οἰδίπους', 'Εἰλείθυια', 'Γλαύκων', 'Χάρυβδις'
+        ];
+        greekStrings.forEach(string => {
+            expect(isGreekString(string)).toBe(true);
+        })
+    });
+
+    test("Consonant functions", () => {
+        const testData = {
+            nasals: ["μ", "ν"],
+            liquids: ["λ", "ρ", "ῥ"],
+            labials: ["π", "β", "φ"],
+            dentals: ["τ", "δ", "θ"],
+            palatals: ["κ", "γ", "χ"],
+            doubles: ["ζ", "ξ", "ψ"],
+            sibilants: ["σ", "ς"],
+            nonConsonants: ["κς", "βι", "א"]
+        }
+
+        testData.nasals.forEach(letter => {
+            expect(isNasal(letter)).toBe(true)
+            expect(isConsonant(letter)).toBe(true)
+        })
+
+        testData.liquids.forEach(letter => {
+            expect(isLiquid(letter)).toBe(true)
+            expect(isConsonant(letter)).toBe(true)
+        })
+
+        testData.labials.forEach(letter => {
+            expect(isLabial(letter)).toBe(true)
+            expect(isConsonant(letter)).toBe(true)
+        })
+
+        testData.dentals.forEach(letter => {
+            expect(isDental(letter)).toBe(true)
+            expect(isConsonant(letter)).toBe(true)
+        })
+
+        testData.palatals.forEach(letter => {
+            expect(isPalatal(letter)).toBe(true)
+            expect(isConsonant(letter)).toBe(true)
+        })
+
+        testData.doubles.forEach(letter => {
+            expect(isDouble(letter)).toBe(true)
+            expect(isConsonant(letter)).toBe(true)
+        })
+
+        testData.sibilants.forEach(letter => {
+            expect(isConsonant(letter)).toBe(true)
+        })
+
+        testData.nonConsonants.forEach(letter => {
+            expect(isConsonant(letter)).toBe(false)
+        })
+    });
 });

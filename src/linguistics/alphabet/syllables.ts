@@ -44,11 +44,6 @@ export function splitIntoSyllables(word: string): string[] {
                 char = characters[i];
         }
 
-        //Now, we move to the vowel group. First, we know char is now a vowel:
-        currentSyllable += char;
-        i++;
-        char = characters[i];
-
         //Add letters to the vowel group until it reaches the breaking point -
         //It's a vowel itself, but stops being so when adding the next character
         while (i <= maxCharIndex && isVowel(vowelGroup + char)) {
@@ -58,10 +53,6 @@ export function splitIntoSyllables(word: string): string[] {
                 break;
             else {
                 char = characters[i];
-                //A vowel with a diaresis following a vowel begins a new syllable
-                if (containsDiacritic(char, "diaresis")) {
-                    break;
-                }
             }
         }
 
@@ -76,6 +67,7 @@ export function splitIntoSyllables(word: string): string[] {
                 //Char is the last letter in the word, and no word comes after it.
                 //Therefore,add it to the current syllable
                 currentSyllable += char;
+                i++;
             }
             else {
                 const nextChar = characters[i + 1];
@@ -95,11 +87,11 @@ export function splitIntoSyllables(word: string): string[] {
         //We're done with the syllable. Add it to the syllables array and reset.
         syllables.push(currentSyllable);
         currentSyllable = '';
-
+/* 
         if (i >= maxCharIndex) {
             //We're past the last letter, exit the loop.
             break;
-        }
+        } */
     }
 
     return syllables;

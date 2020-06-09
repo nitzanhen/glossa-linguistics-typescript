@@ -26,7 +26,7 @@ const letters = {
     'ν': { type: 'consonant', class: 'nasal' },
     'ξ': { type: 'consonant', class: 'double' },
     'ο': { type: 'vowel', class: 'short' },
-    'π': { type: 'consonant', class: 'palatal' },
+    'π': { type: 'consonant', class: 'labial' },
     'ρ': { type: 'consonant', class: 'liquid' },
     'σ': { type: 'consonant', class: 'sibilant' },
     'τ': { type: 'consonant', class: 'dental' },
@@ -73,18 +73,27 @@ export function isGreekLetter(letter: string, strict: boolean = false): boolean 
     return letters.hasOwnProperty(letter) || letter === 'ς';
 }
 
-
 /**
  * @returns true if the string is a sequence of letters of the Greek alphabet, 
  * and false otherwise. Note that spaces and puncuation marks are not letters.
  * Can optionally test "strictly", meaning an accented text (i.e. a text with any diacritic symbol)
  * will not count as Greek text.
  * 
+ * Due to complex diacritic combinations of diacritics spanning more than a single character (thus creating
+ * "empty" characters in the string, which do not pass isGreekLetter() by themselves), the string must be stripped of diacritics
+ * as a whole.
+ * 
  * @param letter the string to be tested.
  * @param strict whether to test strictly or not, defaults to false. 
  */
 export function isGreekString(string: string, strict: boolean = false): boolean {
-    return Array.from(string).every(letter => isGreekLetter(letter, strict));
+    string = string.toLowerCase();
+
+    if (!strict) {
+        string = stripDiacritics(string);
+    }
+
+    return Array.from(string).every(char => letters.hasOwnProperty(char) || char === 'ς');
 }
 
 //------ Vowels ------//
@@ -97,11 +106,14 @@ export function isGreekString(string: string, strict: boolean = false): boolean 
  * the safeDiacritics array constains the keys of all diacritics except the iota
  * subscript, and is used to strip only the safe diacritics in the useMonophthong()
  * and useDiphthong() functions.
- */
+ *//* 
 const safeDiacritics = (() => {
-    const { iota_subscript, ...otherDiacritics } = diacritics;
-    return Object.keys(otherDiacritics) as Diacritic[];
+  const { iota_subscript, ...otherDiacritics } = diacritics;
+  return Object.keys(otherDiacritics) as Diacritic[];
 })();
+
+//For diphthongs, the diaeresis must be retained as well.
+const diphthongSafeDiacritics = safeDiacritics.filter(diacritic => diacritic !== 'diaeresis') */
 
 //Monophthongs 
 
@@ -131,7 +143,7 @@ export function isMonophthong(letter: string, strict: boolean = false): letter i
     letter = letter.toLowerCase();
 
     if (!strict) {
-        letter = stripDiacritics(letter, safeDiacritics);
+        letter = stripDiacritics(letter, { retain: ['iota_subscript'] });
     }
     return monophtongs.includes(letter);
 }
@@ -168,7 +180,7 @@ export function isDiphthong(letter: string, strict: boolean = false): letter is 
     letter = letter.toLowerCase();
 
     if (!strict) {
-        letter = stripDiacritics(letter, safeDiacritics);
+        letter = stripDiacritics(letter, { retain: ["iota_subscript", "diaeresis"] });
     }
     return diphthongs.includes(letter);
 }
@@ -229,7 +241,7 @@ export function isConsonant(letter: string): letter is Consonant {
     letter = letter.toLowerCase();
 
     //Remove rough breathing mark in case the letter is rho
-    letter = stripDiacritics(letter, ["rough_breathing"]);
+    letter = stripDiacritics(letter, { blacklist: ["rough_breathing"] });
 
     return consonants.includes(letter) || letter === 'ς';
 }
@@ -254,7 +266,7 @@ export function isLiquid(letter: string): boolean {
     letter = letter.toLowerCase();
 
     //Remove rough breathing mark in case the letter is rho
-    letter = stripDiacritics(letter, ["rough_breathing"]);
+    letter = stripDiacritics(letter, { blacklist: ["rough_breathing"] });
 
     return liquids.includes(letter);
 }
