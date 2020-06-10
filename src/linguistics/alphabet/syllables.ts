@@ -1,5 +1,5 @@
 import { InvalidLanguageError } from '#/error';
-import { isConsonant, isVowel, Consonant, isStop, isLiquid, isNasal, isGreekString } from './letters';
+import letters, { isConsonant, isVowel, Consonant, isStop, isLiquid, isNasal, isGreekString, isDiphthong } from './letters';
 import { containsDiacritic } from './diacritics';
 
 /**
@@ -127,4 +127,28 @@ function arePronouncedTogether(firstConsonant: Consonant, secondConsonant: Conso
         //firstConsonant is a double consonant
         return false;
     }
+}
+
+/**
+ * @returns the type of the syllable, length-wise.
+ * The possible return (syllable) types are "longByNature", "longByPosition" and "short".
+ * 
+ * @param syllable the syllable to examine. 
+ */
+export function syllableType(syllable: string): "longByNature" | "longByPosition" | "short" {
+    const vowelPart = vowelPartOf(syllable);
+
+    if(isDiphthong(vowelPart) 
+    || containsDiacritic(vowelPart, "macron") 
+    || ((letters as any)[vowelPart]?.class === 'long'))
+}
+
+/**
+ * @returns the vowel part of a syllable.
+ * 
+ * @param syllable the syllable to extract from.
+ */
+export function vowelPartOf(syllable: string): string {
+    //Assuming the vowel is a grouped string, surrounded by two optional groups of consonants.
+    return syllable.trim(letter => !isVowel(letter));
 }

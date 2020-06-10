@@ -1,7 +1,7 @@
 import '#/global/String'
 import { InvalidLanguageError } from '#/error';
 import { isGreekString, isConsonant, isVowel } from '#/linguistics/alphabet/letters';
-import { splitIntoSyllables } from '#/linguistics/alphabet/syllables';
+import { splitIntoSyllables, vowelPartOf } from '#/linguistics/alphabet/syllables';
 import { stripDiacritics } from '#/linguistics/alphabet/diacritics';
 
 /**
@@ -33,10 +33,10 @@ function augment(verb: string): string {
     }
     else {
         //Temporal augment - replace the first syllable by its lengthened counterpart
-        const vowelGroup = firstSyllable.trim(letter => !isVowel(letter));
+        const vowelPart = vowelPartOf(firstSyllable)
 
         const firstSyllableAugmented = firstSyllable
-        .replace(vowelGroup, temporalAugmentOf(vowelGroup))
+        .replace(vowelPart, temporalAugmentOf(vowelPart))
       
         //Replace the first syllable by the augmented variant.
         return firstSyllableAugmented + verb.slice(firstSyllable.length)

@@ -53,6 +53,16 @@ export function stripDiacritics(text: string, {
 }
 
 /**
+ * Utility function to strip only the accents of a text; preserves other diacritics
+ * 
+ * @param text the text to strip from.
+ * @returns the stripped text.
+ */
+export function stripAccents(text: string): string {
+    return stripDiacritics(text, { blacklist: ["acute", "circumflex", "macron"] })
+}
+
+/**
  * @returns true if and only if char has the diacritic argument (that is, when decomposing char,
  * the received string contains the diacritic). This function technically works for strings spanning
  * more than a single letter - in which case it checks whether the diacritic exists somewhere in the string -
