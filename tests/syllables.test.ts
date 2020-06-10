@@ -1,3 +1,4 @@
+import '#/global/String';
 import { splitIntoSyllables } from '#/linguistics/alphabet/syllables';
 
 describe("syllables.ts", () => {

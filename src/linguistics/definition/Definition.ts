@@ -1,6 +1,4 @@
 import { Mastery, Masterable } from '#/mastery';
-import { capitalize } from '#/util/stringUtils';
-
 /**
  * A definition for a word.
  * A Definition object has fields for the primary definitions - shorter, more accurate definitions of the word (closer to translations, in a sense),
@@ -20,7 +18,7 @@ class Definition implements Masterable {
   }
   set primaryDefinitions(definitions: string[]) {
     //Capitalize the definitions
-    this.primary = definitions.map((definition) => capitalize(definition));
+    this.primary = definitions.map(definition => definition.capitalize());
   }
 
   /** @property secondary definitions */
@@ -31,7 +29,7 @@ class Definition implements Masterable {
   }
   set secondaryDefinitions(definitions: string[]) {
     //Capitalize the definitions
-    this.secondary = definitions.map((definition) => capitalize(definition));
+    this.secondary = definitions.map(definition => definition.capitalize());
   }
 
   /** @property mastery */

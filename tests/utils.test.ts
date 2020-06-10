@@ -1,4 +1,4 @@
-import { capitalize } from '#/util/stringUtils';
+import '#/global/String';
 import { getClassName } from '#/util/typeUtils';
 import { permutationsOf } from '#/util/collectionUtils';
 import Tree from '#/structure/Tree';
@@ -48,14 +48,5 @@ describe("Utils", () => {
         });
     });
 
-    test("String utils", () => {
-        const examples: [string, string][] = [
-            ["singular", "Singular"],
-            ["aa_b", "Aa_b"],
-            ["GREEK", "Greek"],
-            ["ῳ", "Ωι"]
-        ];
-        examples.forEach(([string, capitalized]) =>
-            expect(capitalize(string)).toBe(capitalized));
-    });
+
 });

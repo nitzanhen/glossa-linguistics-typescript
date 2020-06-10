@@ -2,7 +2,6 @@ import { Declension } from '#/linguistics/property';
 import { NotImplementedError } from '#/error';
 import ExtendedNounProperties from '#/key/NounKey/ExtendedNounProperties';
 
-import NounInflectionFunctions from './NounInflectionFunctions';
 import nounInflectionFunctions from './NounInflectionFunctions';
 
 /**

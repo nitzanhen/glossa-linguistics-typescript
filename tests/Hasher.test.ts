@@ -1,3 +1,4 @@
+import '#/global/String';
 import HasherService from '#/service/hash';
 import Hasher from '#/service/hash/Hasher';
 import { Key, NounKey, NounFilterKey, FiniteKey, FiniteFilterKey, InfinitiveKey, InfinitiveFilterKey, ParticipleKey, ParticipleFilterKey, FilterKey } from '#/key';

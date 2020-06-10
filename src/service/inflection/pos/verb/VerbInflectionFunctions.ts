@@ -1,4 +1,4 @@
-import { suffixer } from '#/util/stringUtils';
+import { suffixer } from '../../transform';
 
 /**
  * Verb inflection suffix collection.

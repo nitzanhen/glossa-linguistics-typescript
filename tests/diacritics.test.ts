@@ -1,3 +1,4 @@
+import '#/global/String';
 import { Diacritic, stripDiacritics, containsDiacritic } from '#/linguistics/alphabet/diacritics';
 
 describe("diacritics.ts", () => {

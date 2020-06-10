@@ -1,4 +1,19 @@
+/**
+ * Extension functions and extensions for common, built-in
+ * String methods.
+ */
+declare global {
+    interface String {
+        trim(matcher?: (letter: string) => boolean): string;
+        capitalize(): string;
+        isCapitalized(): boolean;
+    }
+    
+}
+
 const toLowerCase = String.prototype.toLowerCase;
+
+
 
 /**
  * Override of the default toLowerCase() implementation;
@@ -45,12 +60,7 @@ String.prototype.toUpperCase = function (): string {
     return toUpperCase.call(replaced);
 };
 
-declare global {
-    interface String {
-        trim(matcher?: (letter: string) => boolean): string 
-    }
-    
-}
+
 
 const trim = String.prototype.trim
 
@@ -68,7 +78,7 @@ String.prototype.trim = function(matcher?: (letter: string) => boolean): string 
     }
     //The indices the interval between of which to slice
     let startIndex = 0; 
-    let endIndex = 0;
+    let endIndex = this.length - 1;
     
     while(matcher(this[startIndex]) && startIndex < this.length) {
         startIndex++;
@@ -82,4 +92,27 @@ String.prototype.trim = function(matcher?: (letter: string) => boolean): string 
     return this.slice(startIndex, endIndex + 1)
 }
 
+/**
+ * Capitalizes a given string.
+ * 
+ * @param string the string to be capitalized. 
+ * @returns the capitalized string
+ */
+String.prototype.capitalize = function(): string {
+    //When string[0] is ῳ, calling toUpperCase() turns it to ΩΙ.
+    //When capitalizing, we want the iota to be lowercase, too;
+    //Therefore, we store the uppercase string first, then slice it after 
+    //the first character.
+    const upperCase = this.toUpperCase();
+    return upperCase.charAt(0) + upperCase.slice(1).toLowerCase();
+  }
+
+/**
+ * Checks whether a given string is capitalized.
+ * 
+ * @returns true if and only if this string equals this.capitalize().
+ */
+String.prototype.isCapitalized = function(): boolean {
+    return this === this.capitalize()
+}  
 export default {};

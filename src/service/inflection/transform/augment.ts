@@ -1,8 +1,8 @@
+import '#/global/String'
 import { InvalidLanguageError } from '#/error';
-import { isGreekString, isConsonant, Vowel, isVowel } from '#/linguistics/alphabet/letters';
-import { splitIntoSyllables } from '../../linguistics/alphabet/syllables';
-import { stripDiacritics } from '../../linguistics/alphabet/diacritics';
-import '#/global/String';
+import { isGreekString, isConsonant, isVowel } from '#/linguistics/alphabet/letters';
+import { splitIntoSyllables } from '#/linguistics/alphabet/syllables';
+import { stripDiacritics } from '#/linguistics/alphabet/diacritics';
 
 /**
  * The augment() function receives a verb form and augments it.
@@ -46,14 +46,13 @@ function augment(verb: string): string {
 /**
  * @returns the temporal augment prefix of a vowel.
  * @param vowel the vowel whose augmented prefix to get.
- * Expects vowel to be *entirely in the lower case*
  */
-function temporalAugmentOf(vowel: string): string {
+export function temporalAugmentOf(vowel: string): string {
     const decomposed = vowel.normalize("NFD");
-    let bare = stripDiacritics(decomposed, { retain: ['iota_subscript'] });
+    let bare = stripDiacritics(decomposed, { retain: ['iota_subscript', 'macron', 'diaeresis'] }).normalize("NFC");
 
-    const lengthened = (() => {
-        switch (bare) {
+    let lengthened = (() => {
+        switch (bare.toLowerCase()) {
             case 'α':
             case 'ε':
                 return 'η';
@@ -76,6 +75,19 @@ function temporalAugmentOf(vowel: string): string {
                 return bare;
         }
     })();
+
+    //If bare is capitalized, lengthened should be too
+    if(bare.isCapitalized()) {
+        lengthened = lengthened.capitalize();
+    }
+
+    //If bare is upper-case, lengthened should be too
+    else if(bare === bare.toUpperCase()) {
+        lengthened = lengthened.toUpperCase();
+    }
+
+    //Decompose again before planting in original string.
+    bare = bare.normalize("NFD");
 
     return decomposed.replace(bare, lengthened).normalize("NFC");
 }

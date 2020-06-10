@@ -1,3 +1,4 @@
+import '#/global/String';
 import letters, { vowels, consonants, monophtongs, diphthongs, isMonophthong, isDiphthong, isVowel, isGreekLetter, isGreekString, nasals, isNasal, isConsonant, isLiquid, isLabial, isDental, isPalatal, isDouble } from '#/linguistics/alphabet/letters';
 import diacritics from '#/linguistics/alphabet/diacritics';
 

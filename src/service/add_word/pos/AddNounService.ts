@@ -28,7 +28,7 @@ const AddNounService = {
             number,
             variant
         });
-        return [baseForm, `(${capitalize(number.name)})`];
+        return [baseForm, `(${number.name.capitalize()})`];
     },
 
     /**
