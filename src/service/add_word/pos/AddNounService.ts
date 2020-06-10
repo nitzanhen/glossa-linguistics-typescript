@@ -1,6 +1,6 @@
+import '#/global/String';
 import { Number, Case, Declension, Gender } from '#/linguistics/property';
 import { DeclensionVariant } from '#/linguistics/variant';
-import { capitalize } from '#/util/stringUtils';
 
 import InflectionServices from '../../inflection';
 
