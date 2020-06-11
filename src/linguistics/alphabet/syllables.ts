@@ -1,5 +1,5 @@
 import { InvalidLanguageError } from '#/error';
-import letters, { isConsonant, isVowel, Consonant, isStop, isLiquid, isNasal, isGreekString, isDiphthong } from './letters';
+import letters, { isConsonant, isVowel, Consonant, isStop, isLiquid, isNasal, isGreekString, isDiphthong, isDouble, Vowel } from './letters';
 import { containsDiacritic } from './diacritics';
 
 /**
@@ -87,11 +87,11 @@ export function splitIntoSyllables(word: string): string[] {
         //We're done with the syllable. Add it to the syllables array and reset.
         syllables.push(currentSyllable);
         currentSyllable = '';
-/* 
-        if (i >= maxCharIndex) {
-            //We're past the last letter, exit the loop.
-            break;
-        } */
+        /* 
+                if (i >= maxCharIndex) {
+                    //We're past the last letter, exit the loop.
+                    break;
+                } */
     }
 
     return syllables;
@@ -133,14 +133,35 @@ function arePronouncedTogether(firstConsonant: Consonant, secondConsonant: Conso
  * @returns the type of the syllable, length-wise.
  * The possible return (syllable) types are "longByNature", "longByPosition" and "short".
  * 
- * @param syllable the syllable to examine. 
+ * @param syllable the syllable to examine.
+ * 
+ * @throws RangeError if the syllableIndex is out of the word's syllable array's bounds. 
  */
-export function syllableType(syllable: string): "longByNature" | "longByPosition" | "short" {
+export function syllableType(word: string, syllableIndex: number): "longByNature" | "longByPosition" | "short" {
+    const syllables = splitIntoSyllables(word);
+    if(!syllables[syllableIndex]) {
+        throw new RangeError(`syllableIndex out of bounds: ${syllableIndex}, for word ${word} with ${syllables.length} syllables.`);
+    }
+    const syllable = syllables[syllableIndex];
     const vowelPart = vowelPartOf(syllable);
 
-    if(isDiphthong(vowelPart) 
-    || containsDiacritic(vowelPart, "macron") 
-    || ((letters as any)[vowelPart]?.class === 'long'))
+    if (isDiphthong(vowelPart)
+        || containsDiacritic(vowelPart, "macron")
+        || ((letters as any)[vowelPart]?.class === 'long')) {
+        return "longByNature";
+    }
+    const vowelIndex = syllable.search(vowelPart);
+    const followingConsonants = syllable.slice(vowelIndex + vowelPart.length);
+    const nextSyllable = syllable[syllableIndex + 1];
+    
+    if(followingConsonants || isDouble(nextSyllable?.[0])) {
+        return "longByPosition";
+    }
+    else {
+        //the vowelPart is a short vowel AND is not followed by separately-pronounced consonants
+        //or a double consonant; therefore, it is a short syllable.
+        return "short";
+    }
 }
 
 /**
@@ -148,7 +169,7 @@ export function syllableType(syllable: string): "longByNature" | "longByPosition
  * 
  * @param syllable the syllable to extract from.
  */
-export function vowelPartOf(syllable: string): string {
+export function vowelPartOf(syllable: string): Vowel {
     //Assuming the vowel is a grouped string, surrounded by two optional groups of consonants.
-    return syllable.trim(letter => !isVowel(letter));
+    return syllable.trim(letter => !isVowel(letter)) as Vowel;
 }

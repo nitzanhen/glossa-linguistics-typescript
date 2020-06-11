@@ -1,5 +1,5 @@
 import '#/global/String';
-import letters, { vowels, consonants, monophtongs, diphthongs, isMonophthong, isDiphthong, isVowel, isGreekLetter, isGreekString, nasals, isNasal, isConsonant, isLiquid, isLabial, isDental, isPalatal, isDouble } from '#/linguistics/alphabet/letters';
+import letters, { vowels, consonants, monophthongs, diphthongs, isMonophthong, isDiphthong, isVowel, isGreekLetter, isGreekString, nasals, isNasal, isConsonant, isLiquid, isLabial, isDental, isPalatal, isDouble } from '#/linguistics/alphabet/letters';
 import diacritics from '#/linguistics/alphabet/diacritics';
 
 describe("lettes.ts", () => {
@@ -13,7 +13,7 @@ describe("lettes.ts", () => {
         });
 
         //There should be exactly 7 monophthongs, 11 diphthongs, 18 vowels total and 17 consonants
-        expect(monophtongs).toHaveLength(7);
+        expect(monophthongs).toHaveLength(7);
         expect(diphthongs).toHaveLength(11);
         expect(vowels).toHaveLength(18);
         expect(consonants).toHaveLength(17);

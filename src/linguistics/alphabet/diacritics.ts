@@ -1,3 +1,4 @@
+
 /**
  * Contains a list of diacritical symbols used in Greek, specifically in their
  * combining forms.
@@ -73,6 +74,87 @@ export function stripAccents(text: string): string {
  */
 export function containsDiacritic(char: string, diacritic: Diacritic): boolean {
     return char.normalize("NFD").includes(diacritics[diacritic]);
+}
+
+/**
+ * Helper functions that returns a number for each diacritic symbol denoting its
+ * "order" - how early or late should it appear (unicode-wise) in a string.
+ * A lower order denotes an earlier presence. 
+ * For example, we'd always want to place a macron char before an acute char,
+ * so its order will be lower.
+ * 
+ * Note that the function expects the diacritic mark itself! not its name;
+ * e.g. '\u0301', not 'acute'.
+ * 
+ * @param diacritic the diacritic symbol *itself* to get the order for. 
+ * Diacritic marks that are not in the diacritics object are supported as well; 
+ * their order will be the highest
+ * @returns the order of the diacritic
+ */
+function orderOf(diacritic: string): number {
+    const { acute, circumflex, grave, macron, breve, smooth_breathing, rough_breathing, iota_subscript, diaeresis } = diacritics;
+    switch (diacritic) {
+        case iota_subscript:
+            return 0;
+        case macron:
+            return 1;
+        case diaeresis:
+            return 2;
+        case breve:
+            return 3;
+        case smooth_breathing:
+        case rough_breathing:
+            return 4;
+        case acute:
+        case circumflex:
+        case grave:
+            return 5;
+
+        default:
+            return Infinity;
+    }
+}
+
+/**
+ * Helper functions that tests whether a given character is a diacritic
+ * symbol (in the general sense; whether it is a part of the unicode diacritic block).
+ * @param char the char to test
+ * @returns true if char is a diacritic, and false otherwise
+ */
+const isDiacritic = (char: string) => /([\u0300-\u036F])/.test(char);
+
+/**
+ * Orders the diacritics blocks in the given string.
+ * 
+ * @param text the text whose diacritics to order.
+ * @returns the ordered text.
+ */
+export function orderDiacritics(text: string): string {
+    const chars = Array.from(text.normalize("NFD"));
+    const charsOrdered: string[] = [];
+
+    let diacriticGroup: string[] = [];
+    chars.forEach(char => {
+        if (isDiacritic(char)) {
+            diacriticGroup.push(char);
+        }
+        else {
+            if (diacriticGroup.length > 0) {
+                //char is not a diacritic, but diacritic group is not empty.
+                //Therefore, we've just moved from a diacritic group back to letters.
+                //Order the group and push it to the charsOrdered array.
+                //Sort by order ascending.
+                diacriticGroup.sort((d1, d2) => orderOf(d1) - orderOf(d2));
+                charsOrdered.concat(diacriticGroup);
+                diacriticGroup = [];
+            }
+
+            charsOrdered.push(char);
+        }
+    });
+
+    //back to string and return
+    return charsOrdered.reduce((string, char) => string + char, '');
 }
 
 export default Object.freeze(diacritics);

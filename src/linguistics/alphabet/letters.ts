@@ -121,7 +121,7 @@ const diphthongSafeDiacritics = safeDiacritics.filter(diacritic => diacritic !==
  * Readonly collection of the monophthongs (single vowels) of the Greek alphabet,
  * sorted by alphabet order.
  */
-export const monophtongs = extractLetters('type', 'vowel');
+export const monophthongs = extractLetters('type', 'vowel');
 
 /**
  * Monophthong type; should match the possible values of the monophthongs array.
@@ -145,7 +145,7 @@ export function isMonophthong(letter: string, strict: boolean = false): letter i
     if (!strict) {
         letter = stripDiacritics(letter, { retain: ['iota_subscript'] });
     }
-    return monophtongs.includes(letter);
+    return monophthongs.includes(letter);
 }
 
 //Diphthongs
@@ -191,7 +191,7 @@ export function isDiphthong(letter: string, strict: boolean = false): letter is 
  * Readonly collection of the vowels (monophthongs and diphthongs) 
  * of the Greek alphabet.
  */
-export const vowels = Object.freeze(monophtongs.concat(diphthongs));
+export const vowels = Object.freeze(monophthongs.concat(diphthongs));
 
 /**
  * Vowel type; should match the possible values of the vowels array.
