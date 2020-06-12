@@ -2,7 +2,7 @@ import '#/global/String';
 import { augment } from '#/service/inflection/transform';
 import { temporalAugmentOf } from '#/service/inflection/transform/augment';
 
-describe("Vowel Transform Service", () => {
+describe("Inflection Transform Service", () => {
     test("augment()", () => {
         const testData = {
             "ἄγ": "ἤγ",
@@ -20,11 +20,11 @@ describe("Vowel Transform Service", () => {
             "ἡσυχάζ": "ἡσυχάζ",
             //All diacritics are on the iota.
             "ἴσχ": "ῑ̓́σχ"
-        }
+        };
 
         Object.entries(testData).forEach(([verb, augmentedForm]) => {
             expect(augment(verb)).toBe(augmentedForm);
-        })
+        });
     });
 
     test("temporalAugmentOf()", () => {
