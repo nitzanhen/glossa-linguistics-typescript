@@ -85,15 +85,15 @@ export function contractVowels(vowel1: string, vowel2: string): string {
 
 /**
  * 
- * @param base 
- * @param suffix
+ * @param base the base form
+ * @param suffix the suffix to add to it
  * @returns the contracted form, or base if suffix is an empty string.
  * @throws RangeError if:
  * - vowel1 is not α, ε, ο, or an accented variant.
  * or
  * - vowel2 is not ε, ει, η, ῃ, ο, οι, ου, ω, or an accented variant.  
  */
-export function suffixContracted(base: string, suffix: string): string {
+export function contract(base: string, suffix: string): string {
     if (suffix.length === 0) {
         return base;
     }
@@ -105,8 +105,6 @@ export function suffixContracted(base: string, suffix: string): string {
         && possibleContractionSuffixes.includes(
             stripAccents(suffix.slice(0, 2))
         )
-        ? 2
-        : 1;
         
     const contractionSuffix = isSuffixDiphthong ? suffix.slice(0, 2) : suffix[0];
 
@@ -114,3 +112,18 @@ export function suffixContracted(base: string, suffix: string): string {
     
     return base.slice(0, base.length - 1) + contracted + suffix.slice(isSuffixDiphthong ? 2 : 1)
 }
+
+/**
+ * Helper for creating functions that add a given suffix to contract verb root;
+ * useful for inflection suffix trees of contract verb.
+ * 
+ * @see VerbInflectionService
+ * 
+ * @param suffix the suffix that the returned function should append.
+ * @returns a *function* which receives a string and returns it appended by the given suffix.
+ */
+function contractor(suffix: string) {
+    return (base: string) => contract(base, suffix);
+}
+
+export default contractor;

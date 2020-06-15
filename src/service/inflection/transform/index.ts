@@ -8,3 +8,4 @@
 
  export { default as augment } from './augment';
  export { default as suffixer } from './suffixer';
+ export { default as contractor } from './contractor';
