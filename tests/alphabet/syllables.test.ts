@@ -1,54 +1,20 @@
 import '#/global/String';
-import { splitIntoSyllables } from '#/linguistics/alphabet/syllables';
+import { splitIntoSyllables, syllableType } from '#/linguistics/alphabet/syllables';
+import testData from './syllables.testdata';
 
 describe("syllables.ts", () => {
     test("Splitting into syllables", () => {
-        const testData = {
-            'φῦλα': ['φῦ', 'λα'],
-            'φύλλα': ['φύλ', 'λα'],
-            'ἅκρον': ['ἅ', 'κρον'],
-            'ἄρχων': ['ἄρ', 'χων'],
-            'οἶστρος': ['οἶ', 'στρος'],
-            'ἄνθραξ': ['ἄν', 'θραξ'],
-            'τάξις': ['τά', 'ξις'],
-            'ἀρχή': ['ἀρ', 'χή'],
-            'ἧττον': ['ἧτ', 'τον'],
-            'λείψω': ['λεί', 'ψω'],
-            'φύλαξ': ['φύ', 'λαξ'],
-            'θεός': ['θε', 'ός'],
-            'θύρᾱ': ['θύ', 'ρᾱ'],
-            'Ποσειδῶν': ['Πο', 'σει', 'δῶν'],
-            //The acute here is on the iota, just not displayed well because of the macron
-            'Ἀφροδῑ́τη': ['Ἀ', 'φρο', 'δῑ́', 'τη'],
-            'Ἥφαιστος': ['Ἥ', 'φαι', 'στος'],
-            'Θουκῡδίδης': ['Θου', 'κῡ', 'δί', 'δης'],
-            'Ἀχιλλεύς': ['Ἀ', 'χιλ', 'λεύς'],
-            'Τροίᾱ': ['Τροί', 'ᾱ'],
-            'Βαῦκις': ['Βαῦ', 'κις'],
-            'Ξέρξης': ['Ξέρ', 'ξης'],
-            'Κύκλωψ': ['Κύ', 'κλωψ'],
-            'Ῥέᾱ': ['Ῥέ', 'ᾱ'],
-            'Δίρκη': ['Δίρ', 'κη'],
-            'Ὅμηρος': ['Ὅ', 'μη', 'ρος'],
-            'Σωκράτης': ['Σω', 'κρά', 'της'],
-            'Μοῦσα': ['Μοῦ', 'σα'],
-            'Ζεύς': ['Ζεύς'],
-            'Ἀγαμέμνων': ['Ἀ', 'γα', 'μέ', 'μνων'],
-            'Ὠκεανός': ['Ὠ', 'κε', 'α', 'νός'],
-            'Φειδίᾱς': ['Φει', 'δί', 'ᾱς'],
-            'Λεύκιππος': ['Λεύ', 'κιπ', 'πος'],
-            //Breathing and acute are on Alpha
-            'Ᾱ̔́ιδης': ['Ᾱ̔́ι', 'δης'],
-            'Οἰδίπους': ['Οἰ', 'δί', 'πους'],
-            'Εἰλείθυια': ['Εἰ', 'λεί', 'θυι', 'α'],
-            'Γλαύκων': ['Γλαύ', 'κων'],
-            'Χάρυβδις': ['Χά', 'ρυ', 'βδις'],
-            'ἤϋ': ['ἤ', 'ϋ'],
-            'Ἀΐδι': ['Ἀ', 'ΐ', 'δι']
-        };
+        for (const [word, { syllables }] of Object.entries(testData)) {
+            expect(splitIntoSyllables(word)).toEqual(syllables);
+        }
+    });
 
-        for(const [word, syllables] of Object.entries(testData)) {
-            expect(splitIntoSyllables(word)).toEqual(syllables)
+    test("Categorizing syllable types", () => {
+        for (const [word, { syllableTypes }] of Object.entries(testData)) {
+            console.log(word, syllableTypes);
+            syllableTypes.forEach((type, syllableIndex) => {
+                expect(syllableType(word, syllableIndex)).toBe(type);
+            });
         }
     });
 });

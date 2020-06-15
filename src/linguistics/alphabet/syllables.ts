@@ -129,6 +129,7 @@ function arePronouncedTogether(firstConsonant: Consonant, secondConsonant: Conso
     }
 }
 
+export type SyllableType = "longByNature" | "longByPosition" | "short";
 /**
  * @returns the type of the syllable, length-wise.
  * The possible return (syllable) types are "longByNature", "longByPosition" and "short".
@@ -137,9 +138,9 @@ function arePronouncedTogether(firstConsonant: Consonant, secondConsonant: Conso
  * 
  * @throws RangeError if the syllableIndex is out of the word's syllable array's bounds. 
  */
-export function syllableType(word: string, syllableIndex: number): "longByNature" | "longByPosition" | "short" {
+export function syllableType(word: string, syllableIndex: number): SyllableType {
     const syllables = splitIntoSyllables(word);
-    if(!syllables[syllableIndex]) {
+    if (!syllables[syllableIndex]) {
         throw new RangeError(`syllableIndex out of bounds: ${syllableIndex}, for word ${word} with ${syllables.length} syllables.`);
     }
     const syllable = syllables[syllableIndex];
@@ -147,14 +148,15 @@ export function syllableType(word: string, syllableIndex: number): "longByNature
 
     if (isDiphthong(vowelPart)
         || containsDiacritic(vowelPart, "macron")
+        || containsDiacritic(vowelPart, "circumflex")
         || ((letters as any)[vowelPart]?.class === 'long')) {
         return "longByNature";
     }
     const vowelIndex = syllable.search(vowelPart);
     const followingConsonants = syllable.slice(vowelIndex + vowelPart.length);
     const nextSyllable = syllable[syllableIndex + 1];
-    
-    if(followingConsonants || isDouble(nextSyllable?.[0])) {
+
+    if (followingConsonants || (nextSyllable && isDouble(nextSyllable?.[0]))) {
         return "longByPosition";
     }
     else {

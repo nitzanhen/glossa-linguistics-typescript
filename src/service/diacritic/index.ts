@@ -47,7 +47,7 @@ interface DiacriticTransformOptions {
     originIndex: number;
     originDiacritic?: Diacritic,
     destinationIndex: number,
-    destinationDiacritic: Diacritic
+    destinationDiacritic: Diacritic;
 }
 
 /**
@@ -70,10 +70,10 @@ export function transformDiacritic(word: string, { originIndex,
 }: DiacriticTransformOptions) {
     const syllables = splitIntoSyllables(word);
     if (originIndex < 0 || originIndex > syllables.length) {
-        throw new RangeError(`originIndex argument exceeds syllable bounds; word ${word} has ${syllables.length} syllables, whereas originIndex is ${originIndex}`)
+        throw new RangeError(`originIndex argument exceeds syllable bounds; word ${word} has ${syllables.length} syllables, whereas originIndex is ${originIndex}`);
     }
     else if (destinationIndex < 0 || destinationIndex > syllables.length) {
-        throw new RangeError(`destinationIndex argument exceeds syllable bounds; word ${word} has ${syllables.length} syllables, whereas destinationIndex is ${originIndex}`)
+        throw new RangeError(`destinationIndex argument exceeds syllable bounds; word ${word} has ${syllables.length} syllables, whereas destinationIndex is ${originIndex}`);
     }
     else {
         let originSyllable = syllables[originIndex];
@@ -82,7 +82,7 @@ export function transformDiacritic(word: string, { originIndex,
             ? stripDiacritics(word, { blacklist: [originDiacritic] })
             : stripAccents(originSyllable);
 
-        word = addDiacritic(word, destinationIndex, destinationDiacritic)
+        word = addDiacritic(word, destinationIndex, destinationDiacritic);
 
         return word;
     }
@@ -101,17 +101,17 @@ export function transformDiacritic(word: string, { originIndex,
  */
 export function enforceGeneralAccentRules(word: string): string {
     const syllables = splitIntoSyllables(word);
-    const ultima = syllables[syllables.length - 1]
+    const ultima = syllables[syllables.length - 1];
 
     const antepenultIndex = syllables.length - 3;
     const penultIndex = syllables.length - 2;
 
     const isUltimaShort = syllableType(word, syllables.length - 1) === 'short'
         || stripAccents(ultima).endsWith("αι")
-        || stripAccents(ultima).endsWith("οι")
+        || stripAccents(ultima).endsWith("οι");
 
     if (syllables.length > 2 && !isUltimaShort) {
-        const antepenult = syllables[antepenultIndex]
+        const antepenult = syllables[antepenultIndex];
         if (containsDiacritic(antepenult, "acute")) {
             //Move to penult
             word = transformDiacritic(word, {
@@ -119,18 +119,18 @@ export function enforceGeneralAccentRules(word: string): string {
                 originDiacritic: "acute",
                 destinationIndex: penultIndex,
                 destinationDiacritic: "acute"
-            })
+            });
         }
     }
 
-    if(syllables.length > 1 && isUltimaShort) {
-        if(syllableType(word, penultIndex) === "longByNature") {
+    if (syllables.length > 1 && isUltimaShort) {
+        if (syllableType(word, penultIndex) === "longByNature") {
             word = transformDiacritic(word, {
                 originIndex: penultIndex,
                 originDiacritic: "acute",
                 destinationIndex: penultIndex,
                 destinationDiacritic: "circumflex"
-            })
+            });
         }
     }
 

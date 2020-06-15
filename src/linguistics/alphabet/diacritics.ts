@@ -60,7 +60,7 @@ export function stripDiacritics(text: string, {
  * @returns the stripped text.
  */
 export function stripAccents(text: string): string {
-    return stripDiacritics(text, { blacklist: ["acute", "circumflex", "macron"] })
+    return stripDiacritics(text, { blacklist: ["acute", "circumflex", "macron"] });
 }
 
 /**
