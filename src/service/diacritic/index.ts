@@ -1,4 +1,4 @@
-import { Diacritic, stripDiacritics, stripAccents, containsDiacritic } from "#/linguistics/alphabet/diacritics";
+import diacritics, { Diacritic, stripDiacritics, stripAccents, containsDiacritic, orderDiacritics } from "#/linguistics/alphabet/diacritics";
 import { splitIntoSyllables, vowelPartOf, syllableType } from "#/linguistics/alphabet/syllables";
 
 /**
@@ -21,17 +21,27 @@ export function addDiacritic(word: string, syllableIndex: number, diacritic: Dia
     const syllables = splitIntoSyllables(word);
     if (!syllables[syllableIndex]) {
         throw new RangeError(`syllableIndex out of bounds: ${syllableIndex}, for word ${word} with ${syllables.length} syllables.`);
-    }
+    } 
 
     const syllable = syllables[syllableIndex];
     const vowelPart = vowelPartOf(syllable);
-    const accentedSyllable = syllable
-        .normalize("NFD")
-        .replace(vowelPart, vowelPart + diacritic)
-        .normalize("NFC");
+    const accentedSyllable = addDiacriticVowel(syllable, diacritic)
     syllables[syllableIndex] = accentedSyllable;
     return syllables.join("");
 }
+
+/**
+ * Adds the given diacritic to the given vowel.
+ * 
+ * @param vowel the vowel to be appended the diacritic.
+ * @param diacritic the diacritic to be added.
+ * 
+ * @returns the accented vowel.
+ */
+export function addDiacriticVowel(vowel: string, diacritic: Diacritic): string {
+    return orderDiacritics(vowel + diacritics[diacritic]);
+}
+
 
 interface DiacriticTransformOptions {
     originIndex: number;
@@ -77,20 +87,6 @@ export function transformDiacritic(word: string, { originIndex,
         return word;
     }
 }
-
-/**
- * Accents a word recessively, i.e. puts a 
- * @param word 
- */
-/* export function accentRecessively(word: string): string {
-    word = stripAccents(word);
-    const syllables = splitIntoSyllables(word);
-
-    //Accent the antepenult, or the first syllable if the word is short.
-    if (syllables.length > 2) {
-
-    }
-} */
 
 /**
  * Enforces the two general rules of accenting Greek word:

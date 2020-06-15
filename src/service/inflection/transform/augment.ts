@@ -1,6 +1,6 @@
 import '#/global/String'
 import { InvalidLanguageError } from '#/error';
-import { isGreekString, isConsonant, isVowel } from '#/linguistics/alphabet/letters';
+import { isGreekString, isConsonant } from '#/linguistics/alphabet/letters';
 import { splitIntoSyllables, vowelPartOf } from '#/linguistics/alphabet/syllables';
 import { stripDiacritics } from '#/linguistics/alphabet/diacritics';
 

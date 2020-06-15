@@ -64,6 +64,16 @@ export function stripAccents(text: string): string {
 }
 
 /**
+ * Checks whether a given text is accented; will return true if and only if text
+ * is equal to text stipped of accents (stripAccents(text))
+ * 
+ * @param text the text to check
+ */
+export function isAccented(text: string): boolean {
+    return text === stripAccents(text);
+}
+
+/**
  * @returns true if and only if char has the diacritic argument (that is, when decomposing char,
  * the received string contains the diacritic). This function technically works for strings spanning
  * more than a single letter - in which case it checks whether the diacritic exists somewhere in the string -
@@ -154,7 +164,7 @@ export function orderDiacritics(text: string): string {
     });
 
     //back to string and return
-    return charsOrdered.reduce((string, char) => string + char, '');
+    return charsOrdered.reduce((string, char) => string + char, '').normalize("NFC");
 }
 
 export default Object.freeze(diacritics);
