@@ -1,5 +1,5 @@
 import '#/global/String';
-import { Diacritic, stripDiacritics, containsDiacritic, orderDiacritics, isAccented } from '#/linguistics/alphabet/diacritics';
+import { stripDiacritics, containsDiacritic, orderDiacritics, isAccented } from '#/linguistics/alphabet/diacritics';
 
 import testData from './diacritics.testdata';
 
@@ -21,7 +21,7 @@ describe("diacritics.ts", () => {
         });
     });
 
-    test("isAccented", () => {
+    test("isAccented()", () => {
         testData.isAccented.forEach(({ text, accented }) => {
             expect(isAccented(text)).toBe(accented);
         });

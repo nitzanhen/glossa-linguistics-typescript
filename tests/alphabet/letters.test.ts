@@ -1,6 +1,7 @@
 import '#/global/String';
 import letters, { vowels, consonants, monophthongs, diphthongs, isMonophthong, isDiphthong, isVowel, isGreekLetter, isGreekString, nasals, isNasal, isConsonant, isLiquid, isLabial, isDental, isPalatal, isDouble } from '#/linguistics/alphabet/letters';
-import diacritics from '#/linguistics/alphabet/diacritics';
+
+import testData from './letters.testdata';
 
 describe("lettes.ts", () => {
     test("All letter groups have the correct number of elements", () => {
@@ -19,16 +20,18 @@ describe("lettes.ts", () => {
         expect(consonants).toHaveLength(17);
     });
 
+
+
     test("isMonophthong(), isDiphthong(), isVowel() work as expected", () => {
-        const { iota_subscript } = diacritics;
-        //Test data
-        const monophthongTests = ['α', 'ε', 'η', 'ι', 'ο', 'υ', 'ω'];
-        const diphthongTests = ["αι", "αυ", "ει", "ευ", "ηυ", "οι", "ου", "υι", "ᾳ", "ῃ", "ῳ"];
-        const nonGreekTests = ['a', 'o', 'nῳ', 'αa', 'א'];
-        const emptyTest = "";
-        const nonStrictMonophthongTests = ['ά', 'ῶ', 'ἡ', 'ὄ'];
-        const nonStrictDiphthongTests = ['οὐ', 'οῖ', 'ῷ', 'αὶ', 'εἰ', 'οῦ'];
-        const malformedTests = ['ῦῦ', 'ιῷ', 'ι' + iota_subscript, 'εια', "ια", 'ωε', 'οο', 'ου' + iota_subscript];
+        const {
+            monophthongTests,
+            diphthongTests,
+            nonGreekTests,
+            emptyTest,
+            nonStrictMonophthongTests,
+            nonStrictDiphthongTests,
+            malformedTests
+        } = testData.vowelTests;
 
         monophthongTests.forEach(mono => {
             expect(isMonophthong(mono)).toBe(true);
@@ -107,80 +110,63 @@ describe("lettes.ts", () => {
     });
 
     test("isGreekLetter(), isGreekString()", () => {
-        expect(isGreekLetter("α")).toBe(true);
-        expect(isGreekLetter("α", true)).toBe(true);
-        expect(isGreekLetter("Ξ")).toBe(true);
-        expect(isGreekLetter("Ξ", true)).toBe(true);
-        expect(isGreekLetter('ᾰ')).toBe(true);
-        expect(isGreekLetter('ᾰ', true)).toBe(false);
-        expect(isGreekLetter('ᾇ')).toBe(true);
-        expect(isGreekLetter('ᾰ', true)).toBe(false);
-        expect(isGreekLetter('ς')).toBe(true);
-        expect(isGreekLetter('ς', true)).toBe(true);
+        testData.greekTests.letters.forEach(([letter, strict, result]) => {
+            expect(isGreekLetter(letter, strict)).toBe(result);
+        });
 
-        const greekStrings = ['φῦλα', 'φύλλα', 'ἅκρον', 'ἄρχων', 'οἶστρος', 'ἄνθραξ', 'τάξις', 'ἀρχή', 'ἧττον',
-            'λείψω', 'φύλαξ', 'θεός', 'θύρᾱ', 'Ποσειδῶν',
-            //The acute here is on the iota, just not displayed well because of the macron
-            'Ἀφροδῑ́τη',
-            'Ἥφαιστος', 'Θουκῡδίδης', 'Ἀχιλλεύς', 'Τροίᾱ', 'Βαῦκις', 'Ξέρξης', 'Κύκλωψ', 'Ῥέᾱ',
-            'Δίρκη', 'Ὅμηρος', 'Σωκράτης', 'Μοῦσα', 'Ζεύς', 'Ἀγαμέμνων', 'Ὠκεανός', 'Φειδίᾱς', 'Λεύκιππος',
-            //Breathing and acute are on Alpha
-            'Ᾱ̔́ιδης',
-            'Οἰδίπους', 'Εἰλείθυια', 'Γλαύκων', 'Χάρυβδις'
-        ];
-        greekStrings.forEach(string => {
+        testData.greekTests.strings.forEach(string => {
             expect(isGreekString(string)).toBe(true);
-        })
+        });
     });
 
     test("Consonant functions", () => {
-        const testData = {
-            nasals: ["μ", "ν"],
-            liquids: ["λ", "ρ", "ῥ"],
-            labials: ["π", "β", "φ"],
-            dentals: ["τ", "δ", "θ"],
-            palatals: ["κ", "γ", "χ"],
-            doubles: ["ζ", "ξ", "ψ"],
-            sibilants: ["σ", "ς"],
-            nonConsonants: ["κς", "βι", "א"]
-        }
+        const {
+            nasals,
+            liquids,
+            labials,
+            dentals,
+            palatals,
+            doubles,
+            sibilants,
+            nonConsonants
+        } = testData.consonantTests;
 
-        testData.nasals.forEach(letter => {
-            expect(isNasal(letter)).toBe(true)
-            expect(isConsonant(letter)).toBe(true)
-        })
+        nasals.forEach(letter => {
+            expect(isNasal(letter)).toBe(true);
+            expect(isConsonant(letter)).toBe(true);
+        });
 
-        testData.liquids.forEach(letter => {
-            expect(isLiquid(letter)).toBe(true)
-            expect(isConsonant(letter)).toBe(true)
-        })
+        liquids.forEach(letter => {
+            expect(isLiquid(letter)).toBe(true);
+            expect(isConsonant(letter)).toBe(true);
+        });
 
-        testData.labials.forEach(letter => {
-            expect(isLabial(letter)).toBe(true)
-            expect(isConsonant(letter)).toBe(true)
-        })
+        labials.forEach(letter => {
+            expect(isLabial(letter)).toBe(true);
+            expect(isConsonant(letter)).toBe(true);
+        });
 
-        testData.dentals.forEach(letter => {
-            expect(isDental(letter)).toBe(true)
-            expect(isConsonant(letter)).toBe(true)
-        })
+        dentals.forEach(letter => {
+            expect(isDental(letter)).toBe(true);
+            expect(isConsonant(letter)).toBe(true);
+        });
 
-        testData.palatals.forEach(letter => {
-            expect(isPalatal(letter)).toBe(true)
-            expect(isConsonant(letter)).toBe(true)
-        })
+        palatals.forEach(letter => {
+            expect(isPalatal(letter)).toBe(true);
+            expect(isConsonant(letter)).toBe(true);
+        });
 
-        testData.doubles.forEach(letter => {
-            expect(isDouble(letter)).toBe(true)
-            expect(isConsonant(letter)).toBe(true)
-        })
+        doubles.forEach(letter => {
+            expect(isDouble(letter)).toBe(true);
+            expect(isConsonant(letter)).toBe(true);
+        });
 
-        testData.sibilants.forEach(letter => {
-            expect(isConsonant(letter)).toBe(true)
-        })
+        sibilants.forEach(letter => {
+            expect(isConsonant(letter)).toBe(true);
+        });
 
-        testData.nonConsonants.forEach(letter => {
-            expect(isConsonant(letter)).toBe(false)
-        })
+        nonConsonants.forEach(letter => {
+            expect(isConsonant(letter)).toBe(false);
+        });
     });
 });
