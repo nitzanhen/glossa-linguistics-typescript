@@ -23,7 +23,6 @@ describe("diacritics.ts", () => {
 
     test("isAccented", () => {
         testData.isAccented.forEach(({ text, accented }) => {
-            console.log(text, isAccented(text), accented);
             expect(isAccented(text)).toBe(accented);
         });
     });
