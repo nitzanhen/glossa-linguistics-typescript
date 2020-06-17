@@ -38,14 +38,26 @@ const testData = {
     ordering: [
         { input: '\u0313\u0301', ordered: '\u0313\u0301' },
         { input: '\u0301\u0313\u0308', ordered: '\u0308\u0313\u0301' },
-        { input: '', ordered: '' },
-        { input: '', ordered: '' },
-        { input: '', ordered: '' },
+        { input: 'ᾌ', ordered: 'ᾌ' },
+        { input: 'ᾌ', ordered: 'ᾌ' },
+        { input: 'ῧ', ordered: 'ῧ' },
+        { input: 'ᾃ', ordered: 'ᾃ' },
+        { input: 'ἴβά\u0345', ordered: 'ἴβᾴ' },
+    ],
+    isAccented: [
+        { text: 'ᾌ', accented: true },
+        { text: 'ᾌ', accented: true },
+        { text: 'ᾌ', accented: true },
+        { text: 'ῧ', accented: true },
+        { text: 'ῧ', accented: true },
+        { text: 'ψ', accented: false },
+        { text: 'ῥ', accented: false }
     ]
 } as {
-    stripping: { input: string, output: string, blacklist?: Diacritic[], retain?: Diacritic[] }[],
-    containing: { text: string, diacritic: Diacritic, result: boolean }[],
-    ordering: { input: string, ordered: string }[]
-}
+    stripping: { input: string, output: string, blacklist?: Diacritic[], retain?: Diacritic[]; }[],
+    containing: { text: string, diacritic: Diacritic, result: boolean; }[],
+    ordering: { input: string, ordered: string; }[],
+    isAccented: { text: string, accented: boolean; }[];
+};
 
 export default testData;

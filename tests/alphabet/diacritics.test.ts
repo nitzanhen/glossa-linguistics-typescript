@@ -1,5 +1,5 @@
 import '#/global/String';
-import { Diacritic, stripDiacritics, containsDiacritic, orderDiacritics } from '#/linguistics/alphabet/diacritics';
+import { Diacritic, stripDiacritics, containsDiacritic, orderDiacritics, isAccented } from '#/linguistics/alphabet/diacritics';
 
 import testData from './diacritics.testdata';
 
@@ -18,6 +18,13 @@ describe("diacritics.ts", () => {
     test("Reordering diacritics", () => {
         testData.ordering.forEach(({ input, ordered }) => {
             expect(orderDiacritics(input)).toBe(ordered);
+        });
+    });
+
+    test("isAccented", () => {
+        testData.isAccented.forEach(({ text, accented }) => {
+            console.log(text, isAccented(text), accented);
+            expect(isAccented(text)).toBe(accented);
         });
     });
 });

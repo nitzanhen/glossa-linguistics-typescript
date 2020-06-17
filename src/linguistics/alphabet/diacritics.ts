@@ -65,12 +65,12 @@ export function stripAccents(text: string): string {
 
 /**
  * Checks whether a given text is accented; will return true if and only if text
- * is equal to text stipped of accents (stripAccents(text))
+ * is not equal to text stipped of accents (stripAccents(text))
  * 
  * @param text the text to check
  */
 export function isAccented(text: string): boolean {
-    return text === stripAccents(text);
+    return text !== stripAccents(text);
 }
 
 /**
@@ -141,9 +141,15 @@ const isDiacritic = (char: string) => /([\u0300-\u036F])/.test(char);
  */
 export function orderDiacritics(text: string): string {
     const chars = Array.from(text.normalize("NFD"));
-    const charsOrdered: string[] = [];
-
+    let charsOrdered: string[] = [];
     let diacriticGroup: string[] = [];
+
+    const concatDiacriticGroup = () => {
+        diacriticGroup.sort((d1, d2) => orderOf(d1) - orderOf(d2));
+        charsOrdered = charsOrdered.concat(diacriticGroup);
+        diacriticGroup = [];
+    };
+
     chars.forEach(char => {
         if (isDiacritic(char)) {
             diacriticGroup.push(char);
@@ -154,17 +160,17 @@ export function orderDiacritics(text: string): string {
                 //Therefore, we've just moved from a diacritic group back to letters.
                 //Order the group and push it to the charsOrdered array.
                 //Sort by order ascending.
-                diacriticGroup.sort((d1, d2) => orderOf(d1) - orderOf(d2));
-                charsOrdered.concat(diacriticGroup);
-                diacriticGroup = [];
+                concatDiacriticGroup();
             }
 
             charsOrdered.push(char);
         }
     });
+    //In case the loop ended, but there are some remaining diacritics.
+    concatDiacriticGroup();
 
     //back to string and return
-    return charsOrdered.reduce((string, char) => string + char, '').normalize("NFC");
+    return charsOrdered.join("").normalize("NFC");
 }
 
 export default Object.freeze(diacritics);
