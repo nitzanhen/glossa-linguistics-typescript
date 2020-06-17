@@ -8,7 +8,7 @@ declare global {
         capitalize(): string;
         isCapitalized(): boolean;
     }
-    
+
 }
 
 const toLowerCase = String.prototype.toLowerCase;
@@ -62,7 +62,7 @@ String.prototype.toUpperCase = function (): string {
 
 
 
-const trim = String.prototype.trim
+const trim = String.prototype.trim;
 
 /**
  * Trims the string by the given matcher function.
@@ -72,25 +72,25 @@ const trim = String.prototype.trim
  * passed to this argument in the beginning or end of this string will be removed.
  * @returns the trimmed string, according to the matcher if one was passed.
  */
-String.prototype.trim = function(matcher?: (letter: string) => boolean): string {
-    if(!matcher) {
+String.prototype.trim = function (matcher?: (letter: string) => boolean): string {
+    if (!matcher) {
         return trim.call(this);
     }
-    //The indices the interval between of which to slice
-    let startIndex = 0; 
+    //The indices the interval between which to slice
+    let startIndex = 0;
     let endIndex = this.length - 1;
-    
-    while(matcher(this[startIndex]) && startIndex < this.length) {
+
+    while (matcher(this[startIndex]) && startIndex < this.length) {
         startIndex++;
     }
 
-    while(matcher(this[endIndex]) && endIndex > 0) {
+    while (matcher(this[endIndex]) && endIndex > 0) {
         endIndex--;
     }
 
     //Start is inclusive, end is exclusive.
-    return this.slice(startIndex, endIndex + 1)
-}
+    return this.slice(startIndex, endIndex + 1);
+};
 
 /**
  * Capitalizes a given string.
@@ -98,21 +98,21 @@ String.prototype.trim = function(matcher?: (letter: string) => boolean): string 
  * @param string the string to be capitalized. 
  * @returns the capitalized string
  */
-String.prototype.capitalize = function(): string {
+String.prototype.capitalize = function (): string {
     //When string[0] is ῳ, calling toUpperCase() turns it to ΩΙ.
     //When capitalizing, we want the iota to be lowercase, too;
     //Therefore, we store the uppercase string first, then slice it after 
     //the first character.
     const upperCase = this.toUpperCase();
     return upperCase.charAt(0) + upperCase.slice(1).toLowerCase();
-  }
+};
 
 /**
  * Checks whether a given string is capitalized.
  * 
  * @returns true if and only if this string equals this.capitalize().
  */
-String.prototype.isCapitalized = function(): boolean {
-    return this === this.capitalize()
-}  
+String.prototype.isCapitalized = function (): boolean {
+    return this === this.capitalize();
+};
 export default {};

@@ -176,5 +176,5 @@ export function syllableType(word: string, syllableIndex: number): SyllableType 
  */
 export function vowelPartOf(syllable: string): Vowel {
     //Assuming the vowel is a grouped string, surrounded by two optional groups of consonants.
-    return syllable.trim(letter => !isVowel(letter)) as Vowel;
+    return syllable.trim(letter => isConsonant(letter)) as Vowel;
 }
