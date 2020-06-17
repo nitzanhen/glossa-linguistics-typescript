@@ -12,12 +12,12 @@ describe("diacritics.ts", () => {
     test("containsDiacritic()", () => {
         testData.containing.forEach(({ text, diacritic, result }) => {
             expect(containsDiacritic(text, diacritic)).toBe(result);
-        })
-    })
+        });
+    });
 
     test("Reordering diacritics", () => {
         testData.ordering.forEach(({ input, ordered }) => {
             expect(orderDiacritics(input)).toBe(ordered);
-        })
-    })
+        });
+    });
 });

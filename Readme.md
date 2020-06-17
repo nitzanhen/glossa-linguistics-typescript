@@ -35,7 +35,8 @@ a service file), they should be imported from the main index.ts of the top-level
   2. Imports from other top-level modules (imports from the same top-level modules, if they require more than one line, should be grouped together, but there need not be a line between those and other imports in this category).
   3. Imports from another "area" of the same top-level modules (this is mostly relevant for files in the linguistics top-level modules, which contains a few different sub-modules, e.g. `'#/linguisitics/property'`, `#/linguistics/inflection`, etc.). These imports can be either relative or "absolute" (using the # alias).
   4. Relative imports from the same module (and "area").
-
+  5. In the case of tests, a testData import is to appear last.
+  
     In general, imports from files "closer" to the given file should appear later in the import section. For example, the imports of the GreekNoun.ts 
     (under `#/linguistics/pos`) file should look something like:
     ```typescript
@@ -46,5 +47,6 @@ a service file), they should be imported from the main index.ts of the top-level
 
     import GreekWord from './GreekWord'; //Group #4
     ```
+  
 
     

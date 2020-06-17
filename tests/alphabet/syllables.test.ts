@@ -1,5 +1,6 @@
 import '#/global/String';
 import { splitIntoSyllables, syllableType, vowelPartOf } from '#/linguistics/alphabet/syllables';
+
 import testData from './syllables.testdata';
 
 describe("syllables.ts", () => {
