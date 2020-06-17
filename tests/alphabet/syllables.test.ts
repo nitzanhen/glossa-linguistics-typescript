@@ -11,7 +11,6 @@ describe("syllables.ts", () => {
 
     test("Categorizing syllable types", () => {
         for (const [word, { syllableTypes }] of Object.entries(testData)) {
-            console.log(word, syllableTypes);
             syllableTypes.forEach((type, syllableIndex) => {
                 expect(syllableType(word, syllableIndex)).toBe(type);
             });

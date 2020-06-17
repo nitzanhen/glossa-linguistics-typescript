@@ -1,6 +1,6 @@
 import { InvalidLanguageError } from '#/error';
-import letters, { isConsonant, isVowel, Consonant, isStop, isLiquid, isNasal, isGreekString, isDiphthong, isDouble, Vowel } from './letters';
-import { containsDiacritic } from './diacritics';
+import letters, { isConsonant, isVowel, Consonant, isStop, isLiquid, isNasal, isGreekString, isDiphthong, isDouble, Vowel, isLongMonophthong } from './letters';
+import { containsDiacritic, stripDiacritics } from './diacritics';
 
 /**
  * Contains useful functions for working with and categorizing syllables.
@@ -149,14 +149,17 @@ export function syllableType(word: string, syllableIndex: number): SyllableType 
     if (isDiphthong(vowelPart)
         || containsDiacritic(vowelPart, "macron")
         || containsDiacritic(vowelPart, "circumflex")
-        || ((letters as any)[vowelPart]?.class === 'long')) {
+        || isLongMonophthong(vowelPart)) {
         return "longByNature";
     }
     const vowelIndex = syllable.search(vowelPart);
     const followingConsonants = syllable.slice(vowelIndex + vowelPart.length);
-    const nextSyllable = syllable[syllableIndex + 1];
+    const nextSyllable = syllables[syllableIndex + 1];
 
-    if (followingConsonants || (nextSyllable && isDouble(nextSyllable?.[0]))) {
+    if ((followingConsonants && isDouble(followingConsonants[0]))
+        || (nextSyllable && isDouble(nextSyllable[0]))
+        || (followingConsonants && nextSyllable && isConsonant(nextSyllable[0]))
+    ) {
         return "longByPosition";
     }
     else {

@@ -108,8 +108,8 @@ export function isGreekString(string: string, strict: boolean = false): boolean 
  * and useDiphthong() functions.
  *//* 
 const safeDiacritics = (() => {
-  const { iota_subscript, ...otherDiacritics } = diacritics;
-  return Object.keys(otherDiacritics) as Diacritic[];
+const { iota_subscript, ...otherDiacritics } = diacritics;
+return Object.keys(otherDiacritics) as Diacritic[];
 })();
 
 //For diphthongs, the diaeresis must be retained as well.
@@ -146,6 +146,56 @@ export function isMonophthong(letter: string, strict: boolean = false): letter i
         letter = stripDiacritics(letter, { retain: ['iota_subscript'] });
     }
     return monophthongs.includes(letter);
+}
+
+//Long & short monophthongs
+
+/**
+ * Readonly collection of the short monophthongs of the Greek alphabet,
+ * sorted by alphabet order.
+ */
+export const shortMonophthongs = extractLetters('class', 'short');
+
+/**
+ * @returns true if the passed letter param is in the shortMonophthongs array, and false otherwise.
+ * Can optionally test "strictly", meaning an accented monophthong (i.e. a monophthong with any diacritic symbol)
+ * will not count as a short monophthong.
+ * 
+ * @param letter the string to be tested. 
+ * @param strict whether to test strictly or not, defaults to false.
+ */
+export function isShortMonophthong(letter: string, strict: boolean = false): boolean {
+    letter = letter.toLowerCase();
+
+    if (!strict) {
+        letter = stripDiacritics(letter, { retain: ['iota_subscript'] });
+    }
+
+    return shortMonophthongs.includes(letter);
+}
+
+/**
+ * Readonly collection of the long monophthongs of the Greek alphabet,
+ * sorted by alphabet order.
+ */
+export const longMonophthongs = extractLetters('class', 'long');
+
+/**
+ * @returns true if the passed letter param is in the longMonophthongs array, and false otherwise.
+ * Can optionally test "strictly", meaning an accented monophthong (i.e. a monophthong with any diacritic symbol)
+ * will not count as a long monophthong.
+ * 
+ * @param letter the string to be tested. 
+ * @param strict whether to test strictly or not, defaults to false.
+ */
+export function isLongMonophthong(letter: string, strict: boolean = false): boolean {
+    letter = letter.toLowerCase();
+
+    if (!strict) {
+        letter = stripDiacritics(letter, { retain: ['iota_subscript'] });
+    }
+
+    return longMonophthongs.includes(letter);
 }
 
 //Diphthongs
