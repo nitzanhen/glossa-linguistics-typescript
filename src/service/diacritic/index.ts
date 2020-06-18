@@ -1,5 +1,6 @@
 import diacritics, { Diacritic, stripDiacritics, stripAccents, containsDiacritic, orderDiacritics } from "#/linguistics/alphabet/diacritics";
 import { splitIntoSyllables, vowelPartOf, syllableType } from "#/linguistics/alphabet/syllables";
+import { isConsonant } from '../../linguistics/alphabet/letters';
 
 /**
  * Contains useful functions for adding and transforming diacritics.
@@ -24,7 +25,11 @@ export function addDiacritic(word: string, syllableIndex: number, diacritic: Dia
     }
 
     const syllable = syllables[syllableIndex];
-    const accentedSyllable = addDiacriticVowel(syllable, diacritic);
+    const vowelPart = vowelPartOf(syllable);
+    /** @todo currently, adds diacritic to second letter always, 
+     * in the case of a diphthong. Logic should be added for a case where  
+     * accenting the first letter is more appropriate. */
+    const accentedSyllable = syllable.replace(vowelPart, addDiacriticVowel(vowelPart, diacritic));
     syllables[syllableIndex] = accentedSyllable;
     return syllables.join("");
 }

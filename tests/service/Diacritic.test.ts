@@ -1,19 +1,7 @@
-import { Diacritic } from '#/linguistics/alphabet/diacritics';
-import { addDiacriticVowel } from '#/service/diacritic';
+import '#/global/String';
+import { addDiacriticVowel, addDiacritic } from '#/service/diacritic';
 
-
-const testData = {
-    addDiacriticVowel: [
-        ["ἀ", "acute", "ἄ"],
-        ["ἀ", "circumflex", "ἆ"],
-        ["έ", "rough_breathing", "ἕ"],
-        ["ὴ", "smooth_breathing", "ἢ"],
-        ["ω", "iota_subscript", "ῳ"],
-        ["ί", "diaeresis", "ΐ"],
-        ["ὦ", "iota_subscript", "ᾦ"],
-        ["ά", "macron", "ᾱ́"]
-    ] as [string, Diacritic, string][]
-};
+import testData from './Diacritic.testdata';
 
 describe("Diacritic service", () => {
     test("Adding diacritics to vowels", () => {
@@ -23,7 +11,9 @@ describe("Diacritic service", () => {
     });
 
     test("Adding diacritics to words", () => {
-
+        testData.addDiacritic.forEach(([input, syllableIndex, diacritic, result]) => {
+            expect(addDiacritic(input, syllableIndex, diacritic)).toBe(result);
+        });
     });
 
     test("Transforming diacritics", () => {
