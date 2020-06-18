@@ -21,11 +21,10 @@ export function addDiacritic(word: string, syllableIndex: number, diacritic: Dia
     const syllables = splitIntoSyllables(word);
     if (!syllables[syllableIndex]) {
         throw new RangeError(`syllableIndex out of bounds: ${syllableIndex}, for word ${word} with ${syllables.length} syllables.`);
-    } 
+    }
 
     const syllable = syllables[syllableIndex];
-    const vowelPart = vowelPartOf(syllable);
-    const accentedSyllable = addDiacriticVowel(syllable, diacritic)
+    const accentedSyllable = addDiacriticVowel(syllable, diacritic);
     syllables[syllableIndex] = accentedSyllable;
     return syllables.join("");
 }
