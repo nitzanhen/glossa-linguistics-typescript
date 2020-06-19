@@ -1,5 +1,5 @@
 import '#/global/String';
-import { addDiacriticVowel, addDiacritic } from '#/service/diacritic';
+import { addDiacriticVowel, addDiacritic, transformDiacritic } from '#/service/diacritic';
 
 import testData from './Diacritic.testdata';
 
@@ -17,7 +17,9 @@ describe("Diacritic service", () => {
     });
 
     test("Transforming diacritics", () => {
-
+        testData.transformDiacritic.forEach(({ word, options, result }) => {
+            expect(transformDiacritic(word, options)).toBe(result);
+        });
     });
 
     test("Enforcing general accenting rules", () => {

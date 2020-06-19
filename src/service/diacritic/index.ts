@@ -1,6 +1,5 @@
 import diacritics, { Diacritic, stripDiacritics, stripAccents, containsDiacritic, orderDiacritics } from "#/linguistics/alphabet/diacritics";
 import { splitIntoSyllables, vowelPartOf, syllableType } from "#/linguistics/alphabet/syllables";
-import { isConsonant } from '../../linguistics/alphabet/letters';
 
 /**
  * Contains useful functions for adding and transforming diacritics.
@@ -11,6 +10,8 @@ import { isConsonant } from '../../linguistics/alphabet/letters';
 /**
  * Adds a diacritic mark to the syllable at the given index of the word.
  * This function is especially useful for accenting syllables.
+ * 
+ * If trying to add a circumflex to a vowel that already has a macron, the macron will be removed.
  * 
  * @param word to word to accent.
  * @param syllableIndex the index of the syllable in the passed word.
@@ -24,7 +25,7 @@ export function addDiacritic(word: string, syllableIndex: number, diacritic: Dia
         throw new RangeError(`syllableIndex out of bounds: ${syllableIndex}, for word ${word} with ${syllables.length} syllables.`);
     }
 
-    const syllable = syllables[syllableIndex];
+    let syllable = syllables[syllableIndex];
     const vowelPart = vowelPartOf(syllable);
     /** @todo currently, adds diacritic to second letter always, 
      * in the case of a diphthong. Logic should be added for a case where  
@@ -36,6 +37,7 @@ export function addDiacritic(word: string, syllableIndex: number, diacritic: Dia
 
 /**
  * Adds the given diacritic to the given vowel.
+ * If trying to add a circumflex to a vowel that already has a macron, the macron will be removed.
  * 
  * @param vowel the vowel to be appended the diacritic.
  * @param diacritic the diacritic to be added.
@@ -43,11 +45,15 @@ export function addDiacritic(word: string, syllableIndex: number, diacritic: Dia
  * @returns the accented vowel.
  */
 export function addDiacriticVowel(vowel: string, diacritic: Diacritic): string {
+    if (diacritic === "circumflex" && containsDiacritic(vowel, "macron")) {
+        //Remove the macron to avoid redundancy.
+        vowel = stripDiacritics(vowel, { blacklist: ["macron"] });
+    }
     return orderDiacritics(vowel + diacritics[diacritic]);
 }
 
 
-interface DiacriticTransformOptions {
+export interface DiacriticTransformOptions {
     originIndex: number;
     originDiacritic?: Diacritic,
     destinationIndex: number,
@@ -56,11 +62,12 @@ interface DiacriticTransformOptions {
 
 /**
  * Transforms a diacritic. Can be used to add, move or remove diacritics from a word.
+ * If trying to add a circumflex to a vowel that already has a macron, the macron will be removed.
  * 
  * @param word the word perform the operation on.
  * @param originIndex the index of the syllable whose diacritic is being transformed
  * @param originDiacritic the diacritic to be transformed; useful when a syllable has multiple
- * diacritics. If originDiacritic is not specified, all accents will be omitted.
+ * diacritics. If originDiacritic is not specified, all *accents* will be omitted.
  * @param destinationIndex the index of the syllable onto which the diacritic will be moved.
  * Defaults to the destinationIndex.
  * @param destinationDiacritic the diacritic to which originDiacritic is to be transformed.
@@ -73,18 +80,23 @@ export function transformDiacritic(word: string, { originIndex,
     destinationDiacritic
 }: DiacriticTransformOptions) {
     const syllables = splitIntoSyllables(word);
-    if (originIndex < 0 || originIndex > syllables.length) {
-        throw new RangeError(`originIndex argument exceeds syllable bounds; word ${word} has ${syllables.length} syllables, whereas originIndex is ${originIndex}`);
+    const maxValidIndex = syllables.length - 1;
+    if (originIndex < 0 || originIndex > maxValidIndex) {
+        throw new RangeError(`originIndex argument exceeds syllable bounds; word ${word} has ${syllables.length} syllables, so the maximum valid index is ${maxValidIndex}, whereas originIndex is ${originIndex}`);
     }
-    else if (destinationIndex < 0 || destinationIndex > syllables.length) {
-        throw new RangeError(`destinationIndex argument exceeds syllable bounds; word ${word} has ${syllables.length} syllables, whereas destinationIndex is ${originIndex}`);
+    else if (destinationIndex < 0 || destinationIndex > maxValidIndex) {
+        throw new RangeError(`destinationIndex argument exceeds syllable bounds; word ${word} has ${syllables.length} syllables, so the maximum valid index is ${maxValidIndex}, whereas destinationIndex is ${originIndex}`);
     }
     else {
         let originSyllable = syllables[originIndex];
 
         originSyllable = originDiacritic
-            ? stripDiacritics(word, { blacklist: [originDiacritic] })
+            ? stripDiacritics(originSyllable, { blacklist: [originDiacritic] })
             : stripAccents(originSyllable);
+
+        syllables[originIndex] = originSyllable;
+        word = syllables.join("");
+
 
         word = addDiacritic(word, destinationIndex, destinationDiacritic);
 

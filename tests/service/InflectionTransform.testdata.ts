@@ -1,4 +1,7 @@
-const testData = {
+const testData: {
+    augments: Record<string, string>,
+    temporalAugments: [string, string][];
+} = {
     augments: {
         "ἄγ": "ἤγ",
         "ἀείρ": "ἠείρ",
@@ -27,9 +30,6 @@ const testData = {
         ['υι', 'υι'], ['ου', 'ου'],
         ['ῗ', 'ῗ']
     ]
-} as {
-    augments: Record<string, string>,
-    temporalAugments: [string, string][];
 };
 
 export default testData;

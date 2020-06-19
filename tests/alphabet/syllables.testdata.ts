@@ -1,6 +1,7 @@
 import { SyllableType } from '#/linguistics/alphabet/syllables';
 
-const testData = {
+const testData: Record<string, { syllables: string[], syllableTypes: SyllableType[], vowelParts: string[]; }>
+    = {
     'φῦλα': {
         syllables: ['φῦ', 'λα'],
         syllableTypes: ['longByNature', 'short'],
@@ -196,6 +197,6 @@ const testData = {
         syllableTypes: ['short', 'short', 'short'],
         vowelParts: ['Ἀ', 'ΐ', 'ι']
     }
-} as Record<string, { syllables: string[], syllableTypes: SyllableType[], vowelParts: string[]; }>;
+};
 
 export default testData;

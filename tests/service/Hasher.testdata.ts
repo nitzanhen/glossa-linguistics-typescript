@@ -2,7 +2,8 @@ import { NounKey, NounFilterKey, FiniteKey, FiniteFilterKey, InfinitiveKey, Infi
 import { Case, PrincipalPart, Canister, Tense, Voice, Mood, Person, Number } from '#/linguistics/property';
 import HasherService from '#/service/hash';
 
-const testData = {
+const testData: Record<keyof typeof HasherService, readonly { input: Key, hash: string; }[]>
+    = {
     NounKey: [{
         input: new NounKey("base", Case.VOCATIVE, Number.SINGULAR),
         hash: '["base","vocative","singular"]'
@@ -75,6 +76,6 @@ const testData = {
         input: new ParticipleFilterKey({}),
         hash: '[null,null,null,null,null]'
     }]
-} as Record<keyof typeof HasherService, readonly { input: Key, hash: string; }[]>;
+};
 
 export default testData;

@@ -1,6 +1,10 @@
 import { isConsonant, isVowel } from '#/linguistics/alphabet/letters';
 
-const testData = {
+const testData: {
+    cases: [string, string][],
+    trimming: { input: string, trimmed: string, trimFunction?: (letter: string) => boolean; }[],
+    capitalization: [string, string][];
+} = {
     cases: [
         ["ᾳ", "ᾳ"], ["ᾳε", "ᾳε"],
         ["ᾱι", "ᾳ"], ["ᾱιε", "ᾳε"],
@@ -25,10 +29,6 @@ const testData = {
         ["GREEK", "Greek"],
         ["ῳ", "Ωι"]
     ]
-} as {
-    cases: [string, string][],
-    trimming: { input: string, trimmed: string, trimFunction?: (letter: string) => boolean; }[],
-    capitalization: [string, string][];
 };
 
 export default testData;

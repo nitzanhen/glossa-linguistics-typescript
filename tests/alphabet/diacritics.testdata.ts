@@ -1,6 +1,11 @@
 import { Diacritic } from "#/linguistics/alphabet/diacritics";
 
-const testData = {
+const testData: {
+    stripping: { input: string, output: string, blacklist?: Diacritic[], retain?: Diacritic[]; }[],
+    containing: { text: string, diacritic: Diacritic, result: boolean; }[],
+    ordering: { input: string, ordered: string; }[],
+    isAccented: { text: string, accented: boolean; }[];
+} = {
     stripping: [
         {
             input: `Πάτερ ἡμῶν ὁ ἐν τοῖς οὐρανοῖς· ἁγιασθήτω τὸ ὄνομά σου·
@@ -53,11 +58,6 @@ const testData = {
         { text: 'ψ', accented: false },
         { text: 'ῥ', accented: false }
     ]
-} as {
-    stripping: { input: string, output: string, blacklist?: Diacritic[], retain?: Diacritic[]; }[],
-    containing: { text: string, diacritic: Diacritic, result: boolean; }[],
-    ordering: { input: string, ordered: string; }[],
-    isAccented: { text: string, accented: boolean; }[];
 };
 
 export default testData;

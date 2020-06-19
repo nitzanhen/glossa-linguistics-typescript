@@ -2,7 +2,10 @@ import { Tree } from '#/structure';
 import { Declension, Gender, Number } from '#/linguistics/property';
 import { Mastery } from '#/mastery';
 
-const testData = {
+const testData: {
+    classNames: [object, string][],
+    permutations: { input: Iterable<any>[], output: Set<any>; }[];
+} = {
     classNames: [
         [new Tree(null), "Tree"],
         [Declension.FIRST_DECLENSION, "Declension"],
@@ -25,9 +28,6 @@ const testData = {
             ])
         }
     ]
-} as {
-    classNames: [object, string][],
-    permutations: { input: Iterable<any>[], output: Set<any>; }[];
 };
 
 export default testData;
