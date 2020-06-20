@@ -1,5 +1,6 @@
 import { IllegalEnumValueError } from '#/error';
 
+import Property from './Property';
 import Tense from './Tense';
 
 /**
@@ -7,7 +8,7 @@ import Tense from './Tense';
  *
  * @since 28/04/2020
  */
-class Voice {
+class Voice extends Property {
   //------ Instances ------//
 
   static readonly ACTIVE = new Voice('active', 0);
@@ -22,25 +23,13 @@ class Voice {
   }
 
   /**
-   * Converts a string to its corresponding Voice instance.
-   *
-   * @param string the string to convert to Voice
-   * @throws IllegalEnumValueError, if a string that has no corressonding Voice value was passed.
-   * @returns the matching Voice
+   * @see Property.fromString(string)
    */
   static fromString(string: string): Voice {
-    // Works assuming the name property of the enum is identical to the variable's name (case insensitive).
-    const value = (this as any)[string.toUpperCase()];
-    if (value) {
-      return value;
-    }
-
-    throw new IllegalEnumValueError(
-      `Illegal argument passed to fromString(): ${string} does not correspond to any instance of the enum ${
-      (this as any).prototype.constructor.name
-      }`
-    );
+    return super.fromString(string) as Voice;
   }
+
+  //------ Methods ------//
 
   /**
   * Returns the morphologically-sound voices of a tense.
@@ -65,26 +54,6 @@ class Voice {
     throw new IllegalEnumValueError(
       'Impossible code reached; Tenses exhausted but no Tense matched.'
     );
-  }
-
-  //------ Constructor------//
-
-  private constructor(
-    /** name of the instance */
-    public readonly name: string,
-
-    /** index of the instance */
-    public readonly index: number
-  ) { }
-
-  //------ Methods ------//
-
-  /**
-   * Called when converting the Voice value to a string using JSON.Stringify.
-   * Compare to the fromString() method, which deserializes the object.
-   */
-  public toJSON() {
-    return this.name;
   }
 }
 

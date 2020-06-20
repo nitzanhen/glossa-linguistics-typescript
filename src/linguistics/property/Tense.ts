@@ -1,5 +1,7 @@
 import { IllegalEnumValueError } from '#/error';
 
+import Property from './Property';
+
 import Time from './Time';
 import Aspect from './Aspect';
 
@@ -8,7 +10,7 @@ import Aspect from './Aspect';
  *
  * @since 28/04/2020
  */
-class Tense {
+class Tense extends Property {
   //------ Instances ------//
 
   static readonly PRESENT = new Tense(
@@ -40,7 +42,6 @@ class Tense {
   );
 
 
-
   //------ Static Methods ------//
 
   static get values() {
@@ -56,48 +57,24 @@ class Tense {
   }
 
   /**
-   * Converts a string to its corresponding Tense instance.
-   *
-   * @param string the string to convert to Tense
-   * @throws IllegalEnumValueError, if a string that has no corressonding Tense value was passed.
-   * @returns the matching Tense
+   * @see Property.fromString(string)
    */
   static fromString(string: string): Tense {
-    // Works assuming the name property of the enum is identical to the variable's name (case insensitive).
-    const value = (this as any)[string.toUpperCase()];
-    if (value) {
-      return value;
-    }
-
-    throw new IllegalEnumValueError(
-      `Illegal argument passed to fromString(): ${string} does not correspond to any instance of the enum ${
-      (this as any).prototype.constructor.name
-      }`
-    );
+    return super.fromString(string) as Tense;
   }
 
-  //------ Constructor------//
+  //------ Constructor ------//
 
-  private constructor(
-    /** name of the instance */
-    public readonly name: string,
-
-    /** index of the instance */
-    public readonly index: number,
-
-    public readonly time: Time,
-    public readonly aspect: Aspect
-  ) { }
+  protected constructor(
+    name: string,
+    index: number,
+    public time: Time,
+    public aspect: Aspect
+  ) {
+    super(name, index);
+  }
 
   //------ Methods ------//
-
-  /**
-   * Called when converting the Tense value to a string using JSON.Stringify.
-   * Compare to the fromString() method, which deserializes the object.
-   */
-  public toJSON() {
-    return this.name;
-  }
 
   /**
    * Checks if this tense has infinitives (morphologically).
