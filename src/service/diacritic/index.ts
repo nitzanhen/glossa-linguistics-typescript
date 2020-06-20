@@ -139,15 +139,17 @@ export function enforceGeneralAccentRules(word: string): string {
         }
     }
 
-    if (syllables.length > 1 && isUltimaShort) {
-        if (syllableType(word, penultIndex) === "longByNature") {
-            word = transformDiacritic(word, {
-                originIndex: penultIndex,
-                originDiacritic: "acute",
-                destinationIndex: penultIndex,
-                destinationDiacritic: "circumflex"
-            });
-        }
+    if (syllables.length > 1
+        && isUltimaShort
+        && syllableType(word, penultIndex) === "longByNature"
+        && containsDiacritic(syllables[penultIndex], "acute")
+    ) {
+        word = transformDiacritic(word, {
+            originIndex: penultIndex,
+            originDiacritic: "acute",
+            destinationIndex: penultIndex,
+            destinationDiacritic: "circumflex"
+        });
     }
 
     return word;

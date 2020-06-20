@@ -20,6 +20,26 @@ const diacritics = {
  */
 export type Diacritic = keyof typeof diacritics;
 
+/**
+ * Attempts to identify a diacritic's name by its symbol.
+ * If found a match in the diacritics array, will returns the
+ * diacritic's name (the key in the diacritics object).
+ * Otherwise, returns the string itself.
+ * 
+ * Useful mostly for debugging.
+ * 
+ * @param char the char to test.
+ * @returns The diacrtiic's name if a match was found, and char otherwise.
+ */
+export function identifyDiacritic(char: string): string {
+    for (const [name, symbol] of Object.entries(diacritics)) {
+        if (symbol === char) {
+            return name;
+        }
+    }
+    return char;
+}
+
 type stripDiacriticsOptions = Partial<{
     blacklist: Diacritic[],
     retain: Diacritic[];
@@ -57,10 +77,15 @@ export function stripDiacritics(text: string, {
  * Utility function to strip only the accents of a text; preserves other diacritics
  * 
  * @param text the text to strip from.
+ * @param stripBreve whether to strip breve marks as well.
  * @returns the stripped text.
  */
-export function stripAccents(text: string): string {
-    return stripDiacritics(text, { blacklist: ["acute", "circumflex", "grave"] });
+export function stripAccents(text: string, stripBreve: boolean = false): string {
+    const blacklist: Diacritic[] = ["acute", "circumflex", "grave"];
+    if (stripBreve) {
+        blacklist.push("breve");
+    }
+    return stripDiacritics(text, { blacklist });
 }
 
 /**

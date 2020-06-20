@@ -1,4 +1,4 @@
-import '#/global/String';
+
 import { augment } from '#/service/inflection/transform';
 import { temporalAugmentOf } from '#/service/inflection/transform/augment';
 

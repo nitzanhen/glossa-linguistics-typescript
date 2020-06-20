@@ -1,4 +1,4 @@
-import '#/global/String';
+
 import HasherService from '#/service/hash';
 import Hasher from '#/service/hash/Hasher';
 

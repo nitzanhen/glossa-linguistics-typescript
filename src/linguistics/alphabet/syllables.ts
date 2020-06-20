@@ -1,6 +1,8 @@
+import "#/global/String";
+
 import { InvalidLanguageError } from '#/error';
-import letters, { isConsonant, isVowel, Consonant, isStop, isLiquid, isNasal, isGreekString, isDiphthong, isDouble, Vowel, isLongMonophthong } from './letters';
-import { containsDiacritic, stripDiacritics } from './diacritics';
+import { isConsonant, isVowel, Consonant, isStop, isLiquid, isNasal, isGreekString, isDiphthong, isDouble, Vowel, isLongMonophthong } from './letters';
+import { containsDiacritic } from './diacritics';
 
 /**
  * Contains useful functions for working with and categorizing syllables.

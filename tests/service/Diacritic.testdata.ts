@@ -4,7 +4,8 @@ import { DiacriticTransformOptions } from '#/service/diacritic';
 const testData: {
     addDiacriticVowel: [string, Diacritic, string][],
     addDiacritic: [string, number, Diacritic, string][],
-    transformDiacritic: { word: string, options: DiacriticTransformOptions, result: string; }[];
+    transformDiacritic: { word: string, options: DiacriticTransformOptions, result: string; }[],
+    enforcingGeneralAccentingRules: [string, string][];
 } = {
     addDiacriticVowel: [
         ["ἀ", "acute", "ἄ"],
@@ -101,6 +102,23 @@ const testData: {
             },
             result: "ἁκρὸν"
         },
+    ],
+    enforcingGeneralAccentingRules: [
+        ["ᾱ̓́κρον", "ἆκρον"],
+        ["ἆκρον", "ἆκρον"],
+        ["οἴστρος", "οἶστρος"],
+        ["οἶστρος", "οἶστρος"],
+        ["ἥττον", "ἧττον"],
+        ["ἧττον", "ἧττον"],
+        ["Πόσειδων", "Ποσείδων"],
+        ["Ποσείδων", "Ποσείδων"],
+        ["Ἀφρόδῑτη", "Ἀφροδῑ́τη"],
+        ["Ἀφροδῑ́τη", "Ἀφροδῑ́τη"],
+        ["Θουκῡ́διδης", "Θουκῡδίδης"],
+        ["Θουκῡδίδης", "Θουκῡδίδης"],
+        ["Ἥφαιστοι", "Ἥφαιστοι"],
+        ["τήξαι", "τῆξαι"],
+        ["τῆξαι", "τῆξαι"]
     ]
 };
 

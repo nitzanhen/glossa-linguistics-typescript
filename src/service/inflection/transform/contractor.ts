@@ -1,6 +1,7 @@
-import { stripAccents, isAccented, Diacritic } from "#/linguistics/alphabet/diacritics";
+import { stripAccents, isAccented, Diacritic, stripDiacritics } from "#/linguistics/alphabet/diacritics";
 
 import { addDiacriticVowel } from "../../diacritic";
+import { vowelPartOf, splitIntoSyllables } from '../../../linguistics/alphabet/syllables';
 
 /**
  * Map of contraction combinations, used in contractVowels().
@@ -61,12 +62,12 @@ const possibleContractionSuffixes = Object.keys(contractions['α']);
  * - vowel2 is not ε, ει, η, ῃ, ο, οι, ου, ω, or an accented variant.
  */
 export function contractVowels(vowel1: string, vowel2: string): string {
-    if (!possibleContractionPrefixes.includes(stripAccents(vowel1))) {
+    if (!possibleContractionPrefixes.includes(stripAccents(vowel1, true))) {
         //Can't (and shouldn't) contract!
         /** @todo return vowel1 + vowel2 instead? */
         throw new RangeError(`Can't contract! vowel1 must be α, ε, ο, or an accented variant. Instead received: ${vowel1}`);
     }
-    else if (!possibleContractionSuffixes.includes(stripAccents(vowel2))) {
+    else if (!possibleContractionSuffixes.includes(stripAccents(vowel2, true))) {
         //Can't (and shouldn't) contract!
         /** @todo return vowel1 + vowel2 instead? */
         throw new RangeError(`Can't contract! vowel2 must be ε, ει, η, ῃ, ο, οι, ου, ω, or an accented variant. Instead received: ${vowel2}`);
@@ -78,7 +79,7 @@ export function contractVowels(vowel1: string, vowel2: string): string {
             ? 'acute'
             : null;
 
-    const contracted = contractions[stripAccents(vowel1)][stripAccents(vowel2)];
+    const contracted = contractions[stripAccents(vowel1, true)][stripAccents(vowel2, true)];
 
     return accent ? addDiacriticVowel(contracted, accent) : contracted;
 }
@@ -98,12 +99,15 @@ export function contract(base: string, suffix: string): string {
         return base;
     }
 
-    const contractionPrefix = base[length - 1];
+    const baseSyllables = splitIntoSyllables(base);
+
+    const contractionPrefix = vowelPartOf(baseSyllables[baseSyllables.length - 1]);
+
     const isSuffixDiphthong = suffix.length > 1
         //If the first two letters of the suffix are a possible contraction suffix, take them as contractions suffix.
-        //Otherwise, take only the first. 
+        //Otherwise, take only the first.  
         && possibleContractionSuffixes.includes(
-            stripAccents(suffix.slice(0, 2))
+            stripAccents(suffix.slice(0, 2), true)
         );
 
     const contractionSuffix = isSuffixDiphthong
@@ -112,7 +116,7 @@ export function contract(base: string, suffix: string): string {
 
     const contracted = contractVowels(contractionPrefix, contractionSuffix);
 
-    return base.slice(0, base.length - 1) + contracted + suffix.slice(isSuffixDiphthong ? 2 : 1);
+    return base.slice(0, base.length - contractionPrefix.length) + contracted + suffix.slice(isSuffixDiphthong ? 2 : 1);
 }
 
 /**

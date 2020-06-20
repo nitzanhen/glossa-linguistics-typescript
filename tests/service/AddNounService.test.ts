@@ -1,4 +1,4 @@
-import '#/global/String';
+
 import { Declension, Gender, Case } from '#/linguistics/property';
 import { DeclensionVariant } from '#/linguistics/variant';
 import AddWordServices from '#/service/add_word';

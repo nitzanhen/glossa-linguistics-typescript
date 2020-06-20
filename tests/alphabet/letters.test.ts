@@ -1,4 +1,4 @@
-import '#/global/String';
+
 import letters, { vowels, consonants, monophthongs, diphthongs, isMonophthong, isDiphthong, isVowel, isGreekLetter, isGreekString, nasals, isNasal, isConsonant, isLiquid, isLabial, isDental, isPalatal, isDouble } from '#/linguistics/alphabet/letters';
 
 import testData from './letters.testdata';

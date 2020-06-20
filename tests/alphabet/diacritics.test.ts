@@ -1,4 +1,4 @@
-import '#/global/String';
+
 import { stripDiacritics, containsDiacritic, orderDiacritics, isAccented } from '#/linguistics/alphabet/diacritics';
 
 import testData from './diacritics.testdata';
