@@ -4,48 +4,48 @@ import { Consonant, isLabial, isPalatal, isDental, isVowel } from "#/linguistics
  * Euphonizes consonants, according to the rules of mutation
  * of the mediopassive perfect.
  * 
- * @param consonant1 the first consonant.
+ * @param consonant the first consonant.
  * @param suffix the first consonants of the suffix; should be "μ", "σ", "σθ" or "τ".
  * @returns the euphonized vesion of the two (a one- or two-letter string)
  */
-export function euphonizeConsonants(consonant1: Consonant, suffix: string): string {
+export function euphonizeConsonants(consonant: Consonant, suffix: string): string {
     switch (suffix) {
         case "μ":
-            if (isLabial(consonant1))
+            if (isLabial(consonant))
                 return "μμ";
-            else if (isPalatal(consonant1))
+            else if (isPalatal(consonant))
                 return "γμ";
-            else if (isDental(consonant1) || consonant1 === "ζ" || consonant1 === "ν")
+            else if (isDental(consonant) || consonant === "ζ" || consonant === "ν")
                 return "σμ";
             else
-                return consonant1 + "μ";
+                return consonant + "μ";
         case "σ":
-            if (isLabial(consonant1))
+            if (isLabial(consonant))
                 return "ψ";
-            else if (isPalatal(consonant1))
+            else if (isPalatal(consonant))
                 return "ξ";
-            else if (isDental(consonant1) || consonant1 === "ζ")
+            else if (isDental(consonant) || consonant === "ζ")
                 return "σ";
             else
-                return consonant1 + "σ";
+                return consonant + "σ";
         case "σθ":
-            if (isLabial(consonant1))
+            if (isLabial(consonant))
                 return "φθ";
-            else if (isPalatal(consonant1))
+            else if (isPalatal(consonant))
                 return "χθ";
-            else if (isDental(consonant1) || consonant1 === "ζ")
+            else if (isDental(consonant) || consonant === "ζ")
                 return "σθ";
             else
-                return consonant1 + "θ";
+                return consonant + "θ";
         case "τ":
-            if (isLabial(consonant1))
+            if (isLabial(consonant))
                 return "πτ";
-            else if (isPalatal(consonant1))
+            else if (isPalatal(consonant))
                 return "κτ";
-            else if (isDental(consonant1) || consonant1 === "ζ")
+            else if (isDental(consonant) || consonant === "ζ")
                 return "στ";
             else
-                return consonant1 + "τ";
+                return consonant + "τ";
     }
 
     //Suffix is not "μ", "σ", "σθ" or "τ".
@@ -67,18 +67,18 @@ export function euphonizeConsonants(consonant1: Consonant, suffix: string): stri
  * @throws RangeError if eupohonization is needed and the suffix down not begin with "μ", "σ", "σθ" or "τ".
  */
 export function euphonize(base: string, suffix: string): string {
-    const lastLetter = base[base.length - 1]
-    if(isVowel(lastLetter)) {
+    const lastLetter = base[base.length - 1];
+    if (isVowel(lastLetter)) {
         return base + suffix;
     }
     else {
         //lastLetter is a consonant
-        const suffixConsonants = 
+        const suffixConsonants =
             suffix.slice(0, 2) === "σθ"
-            ? "σθ"
-            : suffix[0]
-        
-        const euphonized = euphonizeConsonants(lastLetter as Consonant, suffixConsonants)
+                ? "σθ"
+                : suffix[0];
+
+        const euphonized = euphonizeConsonants(lastLetter as Consonant, suffixConsonants);
 
         return base.slice(0, base.length - 1) + euphonized + suffix.slice(suffixConsonants.length);
     }
@@ -92,5 +92,5 @@ export function euphonize(base: string, suffix: string): string {
  * @returns a function which adds a given suffix (with euphonizations) to passed bases.
  */
 export function euphonizer(suffix: string) {
-    return (base: string) => euphonize(base, suffix)
+    return (base: string) => euphonize(base, suffix);
 }
