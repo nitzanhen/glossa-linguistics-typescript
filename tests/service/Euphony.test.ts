@@ -8,6 +8,10 @@ describe("euphony transform service", () => {
         testData.consonants.forEach(([consonant, suffix, result]) => {
             expect(euphonizeConsonants(consonant, suffix)).toBe(result);
         });
+
+        testData.consonantErrors.forEach(([consonant, suffix]) => {
+            expect(() => euphonizeConsonants(consonant, suffix)).toThrow(RangeError)
+        })
     });
 
     test("euphonize()", () => {
