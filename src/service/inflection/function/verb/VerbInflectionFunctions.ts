@@ -1,4 +1,5 @@
 import { suffixer } from '../../transform';
+import { multipleInflections } from '#/util/functionUtils';
 
 /**
  * Verb inflection suffix collection.
@@ -27,7 +28,7 @@ const VerbInflectionFunctions = {
       mediopassive: {
         singular: {
           first: suffixer('ομαι'),
-          second: [suffixer('ῃ'), suffixer('ει')],
+          second: multipleInflections(suffixer('ῃ'), suffixer('ει')),
           third: suffixer('ομαι'),
         },
         plural: {
@@ -154,7 +155,7 @@ const VerbInflectionFunctions = {
     middle: {
       singular: {
         first: suffixer('ομαι'),
-        second: [suffixer('ῃ'), suffixer('ει')],
+        second: multipleInflections(suffixer('ῃ'), suffixer('ει')),
         third: suffixer('εται'),
       },
       plural: {
@@ -166,7 +167,7 @@ const VerbInflectionFunctions = {
     passive: {
       singular: {
         first: suffixer('ομαι'),
-        second: [suffixer('ῃ'), suffixer('ει')],
+        second: multipleInflections(suffixer('ῃ'), suffixer('ει')),
         third: suffixer('εται'),
       },
       plural: {
