@@ -48,14 +48,12 @@ The structure of the tree can be described as such (persons and numbers are omit
 <br>┃ ┣ <span style="color:#cc6699">Active</span>
 <br>┃ ┣ <span style="color:#cc6699">Middle</span>
 <br>┃ ┣ <span style="color:#cc6699">Passive</span>
-<br>┃ ┃ ┣ <span style="color:#ffffff">First</span>
-<br>┃ ┗ ┗ <span style="color:#ffffff">Second</span>
+<span style="color:#ffffff">First / Second (formed the same, on different stems)</span>
 <br>┣ <span style="color:#cc6600">Optative</span>
 <br>┃ ┣ <span style="color:#cc6699">Active</span>
 <br>┃ ┣ <span style="color:#cc6699">Middle</span>
-<br>┃ ┣ <span style="color:#cc6699">Passive</span>
-<br>┃ ┃ ┣ <span style="color:#ffffff">First</span>
-<br>┗ ┗ ┗ <span style="color:#ffffff">Second</span>
+<br>┗ ┗ <span style="color:#cc6699">Passive</span>
+<span style="color:#ffffff">First / Second (formed the same, on different stems)</span>
 <br>
 <br><span style="color:#009999">Aorist</span> (Augment)
 <br>┣ <span style="color:#ffffff">First</span>
@@ -93,7 +91,7 @@ The structure of the tree can be described as such (persons and numbers are omit
 <br>┃ ┃ ┣ <span style="color:#cc6699">Middle</span>
 <br>┗ ┗ ┗ <span style="color:#cc6699">Passive</span>
 <br>
-<br><span style="color:#009999">Perfect</span>
+<br><span style="color:#009999">Perfect</span> (1st and 2nd perfect are equal in formation, only build on different roots)
 <br>┣ <span style="color:#cc6600">Indicative</span>
 <br>┃ ┣ <span style="color:#cc6699">Active</span>
 <br>┃ ┗ <span style="color:#cc6699">Mediopassive</span> (Euphonization)
