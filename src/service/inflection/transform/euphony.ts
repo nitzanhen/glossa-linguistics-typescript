@@ -1,5 +1,7 @@
 import { Consonant, isLabial, isPalatal, isDental, isVowel } from "#/linguistics/alphabet/letters";
 
+import { suffix as suffixFunction } from './suffixer';
+
 /**
  * Euphonizes consonants, according to the rules of mutation
  * of the mediopassive perfect.
@@ -89,8 +91,20 @@ export function euphonize(base: string, suffix: string): string {
  * rules.
  * 
  * @param suffix the suffix to be added to each base passed to the function returned from this.
+* @param fallback a function to call if euphonizing fails (throws an error). Defaults to the suffix function.
+ * 
  * @returns a function which adds a given suffix (with euphonizations) to passed bases.
  */
-export function euphonizer(suffix: string) {
-    return (base: string) => euphonize(base, suffix);
+export function euphonizer(suffix: string, fallback: (base: string, suffix: string) => string = suffixFunction) {
+    return function (base: string) {
+        try {
+            return euphonize(base, suffix);
+        }
+        catch (error) {
+            if (error instanceof RangeError) {
+                return fallback(base, suffix);
+            }
+            throw error;
+        }
+    };
 }

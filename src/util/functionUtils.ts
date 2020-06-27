@@ -1,6 +1,9 @@
+import { Falsey, Class } from './typeUtils';
 
 /**
  * Useful functions for dealing with functions.
+ * 
+ * @since 24/06/20
  */
 
 /**
@@ -17,9 +20,12 @@ export function multipleInflections(...options: ((root: string) => string)[]) {
 
 /**
  * Returns a function composition of the given functions.
- * @param functions the functions to compose.
+ * Supports null or undefined arguments (for conditional composing), which will be ignored.
+ * 
+ * @param functions the functions to compose. Null and undefined values will be filtered out.
  * @returns the composed function, which, when passed a value, returns funcN(funcN-1(...(func1(value))...))
  */
-export function compose<T>(...functions: ((value: T) => T)[]) {
-    return (value: T) => functions.reduce((value, func) => func(value), value)
+export function compose<T>(...functions: (((value: T) => T) | Falsey)[]) {
+    const truthyFunctions = functions.filter(Boolean) as ((value: T) => T)[];
+    return (value: T) => truthyFunctions.reduce((value, func) => func(value), value);
 }

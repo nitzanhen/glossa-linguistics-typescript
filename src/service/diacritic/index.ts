@@ -154,3 +154,28 @@ export function enforceGeneralAccentRules(word: string): string {
 
     return word;
 }
+
+/**
+ * Accents a Green word recessively, i.e. puts the accent as far back
+ * as possible.
+ * In practice, this function puts an acute on the antepenult (or the first syllable,
+ * if there's less than three syllables), and then calls enforceGeneralAccentRules() to
+ * make sure the accenting is valid (and fix it if it isn't).
+ * 
+ * @param word the word to accent recessively.
+ * @param clearAccents whether to clear existing accents before accenting. Defaults to true. 
+ * @returns the word, accenter recessively.
+ */
+export function accentRecessively(word: string, clearAccents: boolean = true): string {
+    if (clearAccents) {
+        word = stripAccents(word);
+    }
+
+    const syllables = splitIntoSyllables(word);
+    const syllableToAccentIndex = Math.max(syllables.length - 3, 0);
+
+    word = addDiacritic(word, syllableToAccentIndex, "acute");
+    word = enforceGeneralAccentRules(word);
+
+    return word;
+}

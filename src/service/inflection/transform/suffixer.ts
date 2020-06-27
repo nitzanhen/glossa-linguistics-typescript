@@ -1,3 +1,11 @@
+
+/**
+ * Convenience method to replace explicit lambda function
+ */
+export function suffix(base: string, suffix: string) {
+    return base + suffix;
+}
+
 /**
  * Helper for creating functions that add a given suffix to any string;
  * useful for inflection suffix trees (where inflections follow simple logic).

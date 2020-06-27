@@ -1,10 +1,13 @@
-import { suffixer } from '../../transform';
 import { multipleInflections } from '#/util/functionUtils';
 
+import { composeVerbInflectionFunction as inflectionFunction } from '../../transform';
+
+//Used as syntactic sugar to shorten { addAugment: true } to { addAugment } when calling inflectionFunction(),
+//Similar to React's boolean props. 
+const addAugment = true;
+
 /**
- * Verb inflection suffix collection.
- * Contains only the suffixes; prefixes (such as augments)
- * are not kept here.
+ * Verb inflection function collection.
  *
  * Order is tense -> mood -> voice -> number -> person.
  *
@@ -15,205 +18,287 @@ const VerbInflectionFunctions = {
     indicative: {
       active: {
         singular: {
-          first: suffixer('ω'),
-          second: suffixer('εις'),
-          third: suffixer('ει'),
+          first: inflectionFunction('ω', { endings: "contract" }),
+          second: inflectionFunction('εις', { endings: "contract" }),
+          third: inflectionFunction('ει', { endings: "contract" }),
         },
         plural: {
-          first: suffixer('ομεν'),
-          second: suffixer('ετε'),
-          third: suffixer('ουσι(ν)'),
+          first: inflectionFunction('ομεν', { endings: "contract" }),
+          second: inflectionFunction('ετε', { endings: "contract" }),
+          third: inflectionFunction('ουσι(ν)', { endings: "contract" }),
         },
       },
       mediopassive: {
         singular: {
-          first: suffixer('ομαι'),
-          second: multipleInflections(suffixer('ῃ'), suffixer('ει')),
-          third: suffixer('ομαι'),
+          first: inflectionFunction('ομαι', { endings: "contract" }),
+          second: multipleInflections(
+            inflectionFunction('ῃ', { endings: "contract" }),
+            inflectionFunction('ει', { endings: "contract" })
+          ),
+          third: inflectionFunction('ομαι', { endings: "contract" }),
         },
         plural: {
-          first: suffixer('ομεν'),
-          second: suffixer('ετε'),
-          third: suffixer('ον'),
+          first: inflectionFunction('ομεν', { endings: "contract" }),
+          second: inflectionFunction('ετε', { endings: "contract" }),
+          third: inflectionFunction('ον', { endings: "contract" }),
         },
       },
     },
     subjunctive: {
       active: {
         singular: {
-          first: suffixer('ω'),
-          second: suffixer('ῃς'),
-          third: suffixer('ῃ'),
+          first: inflectionFunction('ω', { endings: "contract" }),
+          second: inflectionFunction('ῃς', { endings: "contract" }),
+          third: inflectionFunction('ῃ', { endings: "contract" }),
         },
         plural: {
-          first: suffixer('ωμεν'),
-          second: suffixer('ητε'),
-          third: suffixer('ωσι(ν)'),
+          first: inflectionFunction('ωμεν', { endings: "contract" }),
+          second: inflectionFunction('ητε', { endings: "contract" }),
+          third: inflectionFunction('ωσι(ν)', { endings: "contract" }),
         },
       },
       mediopassive: {
         singular: {
-          first: suffixer('ωμαι'),
-          second: suffixer('ῃ'),
-          third: suffixer('ηται'),
+          first: inflectionFunction('ωμαι', { endings: "contract" }),
+          second: inflectionFunction('ῃ', { endings: "contract" }),
+          third: inflectionFunction('ηται', { endings: "contract" }),
         },
         plural: {
-          first: suffixer('ωμεθα'),
-          second: suffixer('ησθε'),
-          third: suffixer('ωνται'),
+          first: inflectionFunction('ωμεθα', { endings: "contract" }),
+          second: inflectionFunction('ησθε', { endings: "contract" }),
+          third: inflectionFunction('ωνται', { endings: "contract" }),
         },
       },
     },
     optative: {
       active: {
         singular: {
-          first: suffixer('οιμι'),
-          second: suffixer('οις'),
-          third: suffixer('οι'),
+          first: inflectionFunction('οιμι', { endings: "contract" }),
+          second: inflectionFunction('οις', { endings: "contract" }),
+          third: inflectionFunction('οι', { endings: "contract" }),
         },
         plural: {
-          first: suffixer('οιμεν'),
-          second: suffixer('οιτε'),
-          third: suffixer('οιεν'),
+          first: inflectionFunction('οιμεν', { endings: "contract" }),
+          second: inflectionFunction('οιτε', { endings: "contract" }),
+          third: inflectionFunction('οιεν', { endings: "contract" }),
         },
       },
       mediopassive: {
         singular: {
-          first: suffixer('οιμην'),
-          second: suffixer('οιο'),
-          third: suffixer('οιτο'),
+          first: inflectionFunction('οιμην', { endings: "contract" }),
+          second: inflectionFunction('οιο', { endings: "contract" }),
+          third: inflectionFunction('οιτο', { endings: "contract" }),
         },
         plural: {
-          first: suffixer('οιμεθα'),
-          second: suffixer('οισθε'),
-          third: suffixer('οιντο'),
+          first: inflectionFunction('οιμεθα', { endings: "contract" }),
+          second: inflectionFunction('οισθε', { endings: "contract" }),
+          third: inflectionFunction('οιντο', { endings: "contract" }),
         },
       },
     },
     imperative: {
       active: {
         singular: {
-          second: suffixer('ε'),
-          third: suffixer('ετω'),
+          second: inflectionFunction('ε', { endings: "contract" }),
+          third: inflectionFunction('ετω', { endings: "contract" }),
         },
         plural: {
-          second: suffixer('ετε'),
-          third: suffixer('οντων'),
+          second: inflectionFunction('ετε', { endings: "contract" }),
+          third: inflectionFunction('οντων', { endings: "contract" }),
         },
       },
       mediopassive: {
         singular: {
-          second: suffixer('ου'),
-          third: suffixer('εσθω'),
+          second: inflectionFunction('ου', { endings: "contract" }),
+          third: inflectionFunction('εσθω', { endings: "contract" }),
         },
         plural: {
-          second: suffixer('εσθε'),
-          third: suffixer('εσθων'),
+          second: inflectionFunction('εσθε', { endings: "contract" }),
+          third: inflectionFunction('εσθων', { endings: "contract" }),
         },
       },
     },
   },
   imperfect: {
-    active: {
-      singular: {
-        first: suffixer('ον'),
-        second: suffixer('ες'),
-        third: suffixer('ε(ν)'),
+    indicative: {
+      active: {
+        singular: {
+          first: inflectionFunction('ον', { endings: "contract", addAugment }),
+          second: inflectionFunction('ες', { endings: "contract", addAugment }),
+          third: inflectionFunction('ε(ν)', { endings: "contract", addAugment }),
+        },
+        plural: {
+          first: inflectionFunction('ομεν', { endings: "contract", addAugment }),
+          second: inflectionFunction('ετε', { endings: "contract", addAugment }),
+          third: inflectionFunction('ον', { endings: "contract", addAugment }),
+        },
       },
-      plural: {
-        first: suffixer('ομεν'),
-        second: suffixer('ετε'),
-        third: suffixer('ον'),
+      mediopassive: {
+        singular: {
+          first: inflectionFunction('ομην', { endings: "contract", addAugment }),
+          second: inflectionFunction('ου', { endings: "contract", addAugment }),
+          third: inflectionFunction('ετο', { endings: "contract", addAugment }),
+        },
+        plural: {
+          first: inflectionFunction('ομεθα', { endings: "contract", addAugment }),
+          second: inflectionFunction('εσθε', { endings: "contract", addAugment }),
+          third: inflectionFunction('οντο', { endings: "contract", addAugment }),
+        },
       },
-    },
-    mediopassive: {
-      singular: {
-        first: suffixer('ομην'),
-        second: suffixer('ου'),
-        third: suffixer('ετο'),
-      },
-      plural: {
-        first: suffixer('ομεθα'),
-        second: suffixer('εσθε'),
-        third: suffixer('οντο'),
-      },
-    },
+    }
   },
   future: {
-    active: {
-      singular: {
-        first: suffixer('ω'),
-        second: suffixer('εις'),
-        third: suffixer('ει'),
+    indicative: {
+      active: {
+        singular: {
+          first: inflectionFunction('ω'),
+          second: inflectionFunction('εις'),
+          third: inflectionFunction('ει'),
+        },
+        plural: {
+          first: inflectionFunction('ομεν'),
+          second: inflectionFunction('ετε'),
+          third: inflectionFunction('ουσι(ν)'),
+        },
       },
-      plural: {
-        first: suffixer('ομεν'),
-        second: suffixer('ετε'),
-        third: suffixer('ουσι(ν)'),
+      middle: {
+        singular: {
+          first: inflectionFunction('ομαι'),
+          second: multipleInflections(
+            inflectionFunction('ῃ'),
+            inflectionFunction('ει')
+          ),
+          third: inflectionFunction('εται'),
+        },
+        plural: {
+          first: inflectionFunction('ομεθα'),
+          second: inflectionFunction('εσθε'),
+          third: inflectionFunction('ονται'),
+        },
+      },
+      passive: {
+        singular: {
+          first: inflectionFunction('ομαι'),
+          second: multipleInflections(
+            inflectionFunction('ῃ'),
+            inflectionFunction('ει')
+          ),
+          third: inflectionFunction('εται'),
+        },
+        plural: {
+          first: inflectionFunction('ομεθα'),
+          second: inflectionFunction('εσθε'),
+          third: inflectionFunction('ονται'),
+        },
       },
     },
-    middle: {
-      singular: {
-        first: suffixer('ομαι'),
-        second: multipleInflections(suffixer('ῃ'), suffixer('ει')),
-        third: suffixer('εται'),
+    optative: {
+      active: {
+        singular: {
+          first: inflectionFunction('οιμι'),
+          second: inflectionFunction('οις'),
+          third: inflectionFunction('οι'),
+        },
+        plural: {
+          first: inflectionFunction('οιμεν'),
+          second: inflectionFunction('οιτε'),
+          third: inflectionFunction('οιεν'),
+        },
       },
-      plural: {
-        first: suffixer('ομεθα'),
-        second: suffixer('εσθε'),
-        third: suffixer('ονται'),
+      middle: {
+        singular: {
+          first: inflectionFunction('οιμην'),
+          second: inflectionFunction('οιο'),
+          third: inflectionFunction('οιτο'),
+        },
+        plural: {
+          first: inflectionFunction('οιμεθα'),
+          second: inflectionFunction('οισθε'),
+          third: inflectionFunction('οιντο'),
+        },
       },
-    },
-    passive: {
-      singular: {
-        first: suffixer('ομαι'),
-        second: multipleInflections(suffixer('ῃ'), suffixer('ει')),
-        third: suffixer('εται'),
-      },
-      plural: {
-        first: suffixer('ομεθα'),
-        second: suffixer('εσθε'),
-        third: suffixer('ονται'),
+      passive: {
+        singular: {
+          first: inflectionFunction('οιμην'),
+          second: inflectionFunction('οιο'),
+          third: inflectionFunction('οιτο'),
+        },
+        plural: {
+          first: inflectionFunction('οιμεθα'),
+          second: inflectionFunction('οισθε'),
+          third: inflectionFunction('οιντο'),
+        },
       },
     },
   },
   aorist: {
-    active: {
-      singular: {
-        first: suffixer('α'),
-        second: suffixer('ας'),
-        third: suffixer('ε'),
+    indicative: {
+      active: {
+        singular: {
+          first: inflectionFunction('α', { addAugment }),
+          second: inflectionFunction('ας', { addAugment }),
+          third: inflectionFunction('ε', { addAugment }),
+        },
+        plural: {
+          first: inflectionFunction('αμεν', { addAugment }),
+          second: inflectionFunction('ατε', { addAugment }),
+          third: inflectionFunction('αν', { addAugment }),
+        },
       },
-      plural: {
-        first: suffixer('αμεν'),
-        second: suffixer('ατε'),
-        third: suffixer('αν'),
+      middle: {
+        singular: {
+          first: inflectionFunction('αμην', { addAugment }),
+          second: inflectionFunction('ω', { addAugment }),
+          third: inflectionFunction('ατο', { addAugment }),
+        },
+        plural: {
+          first: inflectionFunction('αμεθα', { addAugment }),
+          second: inflectionFunction('ασθε', { addAugment }),
+          third: inflectionFunction('αντο', { addAugment }),
+        },
+      },
+      passive: {
+        singular: {
+          first: inflectionFunction('ην', { addAugment }),
+          second: inflectionFunction('ης', { addAugment }),
+          third: inflectionFunction('η', { addAugment }),
+        },
+        plural: {
+          first: inflectionFunction('ημεν', { addAugment }),
+          second: inflectionFunction('ητε', { addAugment }),
+          third: inflectionFunction('ησαν', { addAugment }),
+        },
       },
     },
-    middle: {
-      singular: {
-        first: suffixer('αμην'),
-        second: suffixer('ω'),
-        third: suffixer('ατο'),
+    subjunctive: {
+      active: {
+        singular: {
+          first: inflectionFunction('ω'),
+          second: inflectionFunction('ῃς'),
+          third: inflectionFunction('ῃ'),
+        },
+        plural: {
+          first: inflectionFunction('ωμεν'),
+          second: inflectionFunction('ητε'),
+          third: inflectionFunction('ωσι(ν)'),
+        },
       },
-      plural: {
-        first: suffixer('αμεθα'),
-        second: suffixer('ασθε'),
-        third: suffixer('αντο'),
+      middle: {
+        singular: {
+          first: inflectionFunction('ωμαι'),
+          second: inflectionFunction('ῃ'),
+          third: inflectionFunction('ηται'),
+        },
+        plural: {
+          first: inflectionFunction('ωμεθα'),
+          second: inflectionFunction('ησθε'),
+          third: inflectionFunction('ωνται'),
+        },
       },
+      /** @todo passive? */
     },
-    passive: {
-      singular: {
-        first: suffixer('ην'),
-        second: suffixer('ης'),
-        third: suffixer('η'),
-      },
-      plural: {
-        first: suffixer('ημεν'),
-        second: suffixer('ητε'),
-        third: suffixer('ησαν'),
-      },
-    },
+    optative: {},
+    imperative: {}
   },
   perfect: {},
   pluperfect: {},

@@ -1,7 +1,8 @@
-import { stripAccents, isAccented, Diacritic, stripDiacritics } from "#/linguistics/alphabet/diacritics";
+import { stripAccents, isAccented, Diacritic } from "#/linguistics/alphabet/diacritics";
+import { vowelPartOf, splitIntoSyllables } from '#/linguistics/alphabet/syllables';
 
 import { addDiacriticVowel } from "../../diacritic";
-import { vowelPartOf, splitIntoSyllables } from '../../../linguistics/alphabet/syllables';
+import { suffix as suffixFunction } from './suffixer';
 
 /**
  * Map of contraction combinations, used in contractVowels().
@@ -126,10 +127,22 @@ export function contract(base: string, suffix: string): string {
  * @see VerbInflectionService
  * 
  * @param suffix the suffix that the returned function should append.
+ * @param fallback a function to call if contracting fails (throws an error). Defaults to the suffix function.
+ * 
  * @returns a *function* which receives a string and returns it appended by the given suffix.
  */
-function contractor(suffix: string) {
-    return (base: string) => contract(base, suffix);
+function contractor(suffix: string, fallback: (base: string, suffix: string) => string = suffixFunction) {
+    return function (base: string): string {
+        try {
+            return contract(base, suffix);
+        }
+        catch (error) {
+            if (error instanceof RangeError) {
+                return fallback(base, suffix);
+            }
+            throw error;
+        }
+    };
 }
 
 export default contractor;
