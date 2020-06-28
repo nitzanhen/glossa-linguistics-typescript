@@ -13,13 +13,13 @@ import { Falsey } from './typeUtils';
  * and creates (returns) a function where that t is the parameter, passed to each function, and which returns
  * the collection of the returned values from all functions.
  * 
- * @example parameterized(f1, f2): t |---> [f1(t), f2(t)].
- * @example parameterized(f1, ..., fn): t |---> [f1(t), ..., fn(t)].
- * 
- * Note that due to Typescript limitations, the returned value is a list of values of type T, not a tuple.
+ * @example
+ * parameterized(f1, f2): t |---> [f1(t), f2(t)].
+ * parameterized(f1, ..., fn): t |---> [f1(t), ..., fn(t)].
  * 
  * @param functions the functions to parameterize.
  * @returns the parameterization of the functions.
+ * Note that due to Typescript limitations, the returned value is a list of values of type T, not a tuple.
  * 
  * @since 29/06/20
  */
