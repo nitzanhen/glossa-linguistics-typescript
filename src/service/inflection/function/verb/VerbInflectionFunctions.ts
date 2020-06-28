@@ -1,4 +1,4 @@
-import { multipleInflections } from '#/util/functionUtils';
+import { parameterized as multipleInflections } from '#/util/functionUtils';
 
 import { composeVerbInflectionFunction as inflectionFunction } from '../../transform';
 
@@ -232,77 +232,196 @@ const VerbInflectionFunctions = {
     },
   },
   aorist: {
+    first: {
+      indicative: {
+        active: {
+          singular: {
+            first: inflectionFunction('α', { addAugment }),
+            second: inflectionFunction('ας', { addAugment }),
+            third: inflectionFunction('ε', { addAugment }),
+          },
+          plural: {
+            first: inflectionFunction('αμεν', { addAugment }),
+            second: inflectionFunction('ατε', { addAugment }),
+            third: inflectionFunction('αν', { addAugment }),
+          },
+        },
+        middle: {
+          singular: {
+            first: inflectionFunction('αμην', { addAugment }),
+            second: inflectionFunction('ω', { addAugment }),
+            third: inflectionFunction('ατο', { addAugment }),
+          },
+          plural: {
+            first: inflectionFunction('αμεθα', { addAugment }),
+            second: inflectionFunction('ασθε', { addAugment }),
+            third: inflectionFunction('αντο', { addAugment }),
+          },
+        },
+        passive: {
+          singular: {
+            first: inflectionFunction('ην', { addAugment }),
+            second: inflectionFunction('ης', { addAugment }),
+            third: inflectionFunction('η', { addAugment }),
+          },
+          plural: {
+            first: inflectionFunction('ημεν', { addAugment }),
+            second: inflectionFunction('ητε', { addAugment }),
+            third: inflectionFunction('ησαν', { addAugment }),
+          },
+        },
+      },
+      subjunctive: {
+        active: {
+          singular: {
+            first: inflectionFunction('ω'),
+            second: inflectionFunction('ῃς'),
+            third: inflectionFunction('ῃ'),
+          },
+          plural: {
+            first: inflectionFunction('ωμεν'),
+            second: inflectionFunction('ητε'),
+            third: inflectionFunction('ωσι(ν)'),
+          },
+        },
+        middle: {
+          singular: {
+            first: inflectionFunction('ωμαι'),
+            second: inflectionFunction('ῃ'),
+            third: inflectionFunction('ηται'),
+          },
+          plural: {
+            first: inflectionFunction('ωμεθα'),
+            second: inflectionFunction('ησθε'),
+            third: inflectionFunction('ωνται'),
+          },
+        },
+        passive: {
+
+        }
+      },
+      optative: {
+        active: {
+
+        },
+        middle: {
+
+        },
+        passive: {
+          singular: {
+            first: inflectionFunction('ην', { addAugment }),
+            second: inflectionFunction('ης', { addAugment }),
+            third: inflectionFunction('η', { addAugment }),
+          },
+          plural: {
+            first: inflectionFunction('ημεν', { addAugment }),
+            second: inflectionFunction('ητε', { addAugment }),
+            third: inflectionFunction('ησαν', { addAugment }),
+          },
+        },
+      },
+      imperative: {
+        active: {
+
+        },
+        middle: {
+
+        },
+        passive: {
+
+        }
+      }
+    },
+    second: {
+      indicative: {
+        active: {
+        },
+        middle: {
+        },
+        passive: {
+        },
+        subjunctive: {
+          active: {
+          },
+          middle: {
+          },
+          passive: {
+
+          }
+        },
+        optative: {
+          active: {
+
+          },
+          middle: {
+
+          },
+          passive: {
+
+          }
+        },
+        imperative: {
+          active: {
+
+          },
+          middle: {
+
+          },
+          passive: {
+
+          }
+        }
+      },
+    },
+  },
+  perfect: {
     indicative: {
       active: {
-        singular: {
-          first: inflectionFunction('α', { addAugment }),
-          second: inflectionFunction('ας', { addAugment }),
-          third: inflectionFunction('ε', { addAugment }),
-        },
-        plural: {
-          first: inflectionFunction('αμεν', { addAugment }),
-          second: inflectionFunction('ατε', { addAugment }),
-          third: inflectionFunction('αν', { addAugment }),
-        },
       },
-      middle: {
-        singular: {
-          first: inflectionFunction('αμην', { addAugment }),
-          second: inflectionFunction('ω', { addAugment }),
-          third: inflectionFunction('ατο', { addAugment }),
-        },
-        plural: {
-          first: inflectionFunction('αμεθα', { addAugment }),
-          second: inflectionFunction('ασθε', { addAugment }),
-          third: inflectionFunction('αντο', { addAugment }),
-        },
-      },
-      passive: {
-        singular: {
-          first: inflectionFunction('ην', { addAugment }),
-          second: inflectionFunction('ης', { addAugment }),
-          third: inflectionFunction('η', { addAugment }),
-        },
-        plural: {
-          first: inflectionFunction('ημεν', { addAugment }),
-          second: inflectionFunction('ητε', { addAugment }),
-          third: inflectionFunction('ησαν', { addAugment }),
-        },
+      mediopassive: {
       },
     },
     subjunctive: {
       active: {
-        singular: {
-          first: inflectionFunction('ω'),
-          second: inflectionFunction('ῃς'),
-          third: inflectionFunction('ῃ'),
-        },
-        plural: {
-          first: inflectionFunction('ωμεν'),
-          second: inflectionFunction('ητε'),
-          third: inflectionFunction('ωσι(ν)'),
-        },
       },
-      middle: {
-        singular: {
-          first: inflectionFunction('ωμαι'),
-          second: inflectionFunction('ῃ'),
-          third: inflectionFunction('ηται'),
-        },
-        plural: {
-          first: inflectionFunction('ωμεθα'),
-          second: inflectionFunction('ησθε'),
-          third: inflectionFunction('ωνται'),
-        },
+      mediopassive: {
       },
-      /** @todo passive? */
     },
-    optative: {},
-    imperative: {}
+    optative: {
+      active: {
+      },
+      mediopassive: {
+      },
+    },
+    imperative: {
+      active: {
+      },
+      mediopassive: {
+      },
+    }
   },
-  perfect: {},
-  pluperfect: {},
-  future_perfect: {},
+  pluperfect: {
+    indicative: {
+      active: {
+      },
+      mediopassive: {
+      },
+    },
+  },
+  future_perfect: {
+    indicative: {
+      active: {
+      },
+      mediopassive: {
+      },
+    },
+    optative: {
+      active: {
+      },
+      mediopassive: {
+      },
+    },
+  },
 };
 
 export default VerbInflectionFunctions;

@@ -1,4 +1,4 @@
-import { Falsey, Class } from './typeUtils';
+import { Falsey } from './typeUtils';
 
 /**
  * Useful functions for dealing with functions.
@@ -7,14 +7,24 @@ import { Falsey, Class } from './typeUtils';
  */
 
 /**
- * Utility function for inflections which have multiple options.
+ * forms a parameterization of "scalar" functions from a value of generic type T to T.
  * 
- * @param options the option functions, each of which receives a string and returns an inflection.
- * @returns a function which, when called, returns an array with all of the returned values from
- * the option functions.
+ * In simple terms, this function takes a number of functions that receive an argument t of type T,
+ * and creates (returns) a function where that t is the parameter, passed to each function, and which returns
+ * the collection of the returned values from all functions.
+ * 
+ * @example parameterized(f1, f2): t |---> [f1(t), f2(t)].
+ * @example parameterized(f1, ..., fn): t |---> [f1(t), ..., fn(t)].
+ * 
+ * Note that due to Typescript limitations, the returned value is a list of values of type T, not a tuple.
+ * 
+ * @param functions the functions to parameterize.
+ * @returns the parameterization of the functions.
+ * 
+ * @since 29/06/20
  */
-export function multipleInflections(...options: ((root: string) => string)[]) {
-    return (root: string) => options.map(optionFunction => optionFunction(root));
+export function parameterized<T>(...functions: ((value: T) => T)[]) {
+    return (value: T) => functions.map(f => f(value));
 }
 
 
