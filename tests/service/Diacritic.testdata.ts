@@ -6,6 +6,7 @@ const testData: {
     addDiacritic: [string, number, Diacritic, string][],
     transformDiacritic: { word: string, options: DiacriticTransformOptions, result: string; }[],
     enforcingGeneralAccentingRules: [string, string][];
+    accentingRecessively: [string, string, boolean, boolean?][];
 } = {
     addDiacriticVowel: [
         ["ἀ", "acute", "ἄ"],
@@ -119,6 +120,21 @@ const testData: {
         ["Ἥφαιστοι", "Ἥφαιστοι"],
         ["τήξαι", "τῆξαι"],
         ["τῆξαι", "τῆξαι"]
+    ],
+    accentingRecessively: [
+        ["οἰστρος", "οἶστρος", false],
+        ["οἰστρος", "οἶστρος", true],
+        ['Ἀφροδιτη', 'Ἀφροδίτη', false],
+        ['Ἀφροδιτη', 'Ἀφροδίτη', true],
+        ['Ἀφροδίτη', 'Ἀφροδίτη', true],
+        ['Ἀφροδίτη', 'Ἀφροδίτη', false, true],
+        ["τήξαι", "τῆξαι", true],
+        ["τῆξαι", "τῆξαι", true],
+        ["τῆξαι", "τῆξαι", false, true],
+        ["Θουκῡ́διδης", "Θουκῡδίδης", false],
+        ["Θουκῡ́διδης", "Θουκῡδίδης", true],
+        ["Ποσειδων", "Ποσείδων", false],
+        ["Ποσειδων", "Ποσείδων", true],
     ]
 };
 

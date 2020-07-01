@@ -1,5 +1,5 @@
 
-import { addDiacriticVowel, addDiacritic, transformDiacritic, enforceGeneralAccentRules } from '#/service/diacritic';
+import { addDiacriticVowel, addDiacritic, transformDiacritic, enforceGeneralAccentRules, accentRecessively } from '#/service/diacritic';
 
 import testData from './Diacritic.testdata';
 
@@ -25,6 +25,18 @@ describe("Diacritic service", () => {
     test("Enforcing general accenting rules", () => {
         testData.enforcingGeneralAccentingRules.forEach(([input, output]) => {
             expect(enforceGeneralAccentRules(input)).toBe(output);
+        });
+    });
+
+    test("Accenting Recessively", () => {
+        testData.accentingRecessively.forEach(([input, output, stripAccents, negate]) => {
+            if (negate) {
+                console.log(input);
+                expect(accentRecessively(input, stripAccents)).not.toBe(output);
+            }
+            else {
+                expect(accentRecessively(input, stripAccents)).toBe(output);
+            }
         });
     });
 

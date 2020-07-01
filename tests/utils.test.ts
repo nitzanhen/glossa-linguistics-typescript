@@ -3,6 +3,7 @@ import { getClassName } from '#/util/typeUtils';
 import { permutationsOf } from '#/util/collectionUtils';
 
 import testData from './utils.testdata';
+import { compose, parameterized } from '#/util/functionUtils';
 
 describe("Utils", () => {
     test("typeUtils", () => {
@@ -25,5 +26,15 @@ describe("Utils", () => {
         });
     });
 
+    test("Function utils", () => {
+        //compose()
+        testData.composing.forEach(([functions, initial, result]) => {
+            expect(compose(...functions)(initial)).toBe(result);
+        });
 
+        //patameterized
+        testData.parameterizing.forEach(([functionsVector, value, resultVector]) => {
+            expect(parameterized(...functionsVector)(value)).toEqual(resultVector);
+        });
+    });
 });

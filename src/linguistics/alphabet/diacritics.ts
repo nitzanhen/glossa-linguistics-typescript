@@ -61,7 +61,7 @@ export function stripDiacritics(text: string, {
     const concattedDiacritics = blacklist
         .filter(key => !retain.includes(key))
         .map(key => diacritics[key])
-        .reduce((acc, value) => acc + value, '');
+        .join("");
 
     //Build regex that matches any diacritic
     const regex = new RegExp(`[${concattedDiacritics}]`, "g");

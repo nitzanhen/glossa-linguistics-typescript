@@ -6,7 +6,7 @@ import testData from './diacritics.testdata';
 describe("diacritics.ts", () => {
     test("Stripping diacritics", () => {
         testData.stripping.forEach(({ input, output, blacklist, retain }) =>
-            expect(stripDiacritics(input, { blacklist, retain })).toMatch(output));
+            expect(stripDiacritics(input, { blacklist, retain })).toBe(output));
     });
 
     test("containsDiacritic()", () => {

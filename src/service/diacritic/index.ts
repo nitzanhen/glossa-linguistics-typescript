@@ -164,7 +164,7 @@ export function enforceGeneralAccentRules(word: string): string {
  * 
  * @param word the word to accent recessively.
  * @param clearAccents whether to clear existing accents before accenting. Defaults to true. 
- * @returns the word, accenter recessively.
+ * @returns the word, accented recessively.
  */
 export function accentRecessively(word: string, clearAccents: boolean = true): string {
     if (clearAccents) {
