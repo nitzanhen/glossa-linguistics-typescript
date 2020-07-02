@@ -47,6 +47,7 @@ const possibleContractionSuffixes = Object.keys(contractions['α']);
 
 /**
  * Contracts the two vowels, according to the rules of vowel contraction.
+ * 
  * This action also transforms the accent accordingly:
  * if vowel1 is accented, its accent will be transformed into a circumflex on the resulting vowel.
  * If vowel2 is accented, its accent will be carried on, and appear as an acute on the resulting vowel.

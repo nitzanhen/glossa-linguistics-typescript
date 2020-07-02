@@ -308,16 +308,7 @@ const VerbInflectionFunctions = {
 
         },
         passive: {
-          singular: {
-            first: inflectionFunction('ην', { addAugment }),
-            second: inflectionFunction('ης', { addAugment }),
-            third: inflectionFunction('η', { addAugment }),
-          },
-          plural: {
-            first: inflectionFunction('ημεν', { addAugment }),
-            second: inflectionFunction('ητε', { addAugment }),
-            third: inflectionFunction('ησαν', { addAugment }),
-          },
+
         },
       },
       imperative: {
