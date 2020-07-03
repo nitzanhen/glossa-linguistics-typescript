@@ -16,6 +16,10 @@ It is worth noting that currently, this module only deals with inflecting ω-cla
 All verb inflection functions are a product of the utility function,
 composeVerbInflectionFunction(), declared at the inflection service transform index file.
 
+For inflection functions of forms that have multiple possible inflections, the parameterized() function
+can be used; in that case, the order of the generated inflections should be from the most common to the least
+common, if the inflections differ in that regard.
+
 ### Inflection function tree structure
 
 The inflection function tree itself is structured, for the most part, in the following order:

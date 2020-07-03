@@ -1,4 +1,5 @@
 import { compose } from '#/util/functionUtils';
+import { stripAccents } from '#/linguistics/alphabet/diacritics';
 
 import { accentRecessively } from '../../diacritic';
 

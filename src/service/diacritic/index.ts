@@ -107,15 +107,18 @@ export function transformDiacritic(word: string, { originIndex,
 /**
  * Enforces the two general rules of accenting Greek word:
  * 1. The acute can stay on the antepenult only if the ultima is short,
- * or ends with -αι or -οι. Otherwise, it moves to the penult.
- * 2. If the penult is naturally long and the ultima is short or
- * ends with -αι or -οι, an accent on the penult will be transformed into 
- * a circumflex; otherwise, it will be an acute.
+ * Otherwise, it moves to the penult.
+ * 2. If the penult is naturally long and the ultima is short, 
+ * an accent on the penult will be transformed into a circumflex; 
+ * otherwise, it will be an acute.
+ * Since an ultima ending with -αι or -οι counts as short everywhere except for
+ * Greek verbs in the optative, the default behaviour of this function is to treat
+ * such ultimas as short, but this can be reconfigured through the shortUltimateAiOi parameter.
  * 
  * @param word the word to check
  * @returns the word with accenting corrected, if needed.
  */
-export function enforceGeneralAccentRules(word: string): string {
+export function enforceGeneralAccentRules(word: string, shortUltimateAiOi: boolean = true): string {
     const syllables = splitIntoSyllables(word);
     const ultima = syllables[syllables.length - 1];
 
@@ -123,8 +126,8 @@ export function enforceGeneralAccentRules(word: string): string {
     const penultIndex = syllables.length - 2;
 
     const isUltimaShort = syllableType(word, syllables.length - 1) === 'short'
-        || stripAccents(ultima).endsWith("αι")
-        || stripAccents(ultima).endsWith("οι");
+        || (shortUltimateAiOi && stripAccents(ultima).endsWith("αι"))
+        || (shortUltimateAiOi && stripAccents(ultima).endsWith("οι"));
 
     if (syllables.length > 2 && !isUltimaShort) {
         const antepenult = syllables[antepenultIndex];
