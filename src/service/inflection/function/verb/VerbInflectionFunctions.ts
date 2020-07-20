@@ -152,29 +152,29 @@ const VerbInflectionFunctions = {
     indicative: {
       active: {
         singular: {
-          first: inflectionFunction('ω'),
-          second: inflectionFunction('εις'),
-          third: inflectionFunction('ει'),
+          first: inflectionFunction('ω', { endings: "contract" }),
+          second: inflectionFunction('εις', { endings: "contract" }),
+          third: inflectionFunction('ει', { endings: "contract" }),
         },
         plural: {
-          first: inflectionFunction('ομεν'),
-          second: inflectionFunction('ετε'),
-          third: inflectionFunction('ουσι(ν)'),
+          first: inflectionFunction('ομεν', { endings: "contract" }),
+          second: inflectionFunction('ετε', { endings: "contract" }),
+          third: inflectionFunction('ουσι(ν)', { endings: "contract" }),
         },
       },
       middle: {
         singular: {
-          first: inflectionFunction('ομαι'),
+          first: inflectionFunction('ομαι', { endings: "contract" }),
           second: multipleInflections(
-            inflectionFunction('ῃ'),
-            inflectionFunction('ει')
+            inflectionFunction('ῃ', { endings: "contract" }),
+            inflectionFunction('ει', { endings: "contract" })
           ),
-          third: inflectionFunction('εται'),
+          third: inflectionFunction('εται', { endings: "contract" }),
         },
         plural: {
-          first: inflectionFunction('ομεθα'),
-          second: inflectionFunction('εσθε'),
-          third: inflectionFunction('ονται'),
+          first: inflectionFunction('ομεθα', { endings: "contract" }),
+          second: inflectionFunction('εσθε', { endings: "contract" }),
+          third: inflectionFunction('ονται', { endings: "contract" }),
         },
       },
       passive: {
