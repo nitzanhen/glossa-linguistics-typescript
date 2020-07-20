@@ -5,7 +5,7 @@ const testData: {
     addDiacriticVowel: [string, Diacritic, string][],
     addDiacritic: [string, number, Diacritic, string][],
     transformDiacritic: { word: string, options: DiacriticTransformOptions, result: string; }[],
-    enforcingGeneralAccentingRules: [string, string][];
+    enforcingGeneralAccentingRules: [string, string, boolean?][];
     accentingRecessively: [string, string, boolean, boolean?][];
 } = {
     addDiacriticVowel: [
@@ -119,7 +119,20 @@ const testData: {
         ["Θουκῡδίδης", "Θουκῡδίδης"],
         ["Ἥφαιστοι", "Ἥφαιστοι"],
         ["τήξαι", "τῆξαι"],
-        ["τῆξαι", "τῆξαι"]
+        ["τῆξαι", "τῆξαι"],
+
+        //Testing transforming an invalid circumflex
+        ["τῆξη", "τήξη"],
+        ["ἧττω", "ἥττω"],
+
+        //Testing with long ultimate αι & οι
+        ["τήξαι", "τήξαι", false],
+        ["τῆξαι", "τήξαι", false],
+        ["Ἥφαιστοι", "Ἡφαίστοι", false],
+
+        //Testing long ultimate αι & οι not interrupting valid accenting 
+        ["Ἀφροδῑ́τη", "Ἀφροδῑ́τη", false],
+        ["Ποσείδων", "Ποσείδων", false],
     ],
     accentingRecessively: [
         ["οἰστρος", "οἶστρος", false],

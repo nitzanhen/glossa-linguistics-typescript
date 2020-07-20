@@ -23,15 +23,19 @@ describe("Diacritic service", () => {
     });
 
     test("Enforcing general accenting rules", () => {
-        testData.enforcingGeneralAccentingRules.forEach(([input, output]) => {
-            expect(enforceGeneralAccentRules(input)).toBe(output);
+        testData.enforcingGeneralAccentingRules.forEach(([input, output, shortUltimateAiOi]) => {
+            if (typeof shortUltimateAiOi === 'boolean') {
+                expect(enforceGeneralAccentRules(input, shortUltimateAiOi)).toBe(output);
+            }
+            else {
+                expect(enforceGeneralAccentRules(input)).toBe(output);
+            }
         });
     });
 
     test("Accenting Recessively", () => {
         testData.accentingRecessively.forEach(([input, output, stripAccents, negate]) => {
             if (negate) {
-                console.log(input);
                 expect(accentRecessively(input, stripAccents)).not.toBe(output);
             }
             else {
