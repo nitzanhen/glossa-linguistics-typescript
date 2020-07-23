@@ -13,8 +13,8 @@ It is worth noting that currently, this module only deals with inflecting ω-cla
 ## Structure
 ### Composing inflection functions
 
-All verb inflection functions are a product of the utility function,
-composeVerbInflectionFunction(), declared at the inflection service transform index file.
+Most verb inflection functions are a product of the utility function,
+composeVerbInflectionFunction(), declared at a dedicated file in the transform section of the inflection service.
 
 For inflection functions of forms that have multiple possible inflections, the parameterized() function
 can be used; in that case, the order of the generated inflections should be from the most common to the least
@@ -22,13 +22,15 @@ common, if the inflections differ in that regard.
 
 ### Inflection function tree structure
 
-The inflection function tree itself is structured, for the most part, in the following order:
+The inflection functions themselves are split into multiple files, one for each aspect (present, future, aorist & perfect).
+
+As for the inflection function tree itself, it is structured, for the most part, in the following order:
 tense -> mood -> voice -> number -> person.
 Different variants and classifications may "disrupt" this hierarchy, adding additional partitions.
 
 The structure of the tree can be described as such (persons and numbers are omitted for brevity):
 
-<br><span style="color:#009999">Present</span> (Contraction)
+<br><span style="color:#009999">Present</span> (Contraction) ('./presentInflectionFunctions.ts')
 <br>┣ <span style="color:#cc6600">Indicative</span>
 <br>┃ ┣ <span style="color:#cc6699">Active</span>
 <br>┃ ┗ <span style="color:#cc6699">Mediopassive</span>
@@ -47,7 +49,7 @@ The structure of the tree can be described as such (persons and numbers are omit
 <br>┃ ┣ <span style="color:#cc6699">Active</span>
 <br>┗ ┗ <span style="color:#cc6699">Mediopassive</span>
 <br>
-<br><span style="color:#009999">Future</span>
+<br><span style="color:#009999">Future</span> ('./futureInflectionFunctions.ts')
 <br>┣ <span style="color:#cc6600">Indicative</span>
 <br>┃ ┣ <span style="color:#cc6699">Active</span>
 <br>┃ ┣ <span style="color:#cc6699">Middle</span>
@@ -59,7 +61,7 @@ The structure of the tree can be described as such (persons and numbers are omit
 <br>┗ ┗ <span style="color:#cc6699">Passive</span>
 <span style="color:#ffffff">First / Second (formed the same, on different stems)</span>
 <br>
-<br><span style="color:#009999">Aorist</span> (Augment)
+<br><span style="color:#009999">Aorist</span> (Augment)  ('./aoristInflectionFunctions.ts')
 <br>┣ <span style="color:#ffffff">First</span>
 <br>┃ ┣ <span style="color:#cc6600">Indicative</span>
 <br>┃ ┃ ┣ <span style="color:#cc6699">Active</span>
@@ -95,7 +97,7 @@ The structure of the tree can be described as such (persons and numbers are omit
 <br>┃ ┃ ┣ <span style="color:#cc6699">Middle</span>
 <br>┗ ┗ ┗ <span style="color:#cc6699">Passive</span>
 <br>
-<br><span style="color:#009999">Perfect</span> (1st and 2nd perfect are equal in formation, only build on different roots)
+<br><span style="color:#009999">Perfect</span> (1st and 2nd perfect are equal in formation, only build on different roots)  ('./perfectInflectionFunctions.ts')
 <br>┣ <span style="color:#cc6600">Indicative</span>
 <br>┃ ┣ <span style="color:#cc6699">Active</span>
 <br>┃ ┗ <span style="color:#cc6699">Mediopassive</span> (Euphonization)
