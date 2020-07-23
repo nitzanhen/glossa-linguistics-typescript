@@ -1,4 +1,3 @@
 import "#/global/String";
-import { addDiacritic } from './service/diacritic';
-
-console.log(addDiacritic("Θουκῡδιδης", 1, "acute"));
+import { contract } from './service/inflection/transform/contractor';
+import { enforceGeneralAccentRules } from './service/diacritic';

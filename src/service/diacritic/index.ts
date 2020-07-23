@@ -15,12 +15,19 @@ import { splitIntoSyllables, vowelPartOf, syllableType } from "#/linguistics/alp
  * 
  * @param word to word to accent.
  * @param syllableIndex the index of the syllable in the passed word.
+ * If syllableIndex is negative, it will be counted from the ultima backwards,
+ * like python's negative-index access. 
  * @param diacritic the diacritic to add.
  * @returns the word, with the requested syllable accented.
  * @throws RangeError if the syllableIndex is out of the word's syllable array's bounds.
  */
 export function addDiacritic(word: string, syllableIndex: number, diacritic: Diacritic) {
     const syllables = splitIntoSyllables(word);
+
+    if (syllableIndex < 0) {
+        syllableIndex += syllables.length;
+    }
+
     if (!syllables[syllableIndex]) {
         throw new RangeError(`syllableIndex out of bounds: ${syllableIndex}, for word ${word} with ${syllables.length} syllables.`);
     }
@@ -65,11 +72,14 @@ export interface DiacriticTransformOptions {
  * If trying to add a circumflex to a vowel that already has a macron, the macron will be removed.
  * 
  * @param word the word perform the operation on.
- * @param originIndex the index of the syllable whose diacritic is being transformed
+ * @param originIndex the index of the syllable whose diacritic is being transformed.
+ * If originIndex is negative, it will be counted from the ultima backwards,
+ * like python's negative-index access. 
  * @param originDiacritic the diacritic to be transformed; useful when a syllable has multiple
  * diacritics. If originDiacritic is not specified, all *accents* will be omitted.
  * @param destinationIndex the index of the syllable onto which the diacritic will be moved.
- * Defaults to the destinationIndex.
+ * Defaults to the destinationIndex. If destinationIndex is negative, it will be counted from the ultima backwards,
+ * like python's negative-index access. 
  * @param destinationDiacritic the diacritic to which originDiacritic is to be transformed.
  * @returns the word, with the diacritic transformed.
  * @throws RangeError if originIndex or destinationInde are out of the word's syllables' bounds.
@@ -81,10 +91,19 @@ export function transformDiacritic(word: string, { originIndex,
 }: DiacriticTransformOptions) {
     const syllables = splitIntoSyllables(word);
     const maxValidIndex = syllables.length - 1;
-    if (originIndex < 0 || originIndex > maxValidIndex) {
+
+
+    if (originIndex < 0) {
+        originIndex += syllables.length;
+    }
+    if (destinationIndex < 0) {
+        destinationIndex += syllables.length;
+    }
+
+    if (originIndex > maxValidIndex) {
         throw new RangeError(`originIndex argument exceeds syllable bounds; word ${word} has ${syllables.length} syllables, so the maximum valid index is ${maxValidIndex}, whereas originIndex is ${originIndex}`);
     }
-    else if (destinationIndex < 0 || destinationIndex > maxValidIndex) {
+    else if (destinationIndex > maxValidIndex) {
         throw new RangeError(`destinationIndex argument exceeds syllable bounds; word ${word} has ${syllables.length} syllables, so the maximum valid index is ${maxValidIndex}, whereas destinationIndex is ${originIndex}`);
     }
     else {

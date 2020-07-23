@@ -70,30 +70,76 @@ const presentInflectionFunctions = {
       },
     },
     optative: {
-      active: {
-        singular: {
-          first: inflectionFunction('οιμι', { endings: "contract" }),
-          second: inflectionFunction('οις', { endings: "contract" }),
-          third: inflectionFunction('οι', { endings: "contract" }),
+      standard: {
+        active: {
+          singular: {
+            first: inflectionFunction('οιμι', { endings: "contract" }),
+            second: inflectionFunction('οις', { endings: "contract" }),
+            third: inflectionFunction('οι', { endings: "contract" }),
+          },
+          plural: {
+            first: inflectionFunction('οιμεν', { endings: "contract" }),
+            second: inflectionFunction('οιτε', { endings: "contract" }),
+            third: inflectionFunction('οιεν', { endings: "contract" }),
+          },
         },
-        plural: {
-          first: inflectionFunction('οιμεν', { endings: "contract" }),
-          second: inflectionFunction('οιτε', { endings: "contract" }),
-          third: inflectionFunction('οιεν', { endings: "contract" }),
+        mediopassive: {
+          singular: {
+            first: inflectionFunction('οιμην', { endings: "contract" }),
+            second: inflectionFunction('οιο', { endings: "contract" }),
+            third: inflectionFunction('οιτο', { endings: "contract" }),
+          },
+          plural: {
+            first: inflectionFunction('οιμεθα', { endings: "contract" }),
+            second: inflectionFunction('οισθε', { endings: "contract" }),
+            third: inflectionFunction('οιντο', { endings: "contract" }),
+          },
         },
       },
-      mediopassive: {
-        singular: {
-          first: inflectionFunction('οιμην', { endings: "contract" }),
-          second: inflectionFunction('οιο', { endings: "contract" }),
-          third: inflectionFunction('οιτο', { endings: "contract" }),
+      contract: {
+        active: {
+          singular: {
+            first: multipleInflections(
+              inflectionFunction('οιην', { endings: "contract-optative" }),
+              inflectionFunction('οῑμι', { endings: "contract-optative" })
+            ),
+            second: multipleInflections(
+              inflectionFunction('οιης', { endings: "contract-optative" }),
+              inflectionFunction('οῑς', { endings: "contract-optative" })
+            ),
+            third: multipleInflections(
+              inflectionFunction('οιη', { endings: "contract-optative" }),
+              inflectionFunction('οῑ', { endings: "contract-optative" })
+            )
+          },
+          plural: {
+            first: multipleInflections(
+              inflectionFunction('οῑμεν', { endings: "contract-optative" }),
+              inflectionFunction('οιημεν', { endings: "contract-optative" })
+            ),
+            second: multipleInflections(
+              inflectionFunction('οῑτε', { endings: "contract-optative" }),
+              inflectionFunction('οιητε', { endings: "contract-optative" })
+            ),
+            third: multipleInflections(
+              inflectionFunction('οιεν', { endings: "contract-optative" }),
+              inflectionFunction('οιησαν', { endings: "contract-optative" })
+            )
+          },
         },
-        plural: {
-          first: inflectionFunction('οιμεθα', { endings: "contract" }),
-          second: inflectionFunction('οισθε', { endings: "contract" }),
-          third: inflectionFunction('οιντο', { endings: "contract" }),
+        mediopassive: {
+          singular: {
+            first: inflectionFunction("οῑμην", { endings: "contract-optative" }),
+            second: inflectionFunction("οῑο", { endings: "contract-optative" }),
+            third: inflectionFunction("οῑτο", { endings: "contract-optative" }),
+          },
+          plural: {
+            first: inflectionFunction("οῑμεθα", { endings: "contract-optative" }),
+            second: inflectionFunction("οῑσθε", { endings: "contract-optative" }),
+            third: inflectionFunction("οῑντο", { endings: "contract-optative" }),
+          },
         },
-      },
+      }
     },
     imperative: {
       active: {
