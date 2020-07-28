@@ -1,7 +1,7 @@
 import { stripAccents, isAccented, Diacritic } from "#/linguistics/alphabet/diacritics";
 import { vowelPartOf, splitIntoSyllables } from '#/linguistics/alphabet/syllables';
 
-import { addDiacriticVowel } from "../../diacritic";
+import { addDiacriticVowel, accentRecessively } from "../../diacritic";
 import { suffix as suffixFunction } from './suffixer';
 
 /**
@@ -66,12 +66,10 @@ const possibleContractionSuffixes = Object.keys(contractions['α']);
 export function contractVowels(vowel1: string, vowel2: string): string {
     if (!possibleContractionPrefixes.includes(stripAccents(vowel1, true))) {
         //Can't (and shouldn't) contract!
-        /** @todo return vowel1 + vowel2 instead? */
         throw new RangeError(`Can't contract! vowel1 must be α, ε, ο, or an accented variant. Instead received: ${vowel1}`);
     }
     else if (!possibleContractionSuffixes.includes(stripAccents(vowel2, true))) {
         //Can't (and shouldn't) contract!
-        /** @todo return vowel1 + vowel2 instead? */
         throw new RangeError(`Can't contract! vowel2 must be ε, ει, η, ῃ, ο, οι, ου, ω, or an accented variant. Instead received: ${vowel2}`);
     }
 
@@ -87,21 +85,43 @@ export function contractVowels(vowel1: string, vowel2: string): string {
 }
 
 /**
+ * Adds the given Greek suffix to the base form, performing contraction between the two.
+ * By default, the function automatically accents the form recessively.
  * 
- * @param base the base form
- * @param suffix the suffix to add to it
+ * @param base the base form.
+ * @param suffix the suffix to add to it.
+ * @param autoAccent whether to automatically accent or not. If true, accent will be applied recessively. 
+ * Defaults to true.
  * @returns the contracted form, or base if suffix is an empty string.
  * @throws RangeError if:
  * - vowel1 is not α, ε, ο, or an accented variant.
  * or
  * - vowel2 is not ε, ει, η, ῃ, ο, οι, ου, ω, or an accented variant.  
  */
-export function contract(base: string, suffix: string): string {
+export function contract(base: string, suffix: string, autoAccent: boolean = true): string {
     if (suffix.length === 0) {
         return base;
     }
 
     const baseSyllables = splitIntoSyllables(base);
+
+    /*
+     * In the case of recessive accenting a contract verb, the (recessive) accenting 
+     * needs to be applied *before* contracting the base and the suffix. Otherwise,
+     * if accenting is for example applied after contraction (as would be more convenient),
+     * mismatches can occur, notably in the case of a 3+ syllable work with short ultima.
+     * 
+     * This, if accenting recessively, the "raw" sum of the base and suffix should be recessively
+     * accented, then split up back into base and suffix, with the recessive accent applied.
+     * Then, contraction can proceed as usual.
+     */
+    if (autoAccent) {
+        let suffixed = base + suffix;
+        suffixed = accentRecessively(suffixed);
+
+        //Adding the accent should not change the length of the base or the suffix, so we can use their original lengths to slice.
+        [base, suffix] = [suffixed.slice(0, base.length), suffixed.slice(base.length)];
+    }
 
     const contractionPrefix = vowelPartOf(baseSyllables[baseSyllables.length - 1]);
 
