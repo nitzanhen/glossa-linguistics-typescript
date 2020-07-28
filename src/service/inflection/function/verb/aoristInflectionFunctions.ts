@@ -82,30 +82,30 @@ const aoristInflectionFunctions = {
         passive: {
           singular: {
             first: compose(
-              suffixer("έ"),
-              contractor("ω")
+              suffixer("ε"),
+              inflectionFunction('ω', { endings: "contract" })
             ),
             second: compose(
-              suffixer("έ"),
-              contractor("ῃς")
+              suffixer("ε"),
+              inflectionFunction('ῃς', { endings: "contract" })
             ),
             third: compose(
-              suffixer("έ"),
-              contractor("ῃ")
+              suffixer("ε"),
+              inflectionFunction('ῃ', { endings: "contract" })
             ),
           },
           plural: {
             first: compose(
-              suffixer("έ"),
-              contractor("ωμεν")
+              suffixer("ε"),
+              inflectionFunction('ωμεν', { endings: "contract" })
             ),
             second: compose(
-              suffixer("έ"),
-              contractor("ητε")
+              suffixer("ε"),
+              inflectionFunction('ητε', { endings: "contract" })
             ),
             third: compose(
-              suffixer("έ"),
-              contractor("ωσι(ν)")
+              suffixer("ε"),
+              inflectionFunction('ωσι(ν)', { endings: "contract" })
             ),
           },
         }
@@ -256,30 +256,30 @@ const aoristInflectionFunctions = {
           passive: {
             singular: {
               first: compose(
-                suffixer("έ"),
-                contractor("ω")
+                suffixer("ε"),
+                inflectionFunction("ω", { endings: "contract" })
               ),
               second: compose(
-                suffixer("έ"),
-                contractor("ῃς")
+                suffixer("ε"),
+                inflectionFunction("ῃς", { endings: "contract" })
               ),
               third: compose(
-                suffixer("έ"),
-                contractor("ῃ")
+                suffixer("ε"),
+                inflectionFunction("ῃ", { endings: "contract" })
               ),
             },
             plural: {
               first: compose(
-                suffixer("έ"),
-                contractor("ωμεν")
+                suffixer("ε"),
+                inflectionFunction("ωμεν", { endings: "contract" })
               ),
               second: compose(
-                suffixer("έ"),
-                contractor("ητε")
+                suffixer("ε"),
+                inflectionFunction("ητε", { endings: "contract" })
               ),
               third: compose(
-                suffixer("έ"),
-                contractor("ωσι(ν)")
+                suffixer("ε"),
+                inflectionFunction("ωσι(ν)", { endings: "contract" })
               ),
             },
           }

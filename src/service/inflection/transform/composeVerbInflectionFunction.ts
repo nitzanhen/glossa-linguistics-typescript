@@ -1,7 +1,6 @@
 import { compose } from '#/util/functionUtils';
-import { stripAccents } from '#/linguistics/alphabet/diacritics';
 
-import { accentRecessively, enforceGeneralAccentRules, transformDiacritic, addDiacritic } from '../../diacritic';
+import { accentRecessively, enforceGeneralAccentRules } from '../../diacritic';
 
 import suffixer from './suffixer';
 import augment from './augment';
@@ -10,7 +9,7 @@ import { euphonizer } from './euphony';
 
 
 interface composeVerbInflectionFunctionOptions {
-  endings?: "suffix" | "contract" | "euphonize" | "contract-optative",
+  endings?: "suffix" | "contract" | "euphonize",
   addAugment?: boolean,
   addRecessiveAccent?: boolean;
 }
@@ -36,27 +35,22 @@ function composeVerbInflectionFunction(suffix: string, {
 
   if (typeof addRecessiveAccent === "undefined") {
     //If we're contracting, addRecessiveAccent should be disabled by default.
-    addRecessiveAccent = endings !== "contract" && endings !== "contract-optative";
+    addRecessiveAccent = endings !== "contract";
   }
 
   const endingsFunction = (() => {
     switch (endings) {
       case "suffix":
-        return suffixer(suffix);
+        return suffixer;
       case "contract":
-        return contractor(suffix);
+        return contractor;
       case "euphonize":
-        return euphonizer(suffix);
-      case "contract-optative":
-        return compose(
-          (word: string) => addDiacritic(word, -1, "acute"),
-          contractor(suffix)
-        );
+        return euphonizer;
     }
   })();
 
   return compose(
-    endingsFunction,
+    endingsFunction(suffix),
     addAugment && augment,
     addRecessiveAccent ? accentRecessively : enforceGeneralAccentRules
   );
