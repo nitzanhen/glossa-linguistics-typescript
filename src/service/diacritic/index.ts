@@ -140,14 +140,16 @@ export function transformDiacritic(word: string, { originIndex,
 export function enforceGeneralAccentRules(word: string, shortUltimateAiOi: boolean = true): string {
     const syllables = splitIntoSyllables(word);
 
-    const antepenultIndex = syllables.length - 3;
+    const ultimaIndex = syllables.length - 1;
     const penultIndex = syllables.length - 2;
+    const antepenultIndex = syllables.length - 3;
 
-    const ultima = syllables[syllables.length - 1];
-    const antepenult = syllables[antepenultIndex];
+    const ultima = syllables[ultimaIndex];
     const penult = syllables[penultIndex];
+    const antepenult = syllables[antepenultIndex];
 
-    const isUltimaShort = syllableType(word, syllables.length - 1) === 'short'
+
+    const isUltimaShort = syllableType(word, ultimaIndex) === 'short'
         || (shortUltimateAiOi && stripAccents(ultima).endsWith("αι"))
         || (shortUltimateAiOi && stripAccents(ultima).endsWith("οι"));
 
