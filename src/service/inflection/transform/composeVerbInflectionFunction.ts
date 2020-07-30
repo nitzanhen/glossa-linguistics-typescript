@@ -1,17 +1,17 @@
 import { compose } from '#/util/functionUtils';
 
-import { accentRecessively, enforceGeneralAccentRules } from '../../diacritic';
+import { accentRecessively, enforceGeneralAccentRules, addDiacritic } from '../../diacritic';
 
 import suffixer from './suffixer';
 import augment from './augment';
-import contractor from './contractor';
+import contractor, { ContractAccentingOptions } from './contractor';
 import { euphonizer } from './euphony';
+import { stripAccents } from '../../../linguistics/alphabet/diacritics';
 
-
-interface composeVerbInflectionFunctionOptions {
+interface ComposeVerbInflectionFunctionOptions {
   endings?: "suffix" | "contract" | "euphonize",
   addAugment?: boolean,
-  addRecessiveAccent?: boolean;
+  accenting?: ContractAccentingOptions;
 }
 
 /**
@@ -30,29 +30,47 @@ interface composeVerbInflectionFunctionOptions {
 function composeVerbInflectionFunction(suffix: string, {
   endings = "suffix",
   addAugment = false,
-  addRecessiveAccent }
-  : composeVerbInflectionFunctionOptions = {}) {
-
-  if (typeof addRecessiveAccent === "undefined") {
-    //If we're contracting, addRecessiveAccent should be disabled by default.
-    addRecessiveAccent = endings !== "contract";
-  }
+  accenting }
+  : ComposeVerbInflectionFunctionOptions = {}) {
 
   const endingsFunction = (() => {
     switch (endings) {
       case "suffix":
-        return suffixer;
+        return suffixer(suffix);
       case "contract":
-        return contractor;
+        return contractor(suffix, accenting);
       case "euphonize":
-        return euphonizer;
+        return euphonizer(suffix);
+    }
+  })();
+
+  const accentingFunction = (() => {
+    if (typeof accenting === "number") {
+      //We're not contracting (contraction takes care of accenting itself), 
+      //but there's an explicit syllable marked to be accented. Accent manually.
+      return compose(
+        stripAccents,
+        text => addDiacritic(text, accenting as number, "acute"),
+        enforceGeneralAccentRules
+      );
+    }
+    else if (accenting === null) {
+      //If accenting was explicitly marked as null, keep it so.
+      return null;
+    }
+    else if (accenting === "recessive") {
+      return accentRecessively;
+    }
+    else {
+      //Accenting is undefined. Accemt recessively, unless contracting.
+      return endings === "contract" ? null : accentRecessively;
     }
   })();
 
   return compose(
-    endingsFunction(suffix),
+    endingsFunction,
     addAugment && augment,
-    addRecessiveAccent ? accentRecessively : enforceGeneralAccentRules
+    accentingFunction ?? enforceGeneralAccentRules
   );
 }
 

@@ -1,7 +1,7 @@
 import { stripAccents, isAccented, Diacritic } from "#/linguistics/alphabet/diacritics";
 import { vowelPartOf, splitIntoSyllables } from '#/linguistics/alphabet/syllables';
 
-import { addDiacriticVowel, accentRecessively } from "../../diacritic";
+import { addDiacriticVowel, accentRecessively, addDiacritic } from "../../diacritic";
 import { suffix as suffixFunction } from './suffixer';
 
 /**
@@ -84,21 +84,24 @@ export function contractVowels(vowel1: string, vowel2: string): string {
     return accent ? addDiacriticVowel(contracted, accent) : contracted;
 }
 
+export type ContractAccentingOptions = "recessive" | number | null;
+
 /**
  * Adds the given Greek suffix to the base form, performing contraction between the two.
  * By default, the function automatically accents the form recessively.
  * 
  * @param base the base form.
  * @param suffix the suffix to add to it.
- * @param autoAccent whether to automatically accent or not. If true, accent will be applied recessively. 
- * Defaults to true.
+ * @param accenting whether to automatically accent or not. 
+ * If it's a number, it will be regarded as the syllable to accent (negative values will be treated like Python's negative index access).
+ * If it's a truthy value, accent will be applied recessively. Defaults to recessive accenting. 
  * @returns the contracted form, or base if suffix is an empty string.
  * @throws RangeError if:
  * - vowel1 is not α, ε, ο, or an accented variant.
  * or
  * - vowel2 is not ε, ει, η, ῃ, ο, οι, ου, ω, or an accented variant.  
  */
-export function contract(base: string, suffix: string, autoAccent: boolean = true): string {
+export function contract(base: string, suffix: string, accenting: ContractAccentingOptions = "recessive"): string {
     if (suffix.length === 0) {
         return base;
     }
@@ -115,9 +118,11 @@ export function contract(base: string, suffix: string, autoAccent: boolean = tru
      * accented, then split up back into base and suffix, with the recessive accent applied.
      * Then, contraction can proceed as usual.
      */
-    if (autoAccent) {
+    if (accenting) {
         let suffixed = base + suffix;
-        suffixed = accentRecessively(suffixed);
+        suffixed = accenting === "recessive"
+            ? accentRecessively(suffixed)
+            : addDiacritic(suffixed, accenting, "acute");
 
         //Adding the accent should not change the length of the base or the suffix, so we can use their original lengths to slice.
         [base, suffix] = [suffixed.slice(0, base.length), suffixed.slice(base.length)];
@@ -152,10 +157,10 @@ export function contract(base: string, suffix: string, autoAccent: boolean = tru
  * 
  * @returns a *function* which receives a string and returns it appended by the given suffix.
  */
-function contractor(suffix: string, fallback: (base: string, suffix: string) => string = suffixFunction) {
+function contractor(suffix: string, accenting: ContractAccentingOptions = "recessive", fallback: (base: string, suffix: string) => string = suffixFunction) {
     return function (base: string): string {
         try {
-            return contract(base, suffix);
+            return contract(base, suffix, accenting);
         }
         catch (error) {
             if (error instanceof RangeError) {

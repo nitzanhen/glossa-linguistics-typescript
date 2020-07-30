@@ -11,6 +11,39 @@ import { containsDiacritic } from './diacritics';
  */
 
 /**
+ * Returns the ultima index for a word with the given amount of syllables,
+ * or -1 if no amount is passed. The default returned value is useful for
+ * functions accepting negative syllable index values.
+ * @see syllableType() in this module, addDiacritic(), transformDiacritic() in the diacritic service module.
+ * 
+ * @param length the number *of syllables* of the word. Optional.
+ * @returns the ultima index for the word, or -1 if no length was passed.
+ */
+export const ultimaIndex = (length: number = 0) => length - 1;
+
+/**
+ * Returns the penult index for a word with the given amount of syllables,
+ * or -2 if no amount is passed. The default returned value is useful for
+ * functions accepting negative syllable index values.
+ * @see syllableType() in this module, addDiacritic(), transformDiacritic() in the diacritic service module.
+ * 
+ * @param length the number *of syllables* of the word. Optional.
+ * @returns the penult index for the word, or -2 if no length was passed.
+ */
+export const penultIndex = (length: number = 0) => length - 2;
+
+/**
+ * Returns the antepenult index for a word with the given amount of syllables,
+ * or -3 if no amount is passed. The default returned value is useful for
+ * functions accepting negative syllable index values.
+ * @see syllableType() in this module, addDiacritic(), transformDiacritic() in the diacritic service module.
+ * 
+ * @param length the number *of syllables* of the word. Optional.
+ * @returns the antepenult index for the word, or -3 if no length was passed.
+ */
+export const antepenultIndex = (length: number = 0) => length - 3;
+
+/**
  * Splits a Greek word up into its syllables.
  * 
  * @param word the word to split into syllables.
@@ -19,7 +52,7 @@ import { containsDiacritic } from './diacritics';
  */
 export function splitIntoSyllables(word: string): string[] {
     if (!isGreekString(word)) {
-        throw new InvalidLanguageError(`Passed non-Greek form "${word}"; this functions expects a Greek string.`);
+        throw new InvalidLanguageError(`Passed non-Greek form "${word}"; this function expects a Greek string.`);
     }
 
     const syllables: string[] = [];
@@ -137,11 +170,16 @@ export type SyllableType = "longByNature" | "longByPosition" | "short";
  * The possible return (syllable) types are "longByNature", "longByPosition" and "short".
  * 
  * @param syllable the syllable to examine.
- * 
+ * If syllableIndex is negative, it will be counted from the ultima backwards,
+ * like python's negative-index access. 
  * @throws RangeError if the syllableIndex is out of the word's syllable array's bounds. 
  */
 export function syllableType(word: string, syllableIndex: number): SyllableType {
     const syllables = splitIntoSyllables(word);
+    if (syllableIndex < 0) {
+        syllableIndex += syllables.length;
+    }
+
     if (!syllables[syllableIndex]) {
         throw new RangeError(`syllableIndex out of bounds: ${syllableIndex}, for word ${word} with ${syllables.length} syllables.`);
     }

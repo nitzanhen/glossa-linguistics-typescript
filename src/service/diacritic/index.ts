@@ -1,5 +1,5 @@
 import diacritics, { Diacritic, stripDiacritics, stripAccents, containsDiacritic, orderDiacritics } from "#/linguistics/alphabet/diacritics";
-import { splitIntoSyllables, vowelPartOf, syllableType } from "#/linguistics/alphabet/syllables";
+import { splitIntoSyllables, vowelPartOf, syllableType, ultimaIndex, penultIndex, antepenultIndex } from "#/linguistics/alphabet/syllables";
 
 /**
  * Contains useful functions for adding and transforming diacritics.
@@ -139,30 +139,27 @@ export function transformDiacritic(word: string, { originIndex,
  */
 export function enforceGeneralAccentRules(word: string, shortUltimateAiOi: boolean = true): string {
     const syllables = splitIntoSyllables(word);
+    const { length } = syllables;
 
-    const ultimaIndex = syllables.length - 1;
-    const penultIndex = syllables.length - 2;
-    const antepenultIndex = syllables.length - 3;
-
-    const ultima = syllables[ultimaIndex];
-    const penult = syllables[penultIndex];
-    const antepenult = syllables[antepenultIndex];
+    const ultima = syllables[ultimaIndex(length)];
+    const penult = syllables[penultIndex(length)];
+    const antepenult = syllables[antepenultIndex(length)];
 
 
-    const isUltimaShort = syllableType(word, ultimaIndex) === 'short'
+    const isUltimaShort = syllableType(word, ultimaIndex(length)) === 'short'
         || (shortUltimateAiOi && stripAccents(ultima).endsWith("αι"))
         || (shortUltimateAiOi && stripAccents(ultima).endsWith("οι"));
 
     if (isUltimaShort) {
         if (syllables.length > 1
-            && syllableType(word, penultIndex) === "longByNature"
-            && containsDiacritic(syllables[penultIndex], "acute")
+            && syllableType(word, penultIndex()) === "longByNature"
+            && containsDiacritic(syllables[penultIndex(length)], "acute")
         ) {
             //Rule #2: Acute expands into a circumflex
             word = transformDiacritic(word, {
-                originIndex: penultIndex,
+                originIndex: penultIndex(),
                 originDiacritic: "acute",
-                destinationIndex: penultIndex,
+                destinationIndex: penultIndex(),
                 destinationDiacritic: "circumflex"
             });
         }
@@ -171,18 +168,18 @@ export function enforceGeneralAccentRules(word: string, shortUltimateAiOi: boole
         if (syllables.length > 2 && containsDiacritic(antepenult, "acute")) {
             //Rule #1: Move to penult
             word = transformDiacritic(word, {
-                originIndex: antepenultIndex,
+                originIndex: antepenultIndex(),
                 originDiacritic: "acute",
-                destinationIndex: penultIndex,
+                destinationIndex: penultIndex(),
                 destinationDiacritic: "acute"
             });
         }
         else if (syllables.length > 1 && containsDiacritic(penult, "circumflex")) {
             //Invalid circumflex; transform to penult.
             word = transformDiacritic(word, {
-                originIndex: penultIndex,
+                originIndex: penultIndex(),
                 originDiacritic: "circumflex",
-                destinationIndex: penultIndex,
+                destinationIndex: penultIndex(),
                 destinationDiacritic: "acute"
             });
         }

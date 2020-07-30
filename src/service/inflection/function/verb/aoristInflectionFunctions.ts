@@ -1,7 +1,9 @@
 import { parameterized as multipleInflections, compose } from '#/util/functionUtils';
 
-import { composeVerbInflectionFunction as inflectionFunction, contractor } from '../../transform';
+import { composeVerbInflectionFunction as inflectionFunction } from '../../transform';
 import suffixer from '../../transform/suffixer';
+import { ultimaIndex, penultIndex } from '../../../../linguistics/alphabet/syllables';
+import { stripAccents } from '../../../../linguistics/alphabet/diacritics';
 
 //Used as syntactic sugar to shorten { addAugment: true } to { addAugment } when calling inflectionFunction(),
 //Similar to React's boolean props. 
@@ -28,6 +30,7 @@ const aoristInflectionFunctions = {
             second: inflectionFunction('ατε', { addAugment }),
             third: inflectionFunction('αν', { addAugment }),
           },
+          infinitive: inflectionFunction("αι", { accenting: penultIndex() })
         },
         middle: {
           singular: {
@@ -40,6 +43,7 @@ const aoristInflectionFunctions = {
             second: inflectionFunction('ασθε', { addAugment }),
             third: inflectionFunction('αντο', { addAugment }),
           },
+          infinitive: inflectionFunction("ασθαι")
         },
         passive: {
           singular: {
@@ -52,6 +56,7 @@ const aoristInflectionFunctions = {
             second: inflectionFunction('ητε', { addAugment }),
             third: inflectionFunction('ησαν', { addAugment }),
           },
+          infinitive: inflectionFunction("ηναι", { accenting: penultIndex() })
         },
       },
       subjunctive: {
@@ -202,7 +207,11 @@ const aoristInflectionFunctions = {
             first: inflectionFunction("ομεν", { addAugment }),
             second: inflectionFunction("ετε", { addAugment }),
             third: inflectionFunction("ον", { addAugment }),
-          }
+          },
+          infinitive: compose(
+            stripAccents,
+            inflectionFunction("εῖν", { accenting: null })
+          )
         },
         middle: {
           singular: {
@@ -214,7 +223,8 @@ const aoristInflectionFunctions = {
             first: inflectionFunction("ομεθα", { addAugment }),
             second: inflectionFunction("εσθε", { addAugment }),
             third: inflectionFunction("οντο", { addAugment }),
-          }
+          },
+          infinitive: inflectionFunction("εσθαι", { accenting: penultIndex() })
         },
         passive: {
           singular: {
@@ -226,7 +236,8 @@ const aoristInflectionFunctions = {
             first: inflectionFunction("ημεν", { addAugment }),
             second: inflectionFunction("ητε", { addAugment }),
             third: inflectionFunction("ησαν", { addAugment }),
-          }
+          },
+          infinitive: inflectionFunction("ηναι", { accenting: penultIndex() })
         },
         subjunctive: {
           active: {
@@ -335,7 +346,7 @@ const aoristInflectionFunctions = {
           },
           middle: {
             singular: {
-              second: inflectionFunction("οῦ", { addRecessiveAccent: false }),
+              second: inflectionFunction("ου", { accenting: ultimaIndex() }),
               third: inflectionFunction("εσθω"),
             },
             plural: {

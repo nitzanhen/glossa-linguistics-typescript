@@ -1,11 +1,5 @@
-import { parameterized as multipleInflections, compose } from '#/util/functionUtils';
-
-import { composeVerbInflectionFunction as inflectionFunction, contractor } from '../../transform';
-import suffixer from '../../transform/suffixer';
-
-//Used as syntactic sugar to shorten { addAugment: true } to { addAugment } when calling inflectionFunction(),
-//Similar to React's boolean props. 
-const addAugment = true;
+import { composeVerbInflectionFunction as inflectionFunction } from '../../transform';
+import { penultIndex } from '../../../../linguistics/alphabet/syllables';
 
 /**
  * Inflection functions for the perfect aspect inflections - perfect, pluperfect, future perfect.
@@ -26,7 +20,8 @@ const perfectInflectionFunctions = {
           first: inflectionFunction("αμεν"),
           second: inflectionFunction("ατε"),
           third: inflectionFunction("ᾱσι(ν)")
-        }
+        },
+        infinitive: inflectionFunction("εναι", { accenting: penultIndex() })
       },
       subjunctive: {
         /** RARE and periphrastic. */
@@ -50,7 +45,8 @@ const perfectInflectionFunctions = {
           second: inflectionFunction("σθε", { endings: "euphonize" }),
           //TODO perhiphrastic inflections
           //third: inflectionFunction("", { endings: "euphonize" })
-        }
+        },
+        infinitive: inflectionFunction("σθαι", { endings: "euphonize", accenting: penultIndex() })
       },
       subjunctive: {
         /** RARE and periphrastic. */

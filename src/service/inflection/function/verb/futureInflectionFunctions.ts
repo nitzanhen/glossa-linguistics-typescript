@@ -1,9 +1,7 @@
 import { parameterized as multipleInflections } from '#/util/functionUtils';
 
 import { composeVerbInflectionFunction as inflectionFunction } from '../../transform';
-
-//Used as syntactic sugar to shorten { addAugment: true } to { addAugment } when calling inflectionFunction(),
-//Similar to React's boolean props. 
+import { penultIndex } from '../../../../linguistics/alphabet/syllables';
 
 /**
  * Inflection functions for the future aspect inflections.
@@ -25,6 +23,7 @@ const futureInflectionFunctions = {
           second: inflectionFunction('ετε', { endings: "contract" }),
           third: inflectionFunction('ουσι(ν)', { endings: "contract" }),
         },
+        infinitive: inflectionFunction('ειν', { endings: "contract" })
       },
       middle: {
         singular: {
@@ -40,6 +39,7 @@ const futureInflectionFunctions = {
           second: inflectionFunction('εσθε', { endings: "contract" }),
           third: inflectionFunction('ονται', { endings: "contract" }),
         },
+        infinitive: inflectionFunction('εσθαι', { endings: "contract" })
       },
       passive: {
         singular: {
@@ -55,6 +55,7 @@ const futureInflectionFunctions = {
           second: inflectionFunction('εσθε'),
           third: inflectionFunction('ονται'),
         },
+        infinitive: inflectionFunction('θησεσθαι')
       },
     },
     optative: {
