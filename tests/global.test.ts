@@ -1,6 +1,6 @@
 import '#/global/String';
 
-import testData from './global.testData';
+import testData from './global.testdata';
 
 describe("global modules", () => {
     test("String toUpperCase(), toLowerCase() override", () => {
