@@ -1,5 +1,5 @@
 import { stripAccents, isAccented, Diacritic } from "#/linguistics/alphabet/diacritics";
-import { vowelPartOf, splitIntoSyllables } from '#/linguistics/alphabet/syllables';
+import { vowelPartOf, splitIntoSyllables, ultimaIndex } from '#/linguistics/alphabet/syllables';
 
 import { addDiacriticVowel, accentRecessively, addDiacritic } from "../../diacritic";
 import { suffix as suffixFunction } from './suffixer';
@@ -79,9 +79,13 @@ export function contractVowels(vowel1: string, vowel2: string): string {
             ? 'acute'
             : null;
 
-    const contracted = contractions[stripAccents(vowel1, true)][stripAccents(vowel2, true)];
 
-    return accent ? addDiacriticVowel(contracted, accent) : contracted;
+    let contracted = contractions[stripAccents(vowel1, true)][stripAccents(vowel2, true)];
+    if (accent) {
+        contracted = addDiacriticVowel(contracted, accent);
+    }
+
+    return contracted;
 }
 
 export type ContractAccentingOptions = "recessive" | number | null;
@@ -93,7 +97,8 @@ export type ContractAccentingOptions = "recessive" | number | null;
  * @param base the base form.
  * @param suffix the suffix to add to it.
  * @param accenting whether to automatically accent or not. 
- * If it's a number, it will be regarded as the syllable to accent (negative values will be treated like Python's negative index access).
+ * If it's a number, it will be regarded as the syllable to accent (negative values will be treated like Python's negative index access),
+ * **before contracting**, counting backwards from the end of the simple concatanation of the base and suffix.
  * If it's a truthy value, accent will be applied recessively. Defaults to recessive accenting. 
  * @returns the contracted form, or base if suffix is an empty string.
  * @throws RangeError if:
@@ -106,8 +111,6 @@ export function contract(base: string, suffix: string, accenting: ContractAccent
         return base;
     }
 
-    const baseSyllables = splitIntoSyllables(base);
-
     /*
      * In the case of recessive accenting a contract verb, the (recessive) accenting 
      * needs to be applied *before* contracting the base and the suffix. Otherwise,
@@ -118,17 +121,20 @@ export function contract(base: string, suffix: string, accenting: ContractAccent
      * accented, then split up back into base and suffix, with the recessive accent applied.
      * Then, contraction can proceed as usual.
      */
-    if (accenting) {
+    if (accenting !== null && accenting !== undefined) {
         let suffixed = base + suffix;
         suffixed = accenting === "recessive"
             ? accentRecessively(suffixed)
             : addDiacritic(suffixed, accenting, "acute");
 
-        //Adding the accent should not change the length of the base or the suffix, so we can use their original lengths to slice.
-        [base, suffix] = [suffixed.slice(0, base.length), suffixed.slice(base.length)];
+        //Should normally be equal to base.length; however in extreme cases the addition of the accent may lengthen the base.
+        const sliceIndex = suffixed.length - suffix.length;
+        [base, suffix] = [suffixed.slice(0, sliceIndex), suffixed.slice(sliceIndex)];
     }
 
-    const contractionPrefix = vowelPartOf(baseSyllables[baseSyllables.length - 1]);
+    const baseSyllables = splitIntoSyllables(base);
+
+    const contractionPrefix = vowelPartOf(baseSyllables[ultimaIndex(baseSyllables.length)]);
 
     const isSuffixDiphthong = suffix.length > 1
         //If the first two letters of the suffix are a possible contraction suffix, take them as contractions suffix.

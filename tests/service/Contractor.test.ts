@@ -11,8 +11,8 @@ describe("Contractor service", () => {
     });
 
     test("Contracting forms", () => {
-        testData.wordContractions.forEach(([base, suffix, contraction]) => {
-            expect(contract(base, suffix)).toBe(contraction);
+        testData.wordContractions.forEach(([base, suffix, contraction, accenting]) => {
+            expect(contract(base, suffix, accenting)).toBe(contraction);
         });
     });
 });

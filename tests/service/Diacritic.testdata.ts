@@ -33,7 +33,16 @@ const testData: {
         ['Ἀφροδιτη', 2, 'acute', 'Ἀφροδίτη'],
         ['Ἀφροδίτη', 2, 'macron', 'Ἀφροδῑ́τη'],
         ['Ἀιδι', 0, 'acute', 'Ἀίδι'],
-        ['Ἀίδι', 0, 'diaeresis', 'Ἀΐδι']
+        ['Ἀίδι', 0, 'diaeresis', 'Ἀΐδι'],
+
+        //Some negative index tests
+        ['φυλα', -1, 'grave', 'φυλὰ'],
+        ['ακρον', -2, 'rough_breathing', 'ἁκρον'],
+        ['Ἀίδι', -2, 'diaeresis', 'Ἀΐδι'],
+        ['Ἀφροδίτη', -3, 'acute', 'Ἀφρόδίτη'],
+        ['ἀρχη', -2, 'acute', 'ἄρχη'],
+
+
     ],
     transformDiacritic: [
         {
@@ -102,6 +111,46 @@ const testData: {
                 destinationDiacritic: "grave"
             },
             result: "ἁκρὸν"
+        },
+
+        //Some negative-index tests
+        {
+            word: "ἄκρον",
+            options: {
+                originIndex: 0,
+                originDiacritic: "acute",
+                destinationIndex: -1,
+                destinationDiacritic: "grave"
+            },
+            result: "ἀκρὸν"
+        },
+        {
+            word: "ἅκρον",
+            options: {
+                originIndex: 0,
+                destinationIndex: -2,
+                destinationDiacritic: "grave"
+            },
+            result: "ἃκρον"
+        },
+        {
+            word: "ἄκρον",
+            options: {
+                originIndex: -2,
+                originDiacritic: "acute",
+                destinationIndex: -1,
+                destinationDiacritic: "grave"
+            },
+            result: "ἀκρὸν"
+        },
+        {
+            word: "ἅκρον",
+            options: {
+                originIndex: -2,
+                destinationIndex: -2,
+                destinationDiacritic: "grave"
+            },
+            result: "ἃκρον"
         },
     ],
     enforcingGeneralAccentingRules: [
