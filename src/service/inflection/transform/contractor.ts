@@ -134,7 +134,7 @@ export function contract(base: string, suffix: string, accenting: ContractAccent
 
     const baseSyllables = splitIntoSyllables(base);
 
-    const contractionPrefix = vowelPartOf(baseSyllables[ultimaIndex(baseSyllables.length)]);
+    const contractionPrefix = vowelPartOf(baseSyllables[ultimaIndex(baseSyllables)]);
 
     const isSuffixDiphthong = suffix.length > 1
         //If the first two letters of the suffix are a possible contraction suffix, take them as contractions suffix.

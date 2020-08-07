@@ -139,21 +139,20 @@ export function transformDiacritic(word: string, { originIndex,
  */
 export function enforceGeneralAccentRules(word: string, shortUltimateAiOi: boolean = true): string {
     const syllables = splitIntoSyllables(word);
-    const { length } = syllables;
 
-    const ultima = syllables[ultimaIndex(length)];
-    const penult = syllables[penultIndex(length)];
-    const antepenult = syllables[antepenultIndex(length)];
+    const ultima = syllables[ultimaIndex(syllables)];
+    const penult = syllables[penultIndex(syllables)];
+    const antepenult = syllables[antepenultIndex(syllables)];
 
 
-    const isUltimaShort = syllableType(word, ultimaIndex(length)) === 'short'
+    const isUltimaShort = syllableType(word, ultimaIndex(syllables)) === 'short'
         || (shortUltimateAiOi && stripAccents(ultima).endsWith("αι"))
         || (shortUltimateAiOi && stripAccents(ultima).endsWith("οι"));
 
     if (isUltimaShort) {
         if (syllables.length > 1
             && syllableType(word, penultIndex()) === "longByNature"
-            && containsDiacritic(syllables[penultIndex(length)], "acute")
+            && containsDiacritic(syllables[penultIndex(syllables)], "acute")
         ) {
             //Rule #2: Acute expands into a circumflex
             word = transformDiacritic(word, {

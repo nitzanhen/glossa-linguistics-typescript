@@ -16,10 +16,12 @@ import { containsDiacritic } from './diacritics';
  * functions accepting negative syllable index values.
  * @see syllableType() in this module, addDiacritic(), transformDiacritic() in the diacritic service module.
  * 
- * @param length the number *of syllables* of the word. Optional.
+ * @param arg the number *of syllables* of the word, or an array of syllables. Optional.
  * @returns the ultima index for the word, or -1 if no length was passed.
  */
-export const ultimaIndex = (length: number = 0) => length - 1;
+export const ultimaIndex = (arg: number | string[] = 0) => typeof arg === "number"
+    ? arg - 1
+    : arg.length - 1;
 
 /**
  * Returns the penult index for a word with the given amount of syllables,
@@ -27,10 +29,12 @@ export const ultimaIndex = (length: number = 0) => length - 1;
  * functions accepting negative syllable index values.
  * @see syllableType() in this module, addDiacritic(), transformDiacritic() in the diacritic service module.
  * 
- * @param length the number *of syllables* of the word. Optional.
+ * @param length the number *of syllables* of the word, or an array of syllables. Optional.
  * @returns the penult index for the word, or -2 if no length was passed.
  */
-export const penultIndex = (length: number = 0) => length - 2;
+export const penultIndex = (arg: number | string[] = 0) => typeof arg === "number"
+    ? arg - 2
+    : arg.length - 2;
 
 /**
  * Returns the antepenult index for a word with the given amount of syllables,
@@ -38,10 +42,12 @@ export const penultIndex = (length: number = 0) => length - 2;
  * functions accepting negative syllable index values.
  * @see syllableType() in this module, addDiacritic(), transformDiacritic() in the diacritic service module.
  * 
- * @param length the number *of syllables* of the word. Optional.
+ * @param length the number *of syllables* of the word, or an array of syllables. Optional.
  * @returns the antepenult index for the word, or -3 if no length was passed.
  */
-export const antepenultIndex = (length: number = 0) => length - 3;
+export const antepenultIndex = (arg: number | string[] = 0) => typeof arg === "number"
+    ? arg - 3
+    : arg.length - 3;
 
 /**
  * Splits a Greek word up into its syllables.
