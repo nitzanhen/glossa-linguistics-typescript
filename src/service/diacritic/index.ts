@@ -134,6 +134,8 @@ export function transformDiacritic(word: string, { originIndex,
  * Greek verbs in the optative, the default behaviour of this function is to treat
  * such ultimas as short, but this can be reconfigured through the shortUltimateAiOi parameter.
  * 
+ * Also, enforces that there's no grave accent on a syllable that's not the ultima.
+ * 
  * @param word the word to check
  * @returns the word with accenting corrected, if needed.
  */
@@ -143,7 +145,6 @@ export function enforceGeneralAccentRules(word: string, shortUltimateAiOi: boole
     const ultima = syllables[ultimaIndex(syllables)];
     const penult = syllables[penultIndex(syllables)];
     const antepenult = syllables[antepenultIndex(syllables)];
-
 
     const isUltimaShort = syllableType(word, ultimaIndex(syllables)) === 'short'
         || (shortUltimateAiOi && stripAccents(ultima).endsWith("αι"))
@@ -181,6 +182,13 @@ export function enforceGeneralAccentRules(word: string, shortUltimateAiOi: boole
                 destinationIndex: penultIndex(),
                 destinationDiacritic: "acute"
             });
+        }
+    }
+
+    // Seach for grave accents not on the ultima
+    for (let i = 0; i < syllables.length - 1 /* skip the ultima */; i++) {
+        if (containsDiacritic(syllables[i], "grave")) {
+            syllables[i] = stripDiacritics(syllables[i], { blacklist: ['grave'] });
         }
     }
 
