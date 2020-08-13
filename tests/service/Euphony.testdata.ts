@@ -1,4 +1,4 @@
-import { Consonant } from '#/linguistics/alphabet/letters';
+import { Consonant } from 'linguistics/alphabet/letters';
 
 const testData: {
     consonants: [Consonant, string, string][],

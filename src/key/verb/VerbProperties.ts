@@ -1,4 +1,4 @@
-import { PrincipalPart, Tense, Voice } from '#/linguistics/property';
+import { PrincipalPart, Tense, Voice } from 'linguistics/property';
 
 import KeyProperties from '../KeyProperties';
 

@@ -1,9 +1,9 @@
 
-import { getClassName } from '#/util/typeUtils';
-import { permutationsOf } from '#/util/collectionUtils';
+import { getClassName } from 'util/typeUtils';
+import { permutationsOf } from 'util/collectionUtils';
+import { compose, parameterized } from 'util/functionUtils';
 
 import testData from './utils.testdata';
-import { compose, parameterized } from '#/util/functionUtils';
 
 describe("Utils", () => {
     test("typeUtils", () => {

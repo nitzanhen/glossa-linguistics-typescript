@@ -1,6 +1,6 @@
-import { Tree } from '#/structure';
-import { Declension, Gender, Number } from '#/linguistics/property';
-import { Mastery } from '#/mastery';
+import { Tree } from 'structure';
+import { Declension, Gender, Number } from 'linguistics/property';
+import { Mastery } from 'mastery';
 
 
 const testData: {

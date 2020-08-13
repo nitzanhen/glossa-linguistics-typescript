@@ -1,4 +1,4 @@
-import { Consonant, isLabial, isPalatal, isDental, isVowel } from "#/linguistics/alphabet/letters";
+import { Consonant, isLabial, isPalatal, isDental, isVowel } from 'linguistics/alphabet/letters';
 
 import { suffix as suffixFunction } from './suffixer';
 

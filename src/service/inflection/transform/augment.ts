@@ -1,8 +1,8 @@
-import '#/global/String'
-import { InvalidLanguageError } from '#/error';
-import { isGreekString, isConsonant } from '#/linguistics/alphabet/letters';
-import { splitIntoSyllables, vowelPartOf } from '#/linguistics/alphabet/syllables';
-import { stripDiacritics } from '#/linguistics/alphabet/diacritics';
+import 'global/String'
+import { InvalidLanguageError } from 'error';
+import { isGreekString, isConsonant } from 'linguistics/alphabet/letters';
+import { splitIntoSyllables, vowelPartOf } from 'linguistics/alphabet/syllables';
+import { stripDiacritics } from 'linguistics/alphabet/diacritics';
 
 /**
  * The augment() function receives a verb form and augments it.

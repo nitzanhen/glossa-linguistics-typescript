@@ -1,4 +1,4 @@
-import { Mastery, Masterable } from '#/mastery';
+import { Mastery, Masterable } from 'mastery';
 /**
  * A definition for a word.
  * A Definition object has fields for the primary definitions - shorter, more accurate definitions of the word (closer to translations, in a sense),

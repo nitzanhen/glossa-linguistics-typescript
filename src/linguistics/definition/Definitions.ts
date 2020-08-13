@@ -1,5 +1,5 @@
-import { Key, FilterKey } from '#/key';
-import { KeyMap, Tree } from '#/structure';
+import { Key, FilterKey } from 'key';
+import { KeyMap, Tree } from 'structure';
 
 import Definition from './Definition';
 

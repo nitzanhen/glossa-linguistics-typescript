@@ -1,5 +1,5 @@
-import { Diacritic } from '#/linguistics/alphabet/diacritics';
-import { DiacriticTransformOptions } from '#/service/diacritic';
+import { Diacritic } from 'linguistics/alphabet/diacritics';
+import { DiacriticTransformOptions } from 'service/diacritic';
 
 const testData: {
     addDiacriticVowel: [string, Diacritic, string][],

@@ -1,5 +1,5 @@
 
-import { contractVowels, contract } from '#/service/inflection/transform/contractor';
+import { contractVowels, contract } from 'service/inflection/transform/contractor';
 
 import testData from './Contractor.testdata';
 

@@ -1,7 +1,7 @@
 
-import { Declension, Gender, Case } from '#/linguistics/property';
-import { DeclensionVariant } from '#/linguistics/variant';
-import AddWordServices from '#/service/add_word';
+import { Declension, Gender, Case } from 'linguistics/property';
+import { DeclensionVariant } from 'linguistics/variant';
+import AddWordServices from 'service/add_word';
 
 const AddNounService = AddWordServices.GreekNoun;
 

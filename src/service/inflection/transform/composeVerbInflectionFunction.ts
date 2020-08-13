@@ -1,4 +1,4 @@
-import { compose } from '#/util/functionUtils';
+import { compose } from 'util/functionUtils';
 
 import { accentRecessively, enforceGeneralAccentRules, addDiacritic } from '../../diacritic';
 

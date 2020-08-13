@@ -1,5 +1,5 @@
 
-import { euphonizeConsonants, euphonize } from '#/service/inflection/transform/euphony';
+import { euphonizeConsonants, euphonize } from 'service/inflection/transform/euphony';
 
 import testData from './Euphony.testdata';
 

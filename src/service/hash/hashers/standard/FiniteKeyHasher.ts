@@ -1,5 +1,5 @@
-import { FiniteKey } from '#/key';
-import { Tense, Voice, Mood, Person, Number } from '#/linguistics/property';
+import { FiniteKey } from 'key';
+import { Tense, Voice, Mood, Person, Number } from 'linguistics/property';
 
 import Hasher from '../../Hasher';
 

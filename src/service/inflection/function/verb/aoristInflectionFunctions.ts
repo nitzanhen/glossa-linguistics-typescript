@@ -1,4 +1,4 @@
-import { parameterized as multipleInflections, compose } from '#/util/functionUtils';
+import { parameterized as multipleInflections, compose } from 'util/functionUtils';
 
 import { composeVerbInflectionFunction as inflectionFunction } from '../../transform';
 import suffixer from '../../transform/suffixer';

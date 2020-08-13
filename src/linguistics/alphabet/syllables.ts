@@ -1,6 +1,6 @@
-import "#/global/String";
+import "global/String";
 
-import { InvalidLanguageError } from '#/error';
+import { InvalidLanguageError } from 'error';
 import { isConsonant, isVowel, Consonant, isStop, isLiquid, isNasal, isGreekString, isDiphthong, isDouble, Vowel, isLongMonophthong } from './letters';
 import { containsDiacritic } from './diacritics';
 

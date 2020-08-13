@@ -1,4 +1,4 @@
-import '#/global/String';
+import 'global/String';
 
 import testData from './global.testdata';
 

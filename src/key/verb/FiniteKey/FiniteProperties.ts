@@ -1,4 +1,4 @@
-import { Mood, Person, Number } from '#/linguistics/property';
+import { Mood, Person, Number } from 'linguistics/property';
 
 import VerbProperties from '../VerbProperties';
 

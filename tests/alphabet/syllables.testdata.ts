@@ -1,4 +1,4 @@
-import { SyllableType } from '#/linguistics/alphabet/syllables';
+import { SyllableType } from 'linguistics/alphabet/syllables';
 
 const testData: Record<string, { syllables: string[], syllableTypes: SyllableType[], vowelParts: string[]; }>
     = {

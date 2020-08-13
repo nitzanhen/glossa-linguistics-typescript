@@ -10,7 +10,7 @@ basic path aliases are in place, and some guidelines are to be followed:
 
 - '#' at the beginning of an import refers to the source folder, src;
     ```typescript
-    import { Key, NounKey } from '#/key'
+    import { Key, NounKey } from 'key';
     ```
     imports the Key and NounKey classes from src/key/index.ts, for example.
 - A top-level folder or module, for the sake of this discussion,
@@ -20,11 +20,11 @@ are to be exported.
 - When importing, in a certain file, an entity that is under a different top-level module (e.g. importing Key from
 a service file), they should be imported from the main index.ts of the top-level module, e.g.
     ```typescript
-    import { Key } from '#/key'
+    import { Key } from 'key';
     ```
     and **not**:
     ```typescript
-    import Key from '#/key/Key'
+    import Key from 'key/Key';
     ```
     In other words, files should try to keep all imports from a different, given top-level module under a single import statements;
     this way the import section of each file stays clean and more consistent.
@@ -40,8 +40,8 @@ a service file), they should be imported from the main index.ts of the top-level
     In general, imports from files "closer" to the given file should appear later in the import section. For example, the imports of the GreekNoun.ts 
     (under `#/linguistics/pos`) file should look something like:
     ```typescript
-    import { NounKey } from '#/key'; //Group #2
-    import { Mastery } from '#/mastery'; 
+    import { NounKey } from 'key'; //Group #2
+    import { Mastery } from 'mastery'; 
 
     import { NounInflections } from '../inflection/'; //Group #3
 

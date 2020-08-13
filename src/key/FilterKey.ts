@@ -1,5 +1,5 @@
-import { NonFunctionProperties } from '#/util/typeUtils';
-import { permutationsOf } from '#/util/collectionUtils';
+import { NonFunctionProperties } from 'util/typeUtils';
+import { permutationsOf } from 'util/collectionUtils';
 
 import Key from './Key';
 

@@ -1,5 +1,5 @@
-import Key from '#/key/Key';
-import { Nullable } from '#/util/typeUtils';
+import Key from 'key/Key';
+import { Nullable } from 'util/typeUtils';
 
 /**
  * Imeplementation of a Map data structure that supports basic hashing - converting Key

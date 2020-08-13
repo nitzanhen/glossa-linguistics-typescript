@@ -1,6 +1,6 @@
 
-import { Number, Case, Declension, Gender } from '#/linguistics/property';
-import { DeclensionVariant } from '#/linguistics/variant';
+import { Number, Case, Declension, Gender } from 'linguistics/property';
+import { DeclensionVariant } from 'linguistics/variant';
 
 import InflectionServices from '../../inflection';
 

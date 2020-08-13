@@ -1,5 +1,5 @@
 
-import { addDiacriticVowel, addDiacritic, transformDiacritic, enforceGeneralAccentRules, accentRecessively } from '#/service/diacritic';
+import { addDiacriticVowel, addDiacritic, transformDiacritic, enforceGeneralAccentRules, accentRecessively } from 'service/diacritic';
 
 import testData from './Diacritic.testdata';
 

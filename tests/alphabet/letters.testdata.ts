@@ -1,4 +1,4 @@
-import diacritics from '#/linguistics/alphabet/diacritics';
+import diacritics from 'linguistics/alphabet/diacritics';
 
 const { iota_subscript } = diacritics;
 

@@ -1,4 +1,4 @@
-import { isConsonant, isVowel } from '#/linguistics/alphabet/letters';
+import { isConsonant, isVowel } from 'linguistics/alphabet/letters';
 
 const testData: {
     cases: [string, string][],

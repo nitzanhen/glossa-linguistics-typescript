@@ -1,5 +1,5 @@
 
-import { stripDiacritics, containsDiacritic, orderDiacritics, isAccented } from '#/linguistics/alphabet/diacritics';
+import { stripDiacritics, containsDiacritic, orderDiacritics, isAccented } from 'linguistics/alphabet/diacritics';
 
 import testData from './diacritics.testdata';
 

@@ -1,4 +1,4 @@
-import { ContractAccentingOptions } from '#/service/inflection/transform/contractor';
+import { ContractAccentingOptions } from 'service/inflection/transform/contractor';
 
 const testData:
     {

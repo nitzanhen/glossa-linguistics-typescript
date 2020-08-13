@@ -1,5 +1,5 @@
-import { NounKey } from '#/key';
-import { Mastery } from '#/mastery';
+import { NounKey } from 'key';
+import { Mastery } from 'mastery';
 
 import { NounInflections } from '../inflection/';
 

@@ -1,5 +1,5 @@
-import { Gender, Declension } from '#/linguistics/property';
-import { DeclensionVariant } from '#/linguistics/variant';
+import { Gender, Declension } from 'linguistics/property';
+import { DeclensionVariant } from 'linguistics/variant';
 
 import NounProperties from './NounProperties';
 import ExtendedKeyProperties from '../ExtendedKeyProperties';

@@ -1,5 +1,5 @@
-import diacritics, { Diacritic, stripDiacritics, stripAccents, containsDiacritic, orderDiacritics } from "#/linguistics/alphabet/diacritics";
-import { splitIntoSyllables, vowelPartOf, syllableType, ultimaIndex, penultIndex, antepenultIndex } from "#/linguistics/alphabet/syllables";
+import diacritics, { Diacritic, stripDiacritics, stripAccents, containsDiacritic, orderDiacritics } from 'linguistics/alphabet/diacritics';
+import { splitIntoSyllables, vowelPartOf, syllableType, ultimaIndex, penultIndex, antepenultIndex } from 'linguistics/alphabet/syllables';
 
 /**
  * Contains useful functions for adding and transforming diacritics.
@@ -196,7 +196,7 @@ export function enforceGeneralAccentRules(word: string, shortUltimateAiOi: boole
 }
 
 /**
- * Accents a Green word recessively, i.e. puts the accent as far back
+ * Accents a Greek word recessively, i.e. puts the accent as far back
  * as possible.
  * In practice, this function puts an acute on the antepenult (or the first syllable,
  * if there's less than three syllables), and then calls enforceGeneralAccentRules() to

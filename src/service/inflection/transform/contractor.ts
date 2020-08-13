@@ -1,5 +1,5 @@
-import { stripAccents, isAccented, Diacritic } from "#/linguistics/alphabet/diacritics";
-import { vowelPartOf, splitIntoSyllables, ultimaIndex } from '#/linguistics/alphabet/syllables';
+import { stripAccents, isAccented, Diacritic } from 'linguistics/alphabet/diacritics';
+import { vowelPartOf, splitIntoSyllables, ultimaIndex } from 'linguistics/alphabet/syllables';
 
 import { addDiacriticVowel, accentRecessively, addDiacritic } from "../../diacritic";
 import { suffix as suffixFunction } from './suffixer';

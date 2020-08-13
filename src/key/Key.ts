@@ -1,5 +1,5 @@
-import { getClassName } from '#/util/typeUtils';
-import HashServices from '#/service/hash';
+import { getClassName } from 'util/typeUtils';
+import HashServices from 'service/hash';
 
 /**
  * Common ancestor to all Key instances.

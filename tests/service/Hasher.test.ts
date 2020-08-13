@@ -1,6 +1,6 @@
 
-import HasherService from '#/service/hash';
-import Hasher from '#/service/hash/Hasher';
+import HasherService from 'service/hash';
+import Hasher from 'service/hash/Hasher';
 
 import testData from './Hasher.testdata';
 

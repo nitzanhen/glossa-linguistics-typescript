@@ -1,4 +1,4 @@
-import { Case, Number } from '#/linguistics/property';
+import { Case, Number } from 'linguistics/property';
 
 import KeyProperties from '../KeyProperties';
 

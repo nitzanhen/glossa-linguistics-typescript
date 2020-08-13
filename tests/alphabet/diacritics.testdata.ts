@@ -1,4 +1,4 @@
-import { Diacritic } from "#/linguistics/alphabet/diacritics";
+import { Diacritic } from 'linguistics/alphabet/diacritics';
 
 const testData: {
     stripping: { input: string, output: string, blacklist?: Diacritic[], retain?: Diacritic[]; }[],

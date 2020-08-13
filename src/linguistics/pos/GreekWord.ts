@@ -1,5 +1,5 @@
-import { Key } from '#/key';
-import { Mastery, Masterable } from '#/mastery';
+import { Key } from 'key';
+import { Mastery, Masterable } from 'mastery';
 
 import { Definitions, Definable } from '../definition';
 import { Inflections, Inflectable } from '../inflection';

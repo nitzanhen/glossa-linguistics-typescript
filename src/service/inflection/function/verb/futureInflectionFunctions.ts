@@ -1,4 +1,4 @@
-import { parameterized as multipleInflections } from '#/util/functionUtils';
+import { parameterized as multipleInflections } from 'util/functionUtils';
 
 import { composeVerbInflectionFunction as inflectionFunction } from '../../transform';
 import { penultIndex } from '../../../../linguistics/alphabet/syllables';

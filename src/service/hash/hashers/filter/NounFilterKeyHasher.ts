@@ -1,5 +1,5 @@
-import { NounFilterKey } from '#/key';
-import { Case, Number } from '#/linguistics/property';
+import { NounFilterKey } from 'key';
+import { Case, Number } from 'linguistics/property';
 
 import Hasher from '../../Hasher';
 

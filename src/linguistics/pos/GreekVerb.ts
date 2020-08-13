@@ -1,5 +1,5 @@
-import { Mastery } from '#/mastery';
-import { VerbKey } from '#/key';
+import { Mastery } from 'mastery';
+import { VerbKey } from 'key';
 
 import { VerbInflections } from '../inflection';
 

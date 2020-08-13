@@ -1,5 +1,5 @@
 
-import { splitIntoSyllables, syllableType, vowelPartOf, ultimaIndex, penultIndex, antepenultIndex } from '#/linguistics/alphabet/syllables';
+import { splitIntoSyllables, syllableType, vowelPartOf, ultimaIndex, penultIndex, antepenultIndex } from 'linguistics/alphabet/syllables';
 
 import testData from './syllables.testdata';
 

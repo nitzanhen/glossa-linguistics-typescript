@@ -1,6 +1,6 @@
 
-import { augment } from '#/service/inflection/transform';
-import { temporalAugmentOf } from '#/service/inflection/transform/augment';
+import { augment } from 'service/inflection/transform';
+import { temporalAugmentOf } from 'service/inflection/transform/augment';
 
 import testData from './InflectionTransform.testdata';
 

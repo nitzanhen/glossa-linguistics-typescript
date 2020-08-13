@@ -1,6 +1,6 @@
-import { NounKey, NounFilterKey, FiniteKey, FiniteFilterKey, InfinitiveKey, InfinitiveFilterKey, ParticipleKey, ParticipleFilterKey, Key } from '#/key';
-import { Case, PrincipalPart, Canister, Tense, Voice, Mood, Person, Number } from '#/linguistics/property';
-import HasherService from '#/service/hash';
+import { NounKey, NounFilterKey, FiniteKey, FiniteFilterKey, InfinitiveKey, InfinitiveFilterKey, ParticipleKey, ParticipleFilterKey, Key } from 'key';
+import { Case, PrincipalPart, Canister, Tense, Voice, Mood, Person, Number } from 'linguistics/property';
+import HasherService from 'service/hash';
 
 const testData: Record<keyof typeof HasherService, readonly { input: Key, hash: string; }[]>
     = {
