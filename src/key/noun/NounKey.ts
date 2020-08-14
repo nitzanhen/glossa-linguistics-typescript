@@ -1,12 +1,12 @@
 import { Case, Number } from 'linguistics/property';
 
 import Key from '../Key';
-import NounProperties from './NounProperties';
+import NounKeyProperties from './NounKeyProperties';
 
 /**
  * @since 27/04/20
  */
-class NounKey extends Key implements NounProperties {
+class NounKey extends Key implements NounKeyProperties {
 
     //------ Constrcutor ------//
 

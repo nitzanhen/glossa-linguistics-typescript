@@ -1,9 +1,10 @@
-import { KeyProperties } from '..';
+import GrammaticalProperties from '../GrammaticalProperties';
+import AdjectiveKeyProperties from './AdjectiveKeyProperties';
 
 /**
  * @since 03/08/20
  */
-interface AdjectiveProperties extends KeyProperties {
+interface AdjectiveProperties extends GrammaticalProperties, AdjectiveKeyProperties {
 
 }
 

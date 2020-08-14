@@ -1,5 +1,4 @@
 import FilterKey from '../../FilterKey';
-import ParticipleProperties from './ParticipleProperties';
 import Key from '../../Key';
 import ParticipleKey from './ParticipleKey';
 

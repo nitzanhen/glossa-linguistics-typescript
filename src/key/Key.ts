@@ -24,7 +24,7 @@ abstract class Key {
      * property interface wrapped by the FilterKey type. 
      * 
      * For example, InfinitiveKey's constructor should pass nothing to this method, but InfinitiveFilterKey's method
-     * should pass in properties of the FilterKey<InfinitiveProperties> type.
+     * should pass in properties of the FilterKey<InfinitiveKeyProperties> type.
      * 
      * @param args: the object of arguments to pass into the constructor. In practice, assigns all properties of the args object
      * to this.

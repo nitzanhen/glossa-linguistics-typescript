@@ -1,6 +1,6 @@
 import { Declension } from 'linguistics/property';
 import { NotImplementedError } from 'error';
-import ExtendedNounProperties from 'key/noun/ExtendedNounProperties';
+import NounProperties from 'key/noun/NounProperties';
 
 import nounInflectionFunctions from './NounInflectionFunctions';
 
@@ -25,8 +25,8 @@ const NounInflectionService = {
      * 
      * @todo support for third declension, contract verbs, accenting.
      */
-    suggestInflection(properties: ExtendedNounProperties): string {
-        if (!ExtendedNounProperties.validateVariant(properties)) {
+    suggestInflection(properties: NounProperties): string {
+        if (!NounProperties.validateVariant(properties)) {
             throw new RangeError("variant argument does not match the other properties' constraints: " + properties);
         }
 

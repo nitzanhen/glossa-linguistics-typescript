@@ -1,11 +1,11 @@
 import VerbKey from '../VerbKey';
-import InfinitiveProperties from './InfinitiveProperties';
+import InfinitiveKeyProperties from './InfinitiveKeyProperties';
 
 /**
  * Key for Greek infinitives
  * 
  * @since 14/05/20
  */
-class InfinitiveKey extends VerbKey implements InfinitiveProperties { }
+class InfinitiveKey extends VerbKey implements InfinitiveKeyProperties { }
 
 export default InfinitiveKey;

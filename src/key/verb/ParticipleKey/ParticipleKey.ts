@@ -1,7 +1,7 @@
 import { Tense, Voice, Case, Number, PrincipalPart } from 'linguistics/property';
 
 import VerbKey from '../VerbKey';
-import ParticipleProperties from './ParticipleProperties';
+import ParticipleKeyProperties from './ParticipleKeyProperties';
 
 
 /**
@@ -9,7 +9,7 @@ import ParticipleProperties from './ParticipleProperties';
  * 
  * @since 27/04/20
  */
-class ParticipleKey extends VerbKey implements ParticipleProperties {
+class ParticipleKey extends VerbKey implements ParticipleKeyProperties {
     //------ Constructor ------//
 
     public constructor(
