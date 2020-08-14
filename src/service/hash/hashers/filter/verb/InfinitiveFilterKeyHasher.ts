@@ -1,9 +1,9 @@
 import { InfinitiveFilterKey } from 'key';
 import { Tense, Voice } from 'linguistics/property';
 
-import Hasher from '../../Hasher';
+import Hasher from '../../../Hasher';
 
-import principalPartHasher from '../PrincipalPartHasher';
+import principalPartHasher from '../../standard/verb/PrincipalPartHasher';
 
 /**
  * Hasher for InfinitiveFilterKeys

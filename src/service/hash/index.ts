@@ -1,11 +1,11 @@
-import NounKeyHasher from './hashers/standard/NounKeyHasher';
-import FiniteKeyHasher from './hashers/standard/FiniteKeyHasher';
-import InfinitiveKeyHasher from './hashers/standard/InfinitiveKeyHasher';
-import ParticipleKeyHasher from './hashers/standard/ParticipleKeyHasher';
-import NounFilterKeyHasher from './hashers/filter/NounFilterKeyHasher';
-import FiniteFilterKeyHasher from './hashers/filter/FiniteFilterKeyHasher';
-import InfinitiveFilterKeyHasher from './hashers/filter/InfinitiveFilterKeyHasher';
-import ParticipleFilterKeyHasher from './hashers/filter/ParticipleFilterKeyHasher';
+import NounKeyHasher from './hashers/standard/noun/NounKeyHasher';
+import FiniteKeyHasher from './hashers/standard/verb/FiniteKeyHasher';
+import NounFilterKeyHasher from './hashers/filter/noun/NounFilterKeyHasher';
+import FiniteFilterKeyHasher from './hashers/filter/verb/FiniteFilterKeyHasher';
+import InfinitiveFilterKeyHasher from './hashers/filter/verb/InfinitiveFilterKeyHasher';
+import ParticipleFilterKeyHasher from './hashers/filter/verb/ParticipleFilterKeyHasher';
+import InfinitiveKeyHasher from './hashers/standard/verb/InfinitiveKeyHasher';
+import ParticipleKeyHasher from './hashers/standard/verb/ParticipleKeyHasher';
 
 
 /**

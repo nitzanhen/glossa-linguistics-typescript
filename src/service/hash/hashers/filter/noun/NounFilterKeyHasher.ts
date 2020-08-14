@@ -1,7 +1,7 @@
 import { NounFilterKey } from 'key';
 import { Case, Number } from 'linguistics/property';
 
-import Hasher from '../../Hasher';
+import Hasher from '../../../Hasher';
 
 /** 
  * NounFilterKey hasher 

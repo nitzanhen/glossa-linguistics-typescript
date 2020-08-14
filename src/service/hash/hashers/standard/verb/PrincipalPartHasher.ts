@@ -1,4 +1,4 @@
-import Hasher from '../Hasher';
+import Hasher from '../../../Hasher';
 import { PrincipalPart, Canister } from 'linguistics/property';
 
 /** 
