@@ -6,6 +6,8 @@ import InfinitiveFilterKeyHasher from './hashers/filter/verb/InfinitiveFilterKey
 import ParticipleFilterKeyHasher from './hashers/filter/verb/ParticipleFilterKeyHasher';
 import InfinitiveKeyHasher from './hashers/standard/verb/InfinitiveKeyHasher';
 import ParticipleKeyHasher from './hashers/standard/verb/ParticipleKeyHasher';
+import AdjectiveKeyHasher from './hashers/standard/adjective/AdjectiveKeyHasher';
+import AdjectiveFilterKeyHasher from './hashers/filter/adjective/AdjectiveFilterKeyHasher';
 
 
 /**
@@ -22,7 +24,9 @@ const HashServices = {
     InfinitiveKey: InfinitiveKeyHasher,
     InfinitiveFilterKey: InfinitiveFilterKeyHasher,
     ParticipleKey: ParticipleKeyHasher,
-    ParticipleFilterKey: ParticipleFilterKeyHasher
+    ParticipleFilterKey: ParticipleFilterKeyHasher,
+    AdjectiveKey: AdjectiveKeyHasher,
+    AdjectiveFilterKey: AdjectiveFilterKeyHasher
 };
 
 export default Object.freeze(HashServices);
