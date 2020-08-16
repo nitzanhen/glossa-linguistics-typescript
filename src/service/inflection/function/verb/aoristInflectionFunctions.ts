@@ -346,7 +346,7 @@ const aoristInflectionFunctions = {
           },
           middle: {
             singular: {
-              second: inflectionFunction("ου", { accenting: ultimaIndex() }),
+              second: inflectionFunction("οῦ", { accenting: null }),
               third: inflectionFunction("εσθω"),
             },
             plural: {
