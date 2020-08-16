@@ -1,5 +1,5 @@
-import { NounKey, NounFilterKey, FiniteKey, FiniteFilterKey, InfinitiveKey, InfinitiveFilterKey, ParticipleKey, ParticipleFilterKey, Key } from 'key';
-import { Case, PrincipalPart, Canister, Tense, Voice, Mood, Person, Number } from 'linguistics/property';
+import { NounKey, NounFilterKey, FiniteKey, FiniteFilterKey, InfinitiveKey, InfinitiveFilterKey, ParticipleKey, ParticipleFilterKey, Key, AdjectiveKey, AdjectiveFilterKey } from 'key';
+import { Case, PrincipalPart, Canister, Tense, Voice, Mood, Person, Number, Gender } from 'linguistics/property';
 import HasherService from 'service/hash';
 
 const testData: Record<keyof typeof HasherService, readonly { input: Key, hash: string; }[]>
@@ -75,6 +75,23 @@ const testData: Record<keyof typeof HasherService, readonly { input: Key, hash: 
     }, {
         input: new ParticipleFilterKey({}),
         hash: '[null,null,null,null,null]'
+    }],
+    AdjectiveKey: [{
+        input: new AdjectiveKey(
+            "base",
+            Gender.MASCULINE,
+            Case.ACCUSATIVE,
+            Number.PLURAL
+        ),
+        hash: '["base","masculine","accusative","plural"]'
+    }],
+    AdjectiveFilterKey: [{
+        input: new AdjectiveFilterKey({
+            baseInflection: ["base1", "base2"],
+            case_: [Case.DATIVE, Case.GENITIVE, Case.VOCATIVE],
+            number: [Number.SINGULAR]
+        }),
+        hash: '[["base1","base2"],null,["dative","genitive","vocative"],["singular"]]'
     }]
 };
 
