@@ -1,1 +1,2 @@
-export { FirstDeclensionVariant, ThirdDeclensionVariant, DeclensionVariant } from './DeclensionVariant';
+export { FirstDeclensionVariant, ThirdDeclensionVariant, DeclensionVariant } from './NounVariants';
+export { AdjectiveSuffixVariant, AdjectiveClassVariant } from './AdjectiveVariants';
