@@ -1,13 +1,13 @@
 import { Gender, Case, Number } from 'linguistics/property';
 
-import { Key} from '..';
+import { Key } from '..';
 import AdjectiveKeyProperties from './AdjectiveKeyProperties';
 
 /**
  * @since 03/08/20
  */
 class AdjectiveKey extends Key implements AdjectiveKeyProperties {
-    
+
     //------ Constructor ------//
     public constructor(
         public baseInflection: string,
