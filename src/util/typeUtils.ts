@@ -43,3 +43,17 @@ export type NonFunctionPropertyNames<T> = {
 }[keyof T];
 
 export type NonFunctionProperties<T> = Pick<T, NonFunctionPropertyNames<T>>;
+
+/**
+ * Picks the given fields of type T, and makes them all optional.
+ * 
+ * @since 06/09/20
+ */
+export type PickPartial<T, K extends keyof T> = Partial<Pick<T, K>>
+
+/**
+ * Generalization of Pick to support grabbing some of the fields as optionals.
+ * 
+ * @since 06/09/20
+ */
+export type PickWithPartials<T, K extends keyof T, P extends keyof T> = Pick<T, K> & PickPartial<T, P>

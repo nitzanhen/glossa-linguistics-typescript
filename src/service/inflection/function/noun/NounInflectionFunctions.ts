@@ -1,118 +1,118 @@
-import { suffixer } from '../../transform';
+import { default as inflectionFunction } from '../../composition/composeNounInflectionFunction';
 
 const nounInflectionFunctions = {
   first_declension: {
     feminine: {
       alpha_long: {
         nominative: {
-          singular: suffixer('ᾱ'),
-          plural: suffixer('αι'),
+          singular: inflectionFunction('ᾱ'),
+          plural: inflectionFunction('αι'),
         },
         genitive: {
-          singular: suffixer('ᾱς'),
-          plural: suffixer('ων'),
+          singular: inflectionFunction('ᾱς'),
+          plural: inflectionFunction('ων'),
         },
         dative: {
-          singular: suffixer('ᾳ'),
-          plural: suffixer('αις'),
+          singular: inflectionFunction('ᾳ'),
+          plural: inflectionFunction('αις'),
         },
         accusative: {
-          singular: suffixer('ᾱν'),
-          plural: suffixer('ᾱς'),
+          singular: inflectionFunction('ᾱν'),
+          plural: inflectionFunction('ᾱς'),
         },
         vocative: {
-          singular: suffixer('ᾱ'),
-          plural: suffixer('αι'),
+          singular: inflectionFunction('ᾱ'),
+          plural: inflectionFunction('αι'),
         },
       },
       alpha_short: {
         nominative: {
-          singular: suffixer('α'),
-          plural: suffixer('αι'),
+          singular: inflectionFunction('α'),
+          plural: inflectionFunction('αι'),
         },
         genitive: {
-          singular: suffixer('ᾱς'),
-          plural: suffixer('ων'),
+          singular: inflectionFunction('ᾱς'),
+          plural: inflectionFunction('ων'),
         },
         dative: {
-          singular: suffixer('ᾳ'),
-          plural: suffixer('αις'),
+          singular: inflectionFunction('ᾳ'),
+          plural: inflectionFunction('αις'),
         },
         accusative: {
-          singular: suffixer('αν'),
-          plural: suffixer('ᾱς'),
+          singular: inflectionFunction('αν'),
+          plural: inflectionFunction('ᾱς'),
         },
         vocative: {
-          singular: suffixer('α'),
-          plural: suffixer('αι'),
+          singular: inflectionFunction('α'),
+          plural: inflectionFunction('αι'),
         },
       },
       eta: {
         nominative: {
-          singular: suffixer('η'),
-          plural: suffixer('αι'),
+          singular: inflectionFunction('η'),
+          plural: inflectionFunction('αι'),
         },
         genitive: {
-          singular: suffixer('ης'),
-          plural: suffixer('ων'),
+          singular: inflectionFunction('ης'),
+          plural: inflectionFunction('ων'),
         },
         dative: {
-          singular: suffixer('ῃ'),
-          plural: suffixer('αις'),
+          singular: inflectionFunction('ῃ'),
+          plural: inflectionFunction('αις'),
         },
         accusative: {
-          singular: suffixer('ην'),
-          plural: suffixer('ᾱς'),
+          singular: inflectionFunction('ην'),
+          plural: inflectionFunction('ᾱς'),
         },
         vocative: {
-          singular: suffixer('η'),
-          plural: suffixer('αι'),
+          singular: inflectionFunction('η'),
+          plural: inflectionFunction('αι'),
         },
       },
     },
     masculine: {
       alpha: {
         nominative: {
-          singular: suffixer('ᾱς'),
-          plural: suffixer('αι'),
+          singular: inflectionFunction('ᾱς'),
+          plural: inflectionFunction('αι'),
         },
         genitive: {
-          singular: suffixer('ου'),
-          plural: suffixer('ων'),
+          singular: inflectionFunction('ου'),
+          plural: inflectionFunction('ων'),
         },
         dative: {
-          singular: suffixer('ᾳ'),
-          plural: suffixer('αις'),
+          singular: inflectionFunction('ᾳ'),
+          plural: inflectionFunction('αις'),
         },
         accusative: {
-          singular: suffixer('ᾱν'),
-          plural: suffixer('ᾱς'),
+          singular: inflectionFunction('ᾱν'),
+          plural: inflectionFunction('ᾱς'),
         },
         vocative: {
-          singular: suffixer('ᾱ'),
-          plural: suffixer('αι'),
+          singular: inflectionFunction('ᾱ'),
+          plural: inflectionFunction('αι'),
         },
       },
       eta: {
         nominative: {
-          singular: suffixer('ης'),
-          plural: suffixer('αι'),
+          singular: inflectionFunction('ης'),
+          plural: inflectionFunction('αι'),
         },
         genitive: {
-          singular: suffixer('ου'),
-          plural: suffixer('ων'),
+          singular: inflectionFunction('ου'),
+          plural: inflectionFunction('ων'),
         },
         dative: {
-          singular: suffixer('ῃ'),
-          plural: suffixer('αις'),
+          singular: inflectionFunction('ῃ'),
+          plural: inflectionFunction('αις'),
         },
         accusative: {
-          singular: suffixer('ην'),
-          plural: suffixer('ᾱς'),
+          singular: inflectionFunction('ην'),
+          plural: inflectionFunction('ᾱς'),
         },
         vocative: {
-          singular: suffixer('α'),
-          plural: suffixer('αι'),
+          singular: inflectionFunction('α'),
+          plural: inflectionFunction('αι'),
         },
       },
     },
@@ -120,46 +120,46 @@ const nounInflectionFunctions = {
   second_declension: {
     masculine: {
       nominative: {
-        singular: suffixer('ος'),
-        plural: suffixer('οι'),
+        singular: inflectionFunction('ος'),
+        plural: inflectionFunction('οι'),
       },
       genitive: {
-        singular: suffixer('ου'),
-        plural: suffixer('ων'),
+        singular: inflectionFunction('ου'),
+        plural: inflectionFunction('ων'),
       },
       dative: {
-        singular: suffixer('ῳ'),
-        plural: suffixer('οις'),
+        singular: inflectionFunction('ῳ'),
+        plural: inflectionFunction('οις'),
       },
       accusative: {
-        singular: suffixer('ον'),
-        plural: suffixer('ους'),
+        singular: inflectionFunction('ον'),
+        plural: inflectionFunction('ους'),
       },
       vocative: {
-        singular: suffixer('ε'),
-        plural: suffixer('οι'),
+        singular: inflectionFunction('ε'),
+        plural: inflectionFunction('οι'),
       },
     },
     neuter: {
       nominative: {
-        singular: suffixer('ον'),
-        plural: suffixer('α'),
+        singular: inflectionFunction('ον'),
+        plural: inflectionFunction('α'),
       },
       genitive: {
-        singular: suffixer('ου'),
-        plural: suffixer('ων'),
+        singular: inflectionFunction('ου'),
+        plural: inflectionFunction('ων'),
       },
       dative: {
-        singular: suffixer('ῳ'),
-        plural: suffixer('οις'),
+        singular: inflectionFunction('ῳ'),
+        plural: inflectionFunction('οις'),
       },
       accusative: {
-        singular: suffixer('ον'),
-        plural: suffixer('α'),
+        singular: inflectionFunction('ον'),
+        plural: inflectionFunction('α'),
       },
       vocative: {
-        singular: suffixer('ον'),
-        plural: suffixer('α'),
+        singular: inflectionFunction('ον'),
+        plural: inflectionFunction('α'),
       },
     },
   },

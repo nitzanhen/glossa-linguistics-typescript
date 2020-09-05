@@ -2,11 +2,11 @@ import { compose } from 'util/functionUtils';
 
 import { accentRecessively, enforceGeneralAccentRules, addDiacritic } from '../../diacritic';
 
-import suffixer from './suffixer';
-import augment from './augment';
-import contractor, { ContractAccentingOptions } from './contractor';
-import { euphonizer } from './euphony';
-import { stripAccents } from '../../../linguistics/alphabet/diacritics';
+import suffixer from '../transform/suffixer';
+import augment from '../transform/augment';
+import contractor, { ContractAccentingOptions } from '../transform/contractor';
+import { euphonizer } from '../transform/euphony';
+import { stripAccents } from 'linguistics/alphabet/diacritics';
 
 interface ComposeVerbInflectionFunctionOptions {
   endings?: "suffix" | "contract" | "euphonize",
@@ -15,7 +15,7 @@ interface ComposeVerbInflectionFunctionOptions {
 }
 
 /**
- * Utility function to compose inflection functions easily.
+ * Utility function to compose verb inflection functions easily.
  * Creates a function composition from the given options. 
  * 
  * @param suffix the suffix to add to arguments passed to the function returned from this factory.

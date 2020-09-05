@@ -1,7 +1,10 @@
-import GreekWord from "./GreekWord";
 import { AdjectiveKey } from "key";
 import { Mastery } from "mastery";
 import { AdjectiveInflections } from "linguistics/inflection";
+
+import GreekWord, { GreekWordConstructorOptions } from "./GreekWord";
+
+type GreekAdjectiveConstructorOptions = GreekWordConstructorOptions<AdjectiveKey> & Pick<GreekAdjective, "inflections" | "mastery">;
 
 /**
  * Class for Greek adjectives.
@@ -17,14 +20,14 @@ class GreekAdjective extends GreekWord<AdjectiveKey> {
 
     //------ Constructor ------//
 
-    public constructor(
-        inflections: AdjectiveInflections,
-        mastery: Mastery,
-        mnemonic: string,
-        creationDate: Date,
-        comments: string,
-    ) {
-        super(mnemonic, creationDate, comments);
+    public constructor({
+        inflections,
+        mastery,
+        mnemonic,
+        creationDate,
+        comments,
+    }: GreekAdjectiveConstructorOptions) {
+        super({ mnemonic, creationDate, comments });
         this.inflections = inflections;
         this.mastery = mastery;
     }

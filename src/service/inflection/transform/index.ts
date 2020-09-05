@@ -5,7 +5,7 @@
  * @since 06/06/20
  */
 
-export { default as composeVerbInflectionFunction } from './composeVerbInflectionFunction';
+export { default as composeVerbInflectionFunction } from '../composition/composeVerbInflectionFunction';
 export { default as augment } from './augment';
 export { default as suffixer } from './suffixer';
 export { default as contractor } from './contractor';

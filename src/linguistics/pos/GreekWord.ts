@@ -3,6 +3,9 @@ import { Mastery, Masterable } from 'mastery';
 
 import { Definitions, Definable } from '../definition';
 import { Inflections, Inflectable } from '../inflection';
+import { PickPartial, PickWithPartials } from 'util/typeUtils';
+
+export type GreekWordConstructorOptions<K extends Key> = PickWithPartials<GreekWord<K>, "mnemonic", "creationDate" | "comments">
 
 /**
  * Base class for Greek words.
@@ -21,11 +24,15 @@ abstract class GreekWord<K extends Key>
 
   public mnemonic: string;
   public readonly creationDate: Date;
-  public comments: string;
+  public comments?: string;
 
   //------ Constructor ------//
 
-  public constructor(mnemonic: string, creationDate: Date, comments: string) {
+  public constructor({
+    mnemonic,
+    creationDate = new Date(),
+    comments = undefined
+  }: GreekWordConstructorOptions<K>) {
     this.definitions = new Definitions();
     this.mnemonic = mnemonic;
     this.creationDate = creationDate;

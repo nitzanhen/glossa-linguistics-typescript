@@ -3,8 +3,13 @@ import { VerbKey } from 'key';
 
 import { VerbInflections } from '../inflection';
 
-import GreekWord from './GreekWord';
+import GreekWord, { GreekWordConstructorOptions } from './GreekWord';
 
+type GreekVerbConstructorOptions = GreekWordConstructorOptions<VerbKey> & Pick<GreekVerb, "inflections" | "mastery">;
+
+/**
+ * Class for Greek Nouns.
+ */
 class GreekVerb extends GreekWord<VerbKey> {
     //------ Fields ------//
 
@@ -14,14 +19,14 @@ class GreekVerb extends GreekWord<VerbKey> {
 
     //------ Constructor ------//
 
-    public constructor(
-        inflections: VerbInflections,
-        mastery: Mastery,
-        mnemonic: string,
-        creationDate: Date,
-        comments: string,
-    ) {
-        super(mnemonic, creationDate, comments);
+    public constructor({
+        inflections,
+        mastery,
+        mnemonic,
+        creationDate,
+        comments,
+    }: GreekVerbConstructorOptions) {
+        super({ mnemonic, creationDate, comments });
         this.inflections = inflections;
         this.mastery = mastery;
     }
