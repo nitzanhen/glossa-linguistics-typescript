@@ -10,7 +10,7 @@ class Tree<T> {
 
     //------ Constructor ------//
 
-    constructor(data: T, children?: Tree<T>[]) {
+    public constructor(data: T, children?: Tree<T>[]) {
         this.data = data;
         this.children = children || [];
     }

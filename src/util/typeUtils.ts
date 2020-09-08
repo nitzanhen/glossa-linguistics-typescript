@@ -44,6 +44,8 @@ export type NonFunctionPropertyNames<T> = {
 
 export type NonFunctionProperties<T> = Pick<T, NonFunctionPropertyNames<T>>;
 
+export type Function<A = any[], B = any> = (...args: A extends any[] ? A : [A]) => B;
+
 /**
  * Picks the given fields of type T, and makes them all optional.
  * 
