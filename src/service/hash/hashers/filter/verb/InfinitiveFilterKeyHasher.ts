@@ -1,5 +1,7 @@
 import { InfinitiveFilterKey } from 'key';
-import { Tense, Voice } from 'linguistics/property';
+import { PrincipalPart, Tense, Voice } from 'linguistics/property';
+import Property from 'linguistics/property/Property';
+import SortedSet from 'structure/SortedSet';
 
 import Hasher from '../../../Hasher';
 
@@ -11,33 +13,28 @@ import principalPartHasher from '../../standard/verb/PrincipalPartHasher';
  * @since 17/05/20
  */
 const InfinitiveFilterKeyHasher: Readonly<Hasher<InfinitiveFilterKey>> = {
-    hash(target: InfinitiveFilterKey): string {
-        const { principalPart, tense, voice } = target;
-        const principalPartHash = principalPart
-            ? principalPart.map(pPart => principalPartHasher.hash(pPart))
-            : undefined;
+    hash({ principalPart, tense, voice }: InfinitiveFilterKey): string {
+        const fields = [tense, voice];
 
-        return JSON.stringify([principalPartHash, tense, voice]);
+        const fieldLists = fields.map(set => set?.toList());
+        const principalPartHash = principalPart?.toList().map(pPart => principalPartHasher.hash(pPart))
+
+        return JSON.stringify([principalPartHash, ...fieldLists]);
     },
     unhash(hash: string): InfinitiveFilterKey {
-        let [principalPart, tense, voice] = JSON.parse(hash);
-        principalPart = principalPart
-            //Map to Principal Parts
-            ? principalPart.map((pPart: [string, string]) => principalPartHasher.unhash(pPart))
-            //principalPartHash is null. Convert to undefined
-            : undefined;
+        let [principalPartHash, tense, voice] = JSON.parse(hash);
 
-        tense = tense
-            //Map to Tenses
-            ? tense.map((hash: string) => Tense.fromString(hash))
-            //tense is null. Convert to undefined
-            : undefined;
+        //Map to PrincipalPart instances, then to SortedSet, or to undefined if null.
+        let principalPart = principalPartHash?.map((pPartHash: [string, string]) => principalPartHasher.unhash(pPartHash));
+        principalPart && (principalPart = new SortedSet<PrincipalPart>(PrincipalPart.compare, ...principalPart))
 
-        voice = voice
-            //Map to Voices
-            ? voice.map((hash: string) => Voice.fromString(hash))
-            //voice is null. Convert to undefined
-            : undefined;
+        //Map to Tense instances, then to SortedSet, or to undefined if null.
+        tense = tense?.map((t: string) => Tense.fromString(t));
+        tense && (tense = new SortedSet<Tense>(Property.compare, ...tense))
+
+        //Map to Voice instances, then to SortedSet, or to undefined if null.
+        voice = voice?.map((v: string) => Voice.fromString(v))
+        voice && (voice = new SortedSet<Voice>(Property.compare, ...voice))
 
         return new InfinitiveFilterKey({ principalPart, tense, voice });
     }

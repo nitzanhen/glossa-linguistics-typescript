@@ -27,9 +27,11 @@ class SortedSet<T> {
          * positive iff the second should come before the first,
          * and zero iff the elements are equivalent.
          */
-        public comparator: Function<[T, T], number>
+        public comparator: Function<[T, T], number>,
+        ...initialElements: T[]
     ) {
         this.elements = [];
+        initialElements.forEach(el => this.add(el));
     }
 
     //------ Methods ------//
@@ -40,7 +42,7 @@ class SortedSet<T> {
      */
     private indexOf(element: T): number {
         let i = 0;
-        while (i < this.size && this.comparator(element, this.elements[i]) < 0) {
+        while (i < this.size && this.comparator(this.elements[i], element) < 0) {
             i++;
         }
         //If we're reached here, there exists no element in the elements array that's greater than the given element.
@@ -88,6 +90,11 @@ class SortedSet<T> {
     /** Returns the elements of this set as a (sorted) list */
     toList(): T[] {
         return [...this.elements];
+    }
+
+    // Prevent the user from serializing, to prevent data loss or other problems.
+    toJSON(): never {
+        throw new Error('SortedSet is not to be serialized. To serialize its elements, please convert it to a list first using toList()');
     }
 }
 

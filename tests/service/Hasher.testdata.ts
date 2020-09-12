@@ -1,6 +1,9 @@
 import { NounKey, NounFilterKey, FiniteKey, FiniteFilterKey, InfinitiveKey, InfinitiveFilterKey, ParticipleKey, ParticipleFilterKey, Key, AdjectiveKey, AdjectiveFilterKey } from 'key';
 import { Case, PrincipalPart, Canister, Tense, Voice, Mood, Person, Number, Gender } from 'linguistics/property';
+import Property from 'linguistics/property/Property';
 import HasherService from 'service/hash';
+import SortedSet from 'structure/SortedSet';
+import { compareStrings } from 'util/stringUtils';
 
 const testData: Record<keyof typeof HasherService, readonly { input: Key, hash: string; }[]>
     = {
@@ -9,7 +12,10 @@ const testData: Record<keyof typeof HasherService, readonly { input: Key, hash: 
         hash: '["base","vocative","singular"]'
     }],
     NounFilterKey: [{
-        input: new NounFilterKey({ baseInflection: ["base1", "base2"], case_: [Case.GENITIVE, Case.DATIVE] }),
+        input: new NounFilterKey({
+            baseInflection: new SortedSet<string>(compareStrings, "base1", "base2"),
+            case_: new SortedSet<Case>(Property.compare, Case.GENITIVE, Case.DATIVE)
+        }),
         hash: '[["base1","base2"],["genitive","dative"],null]'
     }, {
         input: new NounFilterKey({}),
@@ -28,12 +34,14 @@ const testData: Record<keyof typeof HasherService, readonly { input: Key, hash: 
     }],
     FiniteFilterKey: [{
         input: new FiniteFilterKey({
-            principalPart: [
+            principalPart: new SortedSet<PrincipalPart>(
+                PrincipalPart.compare,
                 new PrincipalPart(Canister.FIRST, "base1"),
-                new PrincipalPart(Canister.FIRST, "base2")],
-            tense: [Tense.PRESENT],
-            voice: [Voice.ACTIVE, Voice.MEDIOPASSIVE],
-            person: [Person.FIRST_PERSON, Person.THIRD_PERSON],
+                new PrincipalPart(Canister.FIRST, "base2")
+            ),
+            tense: new SortedSet<Tense>(Property.compare, Tense.PRESENT),
+            voice: new SortedSet<Voice>(Property.compare, Voice.ACTIVE, Voice.MEDIOPASSIVE),
+            person: new SortedSet<Person>(Property.compare, Person.FIRST_PERSON, Person.THIRD_PERSON),
         }),
         hash: '[[["first","base1"],["first","base2"]],["present"],null,["active","mediopassive"],["first_person","third_person"],null]'
     }, {
@@ -46,8 +54,8 @@ const testData: Record<keyof typeof HasherService, readonly { input: Key, hash: 
     }],
     InfinitiveFilterKey: [{
         input: new InfinitiveFilterKey({
-            tense: [Tense.AORIST, Tense.PERFECT],
-            voice: [Voice.ACTIVE]
+            tense: new SortedSet<Tense>(Property.compare, Tense.AORIST, Tense.PERFECT),
+            voice: new SortedSet<Voice>(Property.compare, Voice.ACTIVE)
         }),
         hash: '[null,["aorist","perfect"],["active"]]'
     }, {
@@ -66,10 +74,10 @@ const testData: Record<keyof typeof HasherService, readonly { input: Key, hash: 
     }],
     ParticipleFilterKey: [{
         input: new ParticipleFilterKey({
-            principalPart: [new PrincipalPart(Canister.SECOND, "base")],
-            tense: [Tense.FUTURE],
-            case_: [Case.NOMINATIVE, Case.GENITIVE],
-            number: [Number.PLURAL]
+            principalPart: new SortedSet<PrincipalPart>(PrincipalPart.compare, new PrincipalPart(Canister.SECOND, "base")),
+            tense: new SortedSet<Tense>(Property.compare, Tense.FUTURE),
+            case_: new SortedSet<Case>(Property.compare, Case.NOMINATIVE, Case.GENITIVE),
+            number: new SortedSet<Number>(Property.compare, Number.PLURAL)
         }),
         hash: '[[["second","base"]],["future"],null,["nominative","genitive"],["plural"]]'
     }, {
@@ -87,11 +95,11 @@ const testData: Record<keyof typeof HasherService, readonly { input: Key, hash: 
     }],
     AdjectiveFilterKey: [{
         input: new AdjectiveFilterKey({
-            baseInflection: ["base1", "base2"],
-            case_: [Case.DATIVE, Case.GENITIVE, Case.VOCATIVE],
-            number: [Number.SINGULAR]
+            baseInflection: new SortedSet<string>(compareStrings, "base1", "base2"),
+            case_: new SortedSet<Case>(Property.compare, Case.DATIVE, Case.GENITIVE, Case.VOCATIVE),
+            number: new SortedSet<Number>(Property.compare, Number.SINGULAR)
         }),
-        hash: '[["base1","base2"],null,["dative","genitive","vocative"],["singular"]]'
+        hash: '[["base1","base2"],null,["genitive","dative","vocative"],["singular"]]'
     }]
 };
 

@@ -2,9 +2,10 @@ import { NonFunctionProperties } from 'util/typeUtils';
 import { permutationsOf } from 'util/collectionUtils';
 
 import Key from './Key';
+import SortedSet from 'structure/SortedSet';
 
 type FilterKey<K extends Key> = {
-    [P in keyof NonFunctionProperties<K>]?: Array<K[P]>
+    [P in keyof NonFunctionProperties<K>]?: SortedSet<K[P]>
 };
 
 namespace FilterKey {

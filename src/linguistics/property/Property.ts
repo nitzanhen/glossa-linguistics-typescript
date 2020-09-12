@@ -12,7 +12,36 @@ import { getClassName } from '../../util/typeUtils';
  * 
  * @since 20/06/2020
  */
-class Property {
+abstract class Property {
+
+    /**
+     * Static Property functino to compare two Property instances (of the exact same type).
+     * Comparison is done by property index.
+     * 
+     * Note that p1 and p2 must both be of the same subclass of Property.
+     * @throws Type error if p1 and p2 are not of the same class, or that class is not a subclass of Property.
+     * 
+     * @param p1 the first instance.
+     * @param p2 the second instance.
+     * @returns a value indicating the comparison between the two instances; the value will be negative if p1 should come before p2,
+     * positive if p2 should come before p1, and 0 if they're equivalent (and since a Property class has a limited number of instances - they're identical).
+     */
+    static compare<P extends Property>(p1: P, p2: P): number {
+        const c1 = getClassName(p1);
+        const c2 = getClassName(p2);
+
+        if (!(p1 instanceof Property)) {
+            throw new TypeError(`Both arguments of Property#compare must be instances of Property or one of its subclasses. Received p1 with class name ${c1}`)
+        }
+        if (!(p2 instanceof Property)) {
+            throw new TypeError(`Both arguments of Property#compare must be instances of Property or one of its subclasses. Received p2 with class name ${c2}`)
+        }
+        if (c1 !== c2) {
+            throw new TypeError('Both arguments of the compare function must be instances of the same class')
+        }
+
+        return p1.index - p2.index;
+    }
 
     /**
      * Converts a string to its corresponding instance of the Property subclass.
@@ -29,8 +58,7 @@ class Property {
         }
 
         throw new RangeError(
-            `Illegal argument passed to fromString(): ${string} does not correspond to any instance of the enum ${
-            getClassName(this)
+            `Illegal argument passed to fromString(): ${string} does not correspond to any instance of the enum ${getClassName(this)
             }`
         );
     }
