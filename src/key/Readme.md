@@ -16,8 +16,7 @@ key should contain fields for the noun's root, case and number, **but not** its 
   class InfinitiveKey extends Key implements InfinitiveKeyProperties { ... }
   ```
 
-- A "complete" properties interface. This bears no relation to the different Key classes, and is used for functions dealing with grammar logic (mostly inflecting). It extends
-the KeyProperties interface of the corresponding class, as well as the empty GrammaticalProperties interface, for grouping the different extended interfaces.
+- A "complete" properties interface. This bears no relation to the different Key classes, and is used for functions dealing with grammar logic (mostly inflecting). It extends the KeyProperties interface of the corresponding class, as well as the empty GrammaticalProperties interface, for grouping the different extended interfaces.
 These interfaces adhere to the "XXXProperties" naming pattern.
 For example:
 
