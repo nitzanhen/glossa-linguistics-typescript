@@ -35,7 +35,7 @@ const nounInflectionFunctions = {
           plural: inflectionFunction('ων'),
         },
         dative: {
-          singular: inflectionFunction('ᾳ'),
+          singular: inflectionFunction('ᾱͅ'),
           plural: inflectionFunction('αις'),
         },
         accusative: {
