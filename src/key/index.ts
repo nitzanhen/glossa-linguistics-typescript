@@ -8,6 +8,7 @@ export { default as NounKey } from './noun/NounKey';
 export { default as NounFilterKey } from './noun/NounFilterKey';
 
 export { default as VerbKeyProperties } from './verb/VerbKeyProperties';
+export { default as VerbProperties } from './verb/VerbProperties';
 export { default as VerbKey } from './verb/VerbKey';
 
 export { default as FiniteKeyProperties } from './verb/FiniteKey/FiniteKeyProperties';

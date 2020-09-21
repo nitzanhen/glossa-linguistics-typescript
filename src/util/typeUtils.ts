@@ -32,9 +32,6 @@ export type Nullable<T> = T | undefined | null;
  */
 export type Falsey = false | 0 | -0 | 0n | "" | null | undefined;
 
-
-const x: Falsey = false;
-
 /*
  * taken from https://www.typescriptlang.org/docs/handbook/advanced-types.html 
  */
@@ -59,3 +56,7 @@ export type PickPartial<T, K extends keyof T> = Partial<Pick<T, K>>
  * @since 06/09/20
  */
 export type PickWithPartials<T, K extends keyof T, P extends keyof T> = Pick<T, K> & PickPartial<T, P>
+
+export type AssertKeys<T, KeyType extends keyof T = keyof T> = {
+    [K in KeyType]: T[K]
+}
