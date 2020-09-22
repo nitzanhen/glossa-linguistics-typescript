@@ -5,8 +5,8 @@ import { AdjectiveClassVariant } from 'linguistics/variant/AdjectiveVariants';
 /**
  * @since 03/08/20
  */
-interface AdjectiveProperties extends GrammaticalProperties, AdjectiveKeyProperties {
+interface AdjectiveFormProperties extends GrammaticalProperties, AdjectiveKeyProperties {
     class: AdjectiveClassVariant;
 }
 
-export default AdjectiveProperties;
+export default AdjectiveFormProperties;

@@ -7,19 +7,19 @@ import GrammaticalProperties from '../GrammaticalProperties';
 /**
  * @since 16/05/20
  */
-interface NounProperties extends GrammaticalProperties, NounKeyProperties {
+interface NounFormProperties extends GrammaticalProperties, NounKeyProperties {
     gender: Gender,
     declension: Declension,
     variant?: DeclensionVariant;
 }
 
-namespace NounProperties {
+namespace NounFormProperties {
     /**
      * Validates that the variant matches the other properties of this instance.
      *
      * @returns true if this key is valid, and false otherwise
      */
-    export function validateVariant(properties: NounProperties): boolean {
+    export function validateVariant(properties: NounFormProperties): boolean {
         //Ensuring variant is a safe argument 
         const { gender, declension, variant } = properties;
 
@@ -42,4 +42,4 @@ namespace NounProperties {
     }
 }
 
-export default NounProperties;
+export default NounFormProperties;

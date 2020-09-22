@@ -4,8 +4,7 @@ Keys are used to characterize Greek words, with different implementations (class
 The Key contract is comprised of four different pieces:
 
 - An interface of grammatical properties (forms, tenses, moods, etc.). Those follow the "XXXKeyProperties" naming convention, where "XXX" is the correponding entity name (e.g. InfinitiveKeyProperties). For the sake of categorization, all property interfaces should extend the empty KeyProperties interface (or one of its subclasses).
-The KeyProperties interface belonging to a grammatical entity should contains only the fields to be hashed and unhashed; that is, *only the fields that are used to check if two forms are grammatically equal* (have the same set of properties - their keys are equal). For example, a Greek noun
-key should contain fields for the noun's root, case and number, **but not** its gender or declension. The latter are attributes *of the noun*, and while they are needed to determine a noun's corrent inflections, they are not used to distinguish between two inflections of the same noun.
+The KeyProperties interface belonging to a grammatical entity should contains only the fields to be hashed and unhashed; that is, *only the fields that are used to check if two forms are grammatically equal* (have the same set of properties - their keys are equal). For example, a Greek noun key should contain fields for the noun's root, case and number, **but not** its gender or declension. The latter are attributes *of the noun*, and while they are needed to determine a noun's corrent inflections, they are not used to distinguish between two inflections of the same noun.
   ```typescript
   interface InfinitiveKeyProperties extends KeyProperties { ... }
   ```
@@ -30,7 +29,6 @@ For example:
   interface InfinitiveFilterKey extends FilterKey<InfinitiveKey> { ... };
   class InfinitiveFilterKey extends Key { ... }
   ```
-
 
 Keys as a concept bear a close relation to Hash and Hashing, and generally should be implemented
 such that two Key instances of the same class are equal if and only if their hash values are strictly equal (I.E as an isomorphism).
