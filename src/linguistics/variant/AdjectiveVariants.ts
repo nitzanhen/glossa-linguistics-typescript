@@ -1,1 +1,1 @@
-export type AdjectiveClassVariant = "standard" | "standard_two_suffixes" | "us-eia-u" | "sibilant_stem" | "nasal_stem";
+export type AdjectiveVariant = "standard" | "standard_two_suffixes" | "us-eia-u" | "sibilant_stem" | "nasal_stem";
