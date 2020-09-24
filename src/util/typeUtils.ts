@@ -63,23 +63,3 @@ export type PickWithPartials<T, K extends keyof T, P extends keyof T> = Pick<T, 
 export type AssertKeys<T, KeyType extends keyof T = keyof T> = {
     [K in KeyType]: T[K]
 }
-
-/**
- * Essentially turns an interface I into a class.
- * In practice, this creates a new, empty class, with a constructor receiving a 
- * properties object of type I, and assigns all of them to the new instance.
- * 
- * This method should typically be used to turn interfaces into classes for the sake of mixing
- * them into a "subclass", without having to redundantly redeclare each member of the interfaces
- * in the implementing class, as one would have to do when implementing them with the implement keyword. 
- * 
- * Note that while a class can only extend one other class, multiple interfaces can be "crammed" into a single
- * Classify function by intersecting them, e.g. `Classify<I1 & I2>()`.
- */
-export function Embed<I>() {
-    return class { 
-        constructor(properties: I) {
-            Object.assign(this, properties)
-        }
-    } as new (properties: I) => I
-}

@@ -1,6 +1,10 @@
 /**
  * @since 16/05/20
  */
-interface GrammaticalProperties { }
+class GrammaticalProperties { 
+  constructor(properties: object) {
+    Object.assign(this, properties);
+  }
+}
 
 export default GrammaticalProperties;

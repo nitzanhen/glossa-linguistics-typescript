@@ -1,10 +1,10 @@
 import VerbFormProperties from "../VerbFormProperties";
 import InfinitiveKeyProperties from "./InfinitiveKeyProperties";
 
-interface InfinitiveFormProperties extends VerbFormProperties, InfinitiveKeyProperties {}
-class InfinitiveFormProperties {
-  constructor(properties: VerbFormProperties & InfinitiveKeyProperties) {
-    Object.assign(this, properties)
+interface InfinitiveFormProperties extends InfinitiveKeyProperties {}
+class InfinitiveFormProperties extends VerbFormProperties {
+  constructor(properties: InfinitiveFormProperties) {
+    super(properties);
   }
 }
 
