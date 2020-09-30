@@ -37,6 +37,8 @@ The Key contract is comprised of four different pieces:
 
   Any static methods (variant validators, for example) can be defined in the class declaration. For brevity, the constructor should be defined at the top of the class declaration, before anything else, and all other methods/properties of the class should be defined below it.
 
+  A form properties instance **MUST** be instantiated using the class constructor. This is important so the `instanceof` operator works properly.
+
 - A "filter key" (or "partial" key) class. This too extends the Key class, and additionally implements the generic `FilterKey<P>`, where P is the properties interface, and is named conforming to "XXXFilterKey". A filter key class is composed of two separate declarations as well, one for extending Key and the other for implementing FilterKey, for example:
 
   ```typescript

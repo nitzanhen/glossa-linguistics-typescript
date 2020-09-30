@@ -6,6 +6,7 @@ interface VerbFormProperties extends VerbKeyProperties {
   deponent: boolean;
   contract: boolean;
   stemClass: "omega"; /** @todo */
+  aoristVariant?: "first" | "second";
 }
 
 class VerbFormProperties extends GrammaticalProperties {

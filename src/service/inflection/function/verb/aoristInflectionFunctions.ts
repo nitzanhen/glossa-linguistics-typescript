@@ -2,8 +2,8 @@ import { parameterized as multipleInflections, compose } from 'util/functionUtil
 
 import { composeVerbInflectionFunction as inflectionFunction } from '../../transform';
 import suffixer from '../../transform/suffixer';
-import { ultimaIndex, penultIndex } from '../../../../linguistics/alphabet/syllables';
-import { stripAccents } from '../../../../linguistics/alphabet/diacritics';
+import { penultIndex } from 'linguistics/alphabet/syllables';
+import { stripAccents } from 'linguistics/alphabet/diacritics';
 
 //Used as syntactic sugar to shorten { addAugment: true } to { addAugment } when calling inflectionFunction(),
 //Similar to React's boolean props. 
