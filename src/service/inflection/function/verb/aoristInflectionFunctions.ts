@@ -1,16 +1,16 @@
+import { penultIndex } from 'linguistics/alphabet/syllables';
+import { stripAccents } from 'linguistics/alphabet/diacritics';
 import { parameterized as multipleInflections, compose } from 'util/functionUtils';
 
 import { composeVerbInflectionFunction as inflectionFunction } from '../../transform';
 import suffixer from '../../transform/suffixer';
-import { penultIndex } from 'linguistics/alphabet/syllables';
-import { stripAccents } from 'linguistics/alphabet/diacritics';
 
 //Used as syntactic sugar to shorten { addAugment: true } to { addAugment } when calling inflectionFunction(),
 //Similar to React's boolean props. 
 const addAugment = true;
 
 /**
- * Inflection functions for the aorist aspect inflections - first & ssecond aorist.
+ * Inflection functions for the aorist aspect inflections - first & second aorist.
  * @see Readme.md under the same directory
  * 
  * @since 23/07/20
