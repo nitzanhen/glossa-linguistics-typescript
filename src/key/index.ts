@@ -24,6 +24,6 @@ export { default as ParticipleKey } from './verb/ParticipleKey/ParticipleKey';
 export { default as ParticipleFilterKey } from './verb/ParticipleKey/ParticipleFilterKey';
 
 export { default as AdjectiveKeyProperties } from './adjective/AdjectiveKeyProperties';
-export { default as AdjectiveProperties } from './adjective/AdjectiveKeyProperties';
+export { default as AdjectiveFormProperties } from './adjective/AdjectiveFormProperties';
 export { default as AdjectiveKey } from './adjective/AdjectiveKey';
 export { default as AdjectiveFilterKey } from './adjective/AdjectiveFilterKey';
