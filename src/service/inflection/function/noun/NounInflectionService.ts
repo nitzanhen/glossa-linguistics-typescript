@@ -72,4 +72,4 @@ const NounInflectionService = {
   },
 };
 
-export default Object.freeze(NounInflectionService);
+export default NounInflectionService;
