@@ -1,15 +1,14 @@
 import { default as inflectionFunction } from "../../composition/composeAdjectiveInflectionFunction";
 
 /**
- * Inflections functions for standard adjectives, i.e. adjectives in
+ * Inflections functions for first-inflection - standard - adjectives, i.e. adjectives in
  * the first and second declension, with three suffix groups - for the masculine,
  * feminine and neuter.
- * This collection of inflection functions corresponds to the {@link {AdjectiveClassVariant}} value "standard".
  *
  * @since 20/09/20
  */
 const standardInflectionFunctions = {
-  standard: {
+  first_inflection: {
     masculine: {
       nominative: {
         singular: inflectionFunction("ος"),

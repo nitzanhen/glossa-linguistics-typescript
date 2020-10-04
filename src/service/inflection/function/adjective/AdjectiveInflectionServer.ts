@@ -1,10 +1,14 @@
 import { AdjectiveFormProperties } from "key";
-import standardInflectionFunctions from "./standardInflectionFunctions";
-import standardTwoSuffixedInflectionFunctions from "./standardTwoSuffixesInflectionFunctions";
+import firstInflectionFunctions from "./firstInflectionFunctions";
+import fourthInflectionFunctions from './fourthInflectionFunctions';
+import secondInflectionFunctions from './secondInflectionFunctions';
+import thirdInflectionFunctions from './thirdInflectionFunctions.ts';
 
 const inflectionFunctions = {
-  ...standardInflectionFunctions,
-  ...standardTwoSuffixedInflectionFunctions
+  ...firstInflectionFunctions,
+  ...secondInflectionFunctions,
+  ...thirdInflectionFunctions,
+  ...fourthInflectionFunctions
 }
 
 const AdjectiveInflectionService = {
@@ -14,7 +18,7 @@ const AdjectiveInflectionService = {
 
     const inflect = functions[variant][gender.name][case_.name][number.name]
 
-    if(!inflect) {
+    if (!inflect) {
       throw new RangeError();
     }
     return inflect(root)
