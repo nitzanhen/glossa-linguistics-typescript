@@ -8,6 +8,7 @@ const testData: {
     permutations: { input: Iterable<any>[], output: Set<any>; }[],
     composing: [((value: string) => string)[], string, string][],
     parameterizing: [((value: number) => number)[], number, number[]][];
+    compareString: [string, string, 1 | 0 | -1][]
 } = {
     classNames: [
         [new Tree(null), "Tree"],
@@ -38,6 +39,11 @@ const testData: {
     parameterizing: [
         [[x => x ** 2, x => x ** 3, x => 1 / x], 3, [9, 27, 1 / 3]],
         [[x => -x, x => Math.floor(x), x => Math.max(x, 3)], 2.5, [-2.5, 2, 3]]
+    ],
+    compareString: [
+        ["a", "b", -1],
+        ["a", "a", 0],
+        ["b", "a", 1],
     ]
 };
 

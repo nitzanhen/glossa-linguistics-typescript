@@ -4,6 +4,7 @@ import { permutationsOf } from 'util/collectionUtils';
 import { compose, parameterized } from 'util/functionUtils';
 
 import testData from './utils.testdata';
+import { compareStrings } from 'util/stringUtils';
 
 describe("Utils", () => {
     test("typeUtils", () => {
@@ -37,4 +38,11 @@ describe("Utils", () => {
             expect(parameterized(...functionsVector)(value)).toEqual(resultVector);
         });
     });
+
+    test("String utils", () => {
+        //compareString()
+        testData.compareString.forEach(([first, second, sign]) => {
+            expect(Math.sign(compareStrings(first, second))).toBe(sign)
+        })
+    })
 });
