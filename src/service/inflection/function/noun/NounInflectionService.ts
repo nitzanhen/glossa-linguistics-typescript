@@ -26,10 +26,10 @@ const NounInflectionService = {
    * @todo support for third declension, contract verbs, accenting.
    */
   suggestInflection(properties: NounFormProperties): string {
-    if (!NounProperties.validateVariant(properties)) {
+    if (!NounFormProperties.validateVariant(properties)) {
       throw new RangeError(
         "variant argument does not match the other properties' constraints: " +
-          properties
+        properties
       );
     }
 
@@ -55,16 +55,16 @@ const NounInflectionService = {
     const inflect =
       declension === Declension.FIRST_DECLENSION
         ? inflectionFunctions[declension.name][gender.name]?.[variant!!][
-            case_.name
-          ][number.name]
+        case_.name
+        ][number.name]
         : inflectionFunctions[declension.name][gender.name]?.[case_.name][
-            number.name
-          ];
+        number.name
+        ];
 
     if (!inflect) {
       throw new RangeError(
         "No such inflection function; invalid set of properties passed: " +
-          JSON.stringify(properties)
+        JSON.stringify(properties)
       );
     } else {
       return inflect(root);
