@@ -8,7 +8,7 @@ import { default as inflectionFunction } from "../../composition/composeAdjectiv
  * @since 20/09/20
  */
 const standardInflectionFunctions = {
-  first_inflection: {
+  first: {
     masculine: {
       nominative: {
         singular: inflectionFunction("ος"),

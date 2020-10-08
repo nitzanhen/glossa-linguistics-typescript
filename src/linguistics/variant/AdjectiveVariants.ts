@@ -1,1 +1,8 @@
-export type AdjectiveVariant = "standard" | "standard_two_suffixes" | "us-eia-u" | "sibilant_stem" | "nasal_stem";
+enum AdjectiveVariant {
+  FIRST = "first", // Standard adjectives (incl. two-suffixed adjectives)
+  SECOND = "second", // us-eia-u adjectives
+  THIRD = "third", // Sibilant-stem adjectives
+  FOURTH = "fourth" // Nasal-stem adjectives
+}
+
+export default AdjectiveVariant;

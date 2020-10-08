@@ -1,2 +1,2 @@
 export { FirstDeclensionVariant, ThirdDeclensionVariant, DeclensionVariant } from './NounVariants';
-export { AdjectiveVariant as AdjectiveClassVariant } from './AdjectiveVariants';
+export { default as AdjectiveClassVariant } from './AdjectiveVariants';
